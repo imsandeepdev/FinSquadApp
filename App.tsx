@@ -1,45 +1,35 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * (React Native)
+ * Sandeep Dev
+ * sandeepdev00@gmail.com
  *
  * @format
  */
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
 
+import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+
+// @ts-ignore
+import { ThemeProvider } from './src/utils/provider/themeProvider';
+import { Login } from './src/screens';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+// @ts-ignore
+
+import Dashboard from './src/screens/Dashboard';
+import AppNavigator from './src/appNavigator';
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
+  
+  
 
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
+    <ThemeProvider>
+      
+      <AppNavigator/>
+    
+    </ThemeProvider>
     </SafeAreaProvider>
   );
 }
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
-
 export default App;

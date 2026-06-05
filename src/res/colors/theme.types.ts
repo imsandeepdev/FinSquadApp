@@ -22,6 +22,7 @@ export type ThemeColorType = {
   primaryText: string;
   primaryLightText: string;
   secondaryText: string;
+  secondaryLightText: string;
   errorText: string;
   infoText: string;
   appTextColor: string;

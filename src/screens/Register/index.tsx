@@ -15,23 +15,30 @@ import { useTheme } from "../../utils/provider/themeProvider";
 import { responsiveSize } from "../../res";
 import {useNavigation} from '@react-navigation/native';
 
-const Login = () => {
+const Register = () => {
   const navigation = useNavigation<any>();
   const { theme: { themeColor } } = useTheme();
   const styles = getStyles(themeColor);
   const usernameRef = useRef<TextInput | null>(null);
   const passwordRef = useRef<TextInput | null>(null);
+  const mobileRef = useRef<TextInput | null>(null);
+  const emailRef = useRef<TextInput | null>(null);
+
 
   // FORM STATE
   const [form, setForm] = useState({
     username: "",
     password: "",
+    mobile: "",
+    email: "",
   });
 
   // ERROR STATE
   const [errors, setErrors] = useState({
     username: "",
     password: "",
+    mobile: "",
+    email: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -54,18 +61,20 @@ const Login = () => {
   // VALIDATION (FINTECH LEVEL)
   const validate = () => {
     let valid = true;
-    let newErrors = { username: "", password: "" };
+    let newErrors = { username: "", password: "", mobile: "", email: "" };
 
-    const userValid = /^[0-9]{10}$/;
+    const phoneRegex = /^[0-9]{10}$/;
+    const emailRegex = /\S+@\S+\.\S+/;
 
     if (!form.username.trim()) {
       newErrors.username = "Username is required";
       valid = false;
     } else if (
-      !userValid.test(form.username) 
+      !phoneRegex.test(form.username) &&
+      !emailRegex.test(form.username)
     ) {
       newErrors.username =
-        "Enter valid username / mobile number";
+        "Enter valid email or 10-digit mobile number";
       valid = false;
     }
 
@@ -127,21 +136,21 @@ const Login = () => {
             {/* HEADER */}
             <View style={styles.cardViewTopContainer}>
               <Text style={styles.cardViewTopTitleText}>
-                Welcome Back
+                Welcome to Fin Squad
               </Text>
               <Text style={styles.cardViewTopSubTitleText}>
-                Secure Banking Login
+                {'Please provide following details \nfor your new account'}
               </Text>
             </View>
 
-            {/* LOGIN CARD */}
+            {/* REGISTER CARD */}
             <View style={styles.cardView}>
-              <Text style={styles.title}>Sign in</Text>
+              <Text style={styles.title}>Register</Text>
 
               {/* USERNAME */}
               <AppTextInput
                 ref={usernameRef}
-                title="Username / Mobile No"
+                title="Username"
                 value={form.username}
                 onChangeText={(text: string) =>
                   handleChange("username", text)
@@ -169,11 +178,43 @@ const Login = () => {
                 rightOnPress={() =>
                   setShowPassword(!showPassword)
                 }
-                returnKeyType="done"
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  mobileRef.current?.focus();
+                }}
                 isError={!!errors.password}
                 errorMessage={errors.password}
               />
 
+                <AppTextInput
+                ref={mobileRef}
+                title="Mobile Number"
+                value={form.mobile}
+                onChangeText={(text: string) =>
+                  handleChange("mobile", text)
+                }
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  emailRef.current?.focus();
+                }}
+                isError={!!errors.mobile}
+                errorMessage={errors.mobile}
+              />
+
+                <AppTextInput
+                ref={emailRef}
+                title="Email"
+                value={form.email}
+                onChangeText={(text: string) =>
+                  handleChange("email", text)
+                }
+                rightOnPress={() =>
+                  setShowPassword(!showPassword)
+                }
+                returnKeyType="done"
+                isError={!!errors.email}
+                errorMessage={errors.email}
+              />              
               {/* REMEMBER ME */}
               <View
                 style={{
@@ -187,8 +228,8 @@ const Login = () => {
                 >
                   <Text style={{ color: themeColor.primaryText }}>
                     {rememberMe
-                      ? "☑ Remember Me"
-                      : "☐ Remember Me"}
+                      ? "☑ Accept Terms & Conditions"
+                      : "☐ Accept Terms & Conditions"}
                   </Text>
                 </Pressable>
               </View>
@@ -198,7 +239,7 @@ const Login = () => {
                 <AppButton
                   onPress={handleLogin}
                   title={
-                    loading ? "Signing in..." : "Sign in"
+                    loading ? "Registering..." : "Register My Device"
                   }
                   disabled={loading}
                   containerStyle={{
@@ -208,24 +249,12 @@ const Login = () => {
                 />
               </View>
 
-              <View>
-                <View style={styles.registerRowView}>
-                        <Text style={styles.registerText}>
-                          {"Don't have an Account?"}
-                        </Text>
-                
-                        <Pressable onPress={()=>{ navigation.replace('Register')}} style={styles.registerButton}>
-                          <Text style={styles.registerButtonText}>
-                            {'Sign Up'}
-                          </Text>
-                        </Pressable>
-                      </View>
-              </View>
-
               {/* FOOTER */}
               <View style={styles.resetBottomContainer}>
                 <ResetPasswordFooter
-                onResetPress={() => console.log("Reset password")}
+                title="Already have an account?"
+                buttonTitle="Login"
+                onResetPress={() => navigation.replace('Login')}
                 />
               </View>
             </View>
@@ -236,4 +265,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

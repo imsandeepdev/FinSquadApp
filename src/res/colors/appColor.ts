@@ -16,24 +16,32 @@ export const AppColor = {
   infoColor: "#3B82F6",
 
   // APP THEME
-  appLightColor: "#40E0D0",
-  appColor: "#1A7F8E",
-  secAppColor: "#1F2937",
-  secLightAppColor: "#374151",
+  // appLightColor: "#40E0D0",
+  // appColor: "#1A7F8E",
+  // secAppColor: "#1F2937",
+  // secLightAppColor: "#374151",
+
+  appLightColor: "#EEF2FF",     // Soft, premium light indigo tint
+  appColor: "#6366F1",          // Your original Indigo
+
+  secAppColor: "#A855F7",       // Your original Purple
+  secLightAppColor: "#F3E8FF",  
 
   // TEXT COLORS (FIXED HIERARCHY)
-  primaryText: "#F3F4F6",
-  primaryLightText: "#D1D5DB",
-  secondaryText: "#9CA3AF",
+  primaryText: "#1F2937",
+  primaryLightText: " #4B5563",
+  secondaryText: "#F3F4F6",
+  secondaryLightText: "#D1D5DB",
+
 
   errorText: "#FF453A",
   infoText: "#60A5FA",
 
-  appTextColor: "#40E0D0",
-  appLightTextColor: "#1A7F8E",
+  appTextColor: "#6366F1",
+  appLightTextColor: "#EEF2FF",
 
-  secAppText: "#E5E7EB",
-  secLightAppText: "#9CA3AF",
+  secAppText: "#A855F7",
+  secLightAppText: "#F3E8FF",
 
   placeHolder: "#6B7280",
   borderColor: "#2C2C2E",

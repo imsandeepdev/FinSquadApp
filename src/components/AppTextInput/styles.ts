@@ -11,7 +11,7 @@ StyleSheet.create({
     marginTop: responsiveSize(12),
   },
   mainView: {
-    backgroundColor: AppColor.secLightAppColor,
+    backgroundColor: AppColor.appLightColor,
     height: responsiveSize(48),
     borderRadius: responsiveSize(4),
     alignItems: 'center',
@@ -19,7 +19,7 @@ StyleSheet.create({
     borderColor: AppColor.placeHolder,
   },
   showTitle_MainView: {
-    backgroundColor: AppColor.secLightAppColor,
+    backgroundColor: AppColor.appLightColor,
     height: responsiveSize(45),
     borderRadius: responsiveSize(4),
     alignItems: 'center',

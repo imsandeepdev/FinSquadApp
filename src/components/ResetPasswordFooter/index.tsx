@@ -4,10 +4,12 @@ import getStyles from "./styles";
 import { useTheme } from "../../utils/provider/themeProvider";
 
 type Props = {
+  title?: string;
+  buttonTitle?: string;
   onResetPress: () => void;
 };
 
-const ResetPasswordFooter = ({  onResetPress }: Props) => {
+const ResetPasswordFooter = ({ title, buttonTitle, onResetPress }: Props) => {
     const { theme: { themeColor } } = useTheme();
     const styles = getStyles(themeColor);
 
@@ -17,12 +19,14 @@ const ResetPasswordFooter = ({  onResetPress }: Props) => {
 
       <View style={styles.resetBottomRowView}>
         <Text style={styles.forgotPasswordText}>
-          Forgot your password?
+          {title || "Forgot your password?"}
         </Text>
 
-        <Pressable onPress={onResetPress}>
+        <Pressable 
+        style={styles.resetPasswordButton}
+        onPress={onResetPress}>
           <Text style={styles.resetPasswordButtonText}>
-            Reset
+            {buttonTitle || "Reset"}
           </Text>
         </Pressable>
       </View>

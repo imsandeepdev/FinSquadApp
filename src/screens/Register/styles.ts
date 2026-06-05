@@ -60,6 +60,7 @@ export const getStyles = (AppColor: ThemeColorType) =>
     cardViewTopSubTitleText: {
         fontSize: responsiveSize(14),
         color: AppColor.secondaryLightText,
+        textAlign:'center'
     },
     
     rememberView: {
@@ -82,34 +83,6 @@ export const getStyles = (AppColor: ThemeColorType) =>
         justifyContent:'flex-end',
         paddingBottom: responsiveSize(20)
     },
-
-    registerRowView: {
-      flexDirection: "row",
-      justifyContent: "center",
-      alignItems: "center",
-      marginTop: responsiveSize(10),
-    },
-
-    registerText: {
-      color: AppColor.primaryText,
-      fontSize: responsiveSize(14),
-      fontWeight: "400",
-    },
-
-    registerButton: {
-      alignItems: "center",
-      justifyContent: "center",
-      paddingVertical: responsiveSize(6),
-      paddingHorizontal: responsiveSize(14),
-      borderRadius: responsiveSize(20),
-    },
-
-    registerButtonText: {
-      color: AppColor.appColor,
-      fontSize: responsiveSize(14),
-      fontWeight: "600",
-    },
-
 });
 
 export default getStyles;

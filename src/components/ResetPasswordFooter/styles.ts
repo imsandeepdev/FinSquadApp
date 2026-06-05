@@ -24,9 +24,9 @@ const getStyles = (AppColor: ThemeColorType) =>
 
     forgotPasswordText: {
       flex: 1,
-      color: AppColor.secondaryText,
+      color: AppColor.primaryText,
       fontSize: responsiveSize(14),
-      fontWeight: "500",
+      fontWeight: "400",
     },
 
     resetPasswordButton: {
@@ -35,7 +35,7 @@ const getStyles = (AppColor: ThemeColorType) =>
       paddingVertical: responsiveSize(6),
       paddingHorizontal: responsiveSize(14),
       borderWidth: 0.6,
-      borderColor: AppColor.borderColor,
+      borderColor: AppColor.appColor,
       borderRadius: responsiveSize(20),
     },
 

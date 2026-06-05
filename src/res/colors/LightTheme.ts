@@ -17,26 +17,34 @@ export const LightTheme = {
     successColor: "#16A34A",
     infoColor: "#3B82F6",
 
-    // app theme
-    appLightColor: "#40E0D0",
-    appColor: "#1A7F8E",
+    // // app theme
+    // appLightColor: "#40E0D0",
+    // appColor: "#1A7F8E",
 
-    secAppColor: "#E6F7F6",
-    secLightAppColor: "#D1F0ED",
+    // secAppColor: "#E6F7F6",
+    // secLightAppColor: "#D1F0ED",
+
+     // app theme
+    appLightColor: "#EEF2FF",     // Soft, premium light indigo tint
+    appColor: "#6366F1",          // Your original Indigo
+
+    secAppColor: "#A855F7",       // Your original Purple
+    secLightAppColor: "#F3E8FF",  // Soft, clean light purple tint
 
     // text system (clean hierarchy)
-    primaryText: "#111827",
-    primaryLightText: "#374151",
-    secondaryText: "#6B7280",
+    primaryText: "#1F2937",
+    primaryLightText: " #4B5563",
+    secondaryText: "#F3F4F6",
+    secondaryLightText: "#D1D5DB",
 
     errorText: "#DC2626",
     infoText: "#2563EB",
 
-    appTextColor: "#1A7F8E",
-    appLightTextColor: "#40E0D0",
+    appTextColor: "#6366F1",
+    appLightTextColor: "#EEF2FF",
 
-    secAppText: "#1F2937",
-    secLightAppText: "#4B5563",
+    secAppText: "#A855F7",
+    secLightAppText: "#F3E8FF",
 
     placeHolder: "#9CA3AF",
 

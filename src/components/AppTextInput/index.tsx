@@ -39,7 +39,8 @@ const AppTextInput = React.forwardRef<TextInput, AppTextInputProps>(
     errorMessage = '',
     showTitle = false,
     titleMessage = '',
-    returnKeyType
+    returnKeyType,
+    autoCapitalize
   },
   ref) => {
     const { theme: { themeColor } } = useTheme();
@@ -76,6 +77,7 @@ const AppTextInput = React.forwardRef<TextInput, AppTextInputProps>(
                 secureTextEntry={secureTextEntry}
                 onSubmitEditing={onSubmitEditing}
                 returnKeyType={returnKeyType}
+                autoCapitalize={autoCapitalize}
                 {...restInputTextProps}
               />
             </View>

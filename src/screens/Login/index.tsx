@@ -94,7 +94,7 @@ const Login = () => {
       setTimeout(() => {
         setLoading(false);
         console.log("Login Success");
-         navigation.replace('AIWealthCoachScreen');
+         navigation.replace('Dashboard');
 
         // TODO:
         // store token

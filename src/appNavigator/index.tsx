@@ -7,6 +7,9 @@ import Register from '../screens/Register';
 import Dashboard from '../screens/Dashboard';
 import AIWealthCoachScreen from '../screens/AIBased';
 import {navigationRef} from './navigationService';
+import CustomerOnboardingScreen from '../screens/CustomerOnBoard';
+import { BottomTabs } from '../components';
+
 
 const Stack = createStackNavigator();
 
@@ -14,7 +17,7 @@ const AppNavigator = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator
-        initialRouteName="Register"
+        initialRouteName="MainApp"
         screenOptions={{
           headerShown: false,
         }}>
@@ -30,13 +33,18 @@ const AppNavigator = () => {
         />
 
         <Stack.Screen
-          name="Dashboard"
-          component={Dashboard}
+          name="MainApp"
+          component={BottomTabs}
         />
 
         <Stack.Screen
           name="AIWealthCoachScreen"
           component={AIWealthCoachScreen}
+        />
+
+         <Stack.Screen
+          name="CustomerOnboardingScreen"
+          component={CustomerOnboardingScreen}
         />
 
       </Stack.Navigator>

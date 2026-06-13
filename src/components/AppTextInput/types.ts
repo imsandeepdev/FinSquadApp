@@ -30,6 +30,7 @@ export interface AppTextInputProps {
   errorMessage?: string;
   showTitle?: boolean;
   titleMessage?: string;
-  returnKeyType?: any
+  returnKeyType?: any;
+  autoCapitalize?: string;
 };
 

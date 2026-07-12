@@ -12,7 +12,6 @@ overflow:"hidden",
 
 topBody:{
 padding:20,
-paddingBottom:50
 },  
 
 top:{
@@ -28,7 +27,7 @@ color:"#fff",
 name:{
 fontSize:18,
 fontWeight:"700",
-color:"#fff",
+color:"#999",
 marginTop:10,
 },
 
@@ -263,4 +262,45 @@ top:200,
 left:250,
 },
 
+
+header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: AppColor.appColor,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+},
+
+profileButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 20,
+    backgroundColor: "rgba(255,255,255,0.15)",
+},
+
+profileButtonText: {
+    color: "#fff",
+    fontSize: 13,
+    fontWeight: "600",
+    marginRight: 4,
+},
+
+hideProfileBtn: {
+    height: 36,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(255,255,255,.12)",
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 22,
+},
+
+hideProfileText: {
+    color: "#fff",
+    fontWeight: "600",
+    marginRight: 4,
+},
 });

@@ -113,8 +113,8 @@ const BottomTabs: React.FC = () => {
 
             case 'AI':
               iconName = focused
-                ? 'sparkles'
-                : 'sparkles-outline';
+                ? 'grid'
+                : 'grid-outline';
               break;
 
             case 'Tasks':
@@ -142,9 +142,13 @@ const BottomTabs: React.FC = () => {
           );
         },
       })}>
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Dashboard"
         component={Dashboard}
+      /> */}
+       <Tab.Screen
+        name="AI"
+        component={AIWealthCoachScreen}
       />
 
       <Tab.Screen
@@ -153,8 +157,8 @@ const BottomTabs: React.FC = () => {
       />
 
       <Tab.Screen
-        name="AI"
-        component={AIWealthCoachScreen}
+        name="Dashboard"
+        component={Dashboard}
         options={{
           tabBarButton: (props: BottomTabBarButtonProps) => (
             <AIButton {...props} />

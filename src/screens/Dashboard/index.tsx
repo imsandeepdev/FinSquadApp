@@ -73,6 +73,7 @@ const Dashboard = () => {
   const navigation = useNavigation<any>();
   const { theme: { themeColor } } = useTheme();
   const styles = getStyles(themeColor);
+  
 
   return (
     <StoryScreen>
@@ -81,21 +82,24 @@ const Dashboard = () => {
     showsVerticalScrollIndicator={false}>
       <HeaderSection/>
       
-      <View style={{paddingHorizontal:16, paddingBottom:5, paddingTop:10}}>
+      {/* <View style={{paddingHorizontal:16, paddingBottom:5, paddingTop:10}}>
         <PerformanceSection/>
-      </View>
+      </View> */}
+
+      <StatsSection/>
+
 
       <View style={{paddingHorizontal:16, paddingVertical:5}}>
         <AISectionCard/>
       </View>
       {/* <PortfolioCard/> */}
-      {/* <StatsSection/>
-      <AIInsightCard/> */}
+      {/* <StatsSection/> */}
+      {/* <AIInsightCard/> */}
       <View style={{paddingHorizontal:16, paddingVertical:10}}>
 
       <QuickActions
-      onPress={()=>{
-        navigation.navigate('CustomerOnboardingScreen')
+      onPress={(item:any)=>{
+        navigation.navigate(item?.navigate)
       }}
       />
       </View>

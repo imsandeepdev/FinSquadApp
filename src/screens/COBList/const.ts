@@ -1,0 +1,58 @@
+import { Customer } from "./types"
+
+export const customers: Customer[] = [
+  {
+    id: "1",
+    name: "Rajesh Kumar",
+    code: "UC_32168",
+    mobile: "9876543210",
+    village: "Rampur",
+    status: "ACTIVE",
+    mode: "OFFLINE",
+  },
+  {
+    id: "2",
+    name: "Sanjay Singh",
+    code: "UC_32169",
+    mobile: "9876543211",
+    village: "Bhatauli",
+    status: "ACTIVE",
+    mode: "ONLINE",
+  },
+  {
+    id: "3",
+    name: "Pooja Mehta",
+    code: "UC_32170",
+    mobile: "9876543212",
+    village: "Kalyanpur",
+    status: "INACTIVE",
+    mode: "OFFLINE",
+  },
+  {
+    id: "4",
+    name: "Vikram Yadav",
+    code: "UC_32171",
+    mobile: "9876543213",
+    village: "Shahpur",
+    status: "ACTIVE",
+    mode: "ONLINE",
+  },
+  {
+    id: "5",
+    name: "Anita Sharma",
+    code: "UC_32172",
+    mobile: "9876543214",
+    village: "Maldah",
+    status: "INACTIVE",
+    mode: "OFFLINE",
+  },
+  {
+    id: "6",
+    name: "Deepak Kumar",
+    code: "UC_32173",
+    mobile: "9876543215",
+    village: "Hasanpur",
+    status: "ACTIVE",
+    mode: "ONLINE",
+  },
+];

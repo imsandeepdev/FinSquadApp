@@ -15,8 +15,9 @@ StyleSheet.create({
     bottom: 0,
     height: 75,
     backgroundColor: '#132238',
-    borderRadius: 25,
-    borderTopWidth: 0,
+    // borderRadius: 1,
+    borderTopWidth: 1,
+    borderColor: AppColor.appColor,
     elevation: 15,
     shadowColor: '#000',
     shadowOffset: {
@@ -25,7 +26,7 @@ StyleSheet.create({
     },
     shadowOpacity: 0.15,
     shadowRadius: 12,
-    paddingTop:10
+    paddingTop:10,
   },
 
   aiContainer: {
@@ -35,10 +36,10 @@ StyleSheet.create({
   },
 
   aiButton: {
-    width: 70,
-    height: 70,
+    width: 65,
+    height: 65,
     borderRadius: 36,
-    backgroundColor: AppColor.secAppColor,
+    backgroundColor: AppColor.lightWhite,
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 12,
@@ -49,5 +50,7 @@ StyleSheet.create({
     },
     shadowOpacity: 0.4,
     shadowRadius: 10,
+    borderWidth:2,
+    borderColor: AppColor.secAppColor
   },
 });

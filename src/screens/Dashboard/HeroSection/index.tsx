@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
 View,
@@ -6,6 +6,7 @@ Text,
 StyleSheet,
 Image,
 TouchableOpacity,
+LayoutAnimation,
 } from "react-native";
 
 import LinearGradient from "react-native-linear-gradient";
@@ -19,16 +20,73 @@ const styles = getStyles(themeColor);
 const gridientColor = [themeColor.appColor, themeColor.appColor, themeColor.secAppColor]
 const portfolioGridientColor = [themeColor.secAppColor, themeColor.appColor]
 
+const [expanded, setExpanded] = useState
+(false);
+
+const toggleProfile = () => {
+  LayoutAnimation.configureNext(
+    LayoutAnimation.Presets.easeInEaseOut,
+  );
+
+  setExpanded(prev => !prev);
+};
+
 
 return(
 
 <View>
+{
+!expanded &&
+<View style={styles.header}>
+    <View style={{ flex: 1 }}>
+
+        <Text style={styles.greeting}>
+            Good Morning ☀️
+        </Text>
+
+        <Text style={styles.name}>
+            Riya Nandi
+        </Text>
+
+        <Text style={styles.role}>
+            Senior Relationship Manager
+        </Text>
+
+    </View>
+
+    <TouchableOpacity
+        onPress={toggleProfile}
+        style={styles.profileButton}
+    >
+
+        <Text style={styles.profileButtonText}>
+            {expanded ? "Hide Profile" : "View Profile"}
+        </Text>
+
+        <Icon
+            name={
+                expanded
+                    ? "chevron-up"
+                    : "chevron-forward"
+            }
+            size={18}
+            color="#fff"
+        />
+
+    </TouchableOpacity>
+
+</View>}
+
+{
+expanded &&  
+<View style={{ flex: 1 }}>  
 <LinearGradient
     colors={gridientColor}
     start={{x:0,y:0}}
     end={{x:1,y:1,}}
     style={styles.container}
 >
+
 
     <View style={styles.particle1}/>
     <View style={styles.particle2}/>
@@ -86,22 +144,27 @@ return(
 
         </View>
 
-        <TouchableOpacity style={styles.notification}>
-            <Icon
-            name="notifications-outline"
-            size={20}
-            color="#fff"
-            />
-            <View style={styles.badge}>
-                <Text style={styles.badgeText}>{'3'}</Text>
-            </View>
-        </TouchableOpacity>
+        <TouchableOpacity
+    onPress={toggleProfile}
+    style={styles.hideProfileBtn}
+>
+    <Text style={styles.hideProfileText}>
+        Hide
+    </Text>
+
+    <Icon
+        name="chevron-up"
+        size={18}
+        color="#fff"
+    />
+</TouchableOpacity>
+       
 
         </View>
     </View>
 </LinearGradient>
 
-<View style={styles.portfolio}>
+{/* <View style={styles.portfolio}>
     <LinearGradient
     colors={portfolioGridientColor}
     style={styles.portfolioGradient}
@@ -130,7 +193,12 @@ return(
             </View>
         </View>
     </LinearGradient>
+</View> */}
+
 </View>
+}
+
+
 
 </View>
 

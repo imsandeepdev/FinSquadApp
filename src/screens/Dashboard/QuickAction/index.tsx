@@ -10,37 +10,50 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useTheme } from "../../../utils/provider/themeProvider";
 import { getStyles } from "./styles";
+import { NAVIGATE_NAME } from "../../../utils/const";
 
 const actions = [
   {
-    icon: "qr-code",
-    title: "Scan QR",
+    icon: "person-add", // Customer onboarding
+    title: "COB",
+    subtitle: "Customer on Board",
     color: "#2563EB",
+    navigate: NAVIGATE_NAME.COB_LIST_SCREEN
   },
   {
-    icon: "people",
-    title: "Clients",
+    icon: "document-text", // Loan proposal document
+    title: "Loan Proposal",
+    subtitle: "Create New Proposal",
     color: "#16A34A",
+    navigate: NAVIGATE_NAME.COB_LIST_SCREEN
   },
   {
-    icon: "wallet",
-    title: "Portfolio",
+    icon: "flash", // Express / Quick loan
+    title: "Express Loan",
+    subtitle: "Quick Loan Disbursement",
     color: "#7C3AED",
+    navigate: NAVIGATE_NAME.COB_LIST_SCREEN
   },
   {
-    icon: "calendar",
+    icon: "calendar-clear", // Meetings
     title: "Meetings",
+    subtitle: "Schedule and Manage Meetings",
     color: "#F59E0B",
+    navigate: NAVIGATE_NAME.COB_LIST_SCREEN
   },
   {
-    icon: "sparkles",
-    title: "AI Coach",
+    icon: "cash", // Collections & Payments
+    title: "Collection",
+    subtitle: "Manage Collections and Payments",
     color: "#EC4899",
+    navigate: NAVIGATE_NAME.COB_LIST_SCREEN
   },
   {
-    icon: "stats-chart",
+    icon: "bar-chart", // Reports & Analytics
     title: "Reports",
+    subtitle: "View Reports and Analytics",
     color: "#0EA5E9",
+    navigate: NAVIGATE_NAME.COB_LIST_SCREEN
   },
 ];
 
@@ -59,7 +72,7 @@ const QuickActions = ({onPress}:QuickActionType) => {
       <View style={styles.grid}>
         {actions.map((item, index) => (
           <Pressable
-            onPress={onPress}
+             onPress={() => onPress?.(item)}
             key={index}
             style={({pressed})=>[
               styles.card,

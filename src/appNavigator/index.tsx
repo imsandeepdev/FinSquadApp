@@ -9,6 +9,8 @@ import AIWealthCoachScreen from '../screens/AIBased';
 import {navigationRef} from './navigationService';
 import CustomerOnboardingScreen from '../screens/CustomerOnBoard';
 import { BottomTabs } from '../components';
+import COBListScreen from '../screens/COBList';
+import { NAVIGATE_NAME } from '../utils/const';
 
 
 const Stack = createStackNavigator();
@@ -23,12 +25,12 @@ const AppNavigator = () => {
         }}>
         
         <Stack.Screen
-          name="Login"
+          name={NAVIGATE_NAME.LOGIN}
           component={Login}
         />
 
          <Stack.Screen
-          name="Register"
+          name={NAVIGATE_NAME.REGISTER}
           component={Register}
         />
 
@@ -38,13 +40,18 @@ const AppNavigator = () => {
         />
 
         <Stack.Screen
-          name="AIWealthCoachScreen"
+          name={NAVIGATE_NAME.AIWEALTH_COACH_SCREEN}
           component={AIWealthCoachScreen}
         />
 
          <Stack.Screen
-          name="CustomerOnboardingScreen"
+          name={NAVIGATE_NAME.CUSTOMER_ONBOARDING_SCREEN}
           component={CustomerOnboardingScreen}
+        />
+
+        <Stack.Screen
+          name={NAVIGATE_NAME.COB_LIST_SCREEN}
+          component={COBListScreen}
         />
 
       </Stack.Navigator>

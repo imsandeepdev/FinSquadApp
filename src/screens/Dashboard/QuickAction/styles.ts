@@ -24,7 +24,7 @@ StyleSheet.create({
     card:{
     width:"31%",
     backgroundColor:"#fff",
-    paddingVertical:16,
+    paddingVertical:14,
     borderRadius:20,
     alignItems:"center",
     marginBottom:15,
@@ -39,17 +39,23 @@ StyleSheet.create({
     },
 
     iconContainer:{
-    height:60,
-    width:60,
-    borderRadius:30,
+    height:50,
+    width:50,
+    borderRadius:25,
     justifyContent:"center",
     alignItems:"center",
     },
 
     title:{
-    marginTop:10,
-    fontSize:14,
+    marginTop:8,
+    fontSize:12,
     fontWeight:"600",
     color:AppColor.primaryText,
+    },
+    subtitle:{
+    marginTop:2,
+    fontSize:10,
+    color:AppColor.placeHolder,
+    textAlign:"center",
     },
 })

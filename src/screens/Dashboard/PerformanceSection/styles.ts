@@ -1,5 +1,6 @@
 import {StyleSheet} from "react-native";
 import { ThemeColorType } from "../../../res/colors/theme.types";
+import { responsiveSize } from "../../../res";
 
 export const getStyles = (AppColor: ThemeColorType) =>
 StyleSheet.create({
@@ -7,8 +8,8 @@ StyleSheet.create({
 container:{
     backgroundColor: AppColor.lightWhite,
     borderWidth:1,
-    borderRadius:15,
-    paddingVertical:10,
+    borderRadius:responsiveSize(15),
+    paddingVertical:responsiveSize(10),
     flexDirection:"row",
     justifyContent:"space-between",
     elevation:8,
@@ -16,15 +17,15 @@ container:{
     shadowOpacity:.08,
     shadowOffset:{
         width:0,
-        height:5,
+        height:responsiveSize(5),
     },
-    shadowRadius:10,
+    shadowRadius:responsiveSize(10),
 },
 
 card:{
     flex:1,
-    paddingHorizontal:6,
-    height:70
+    paddingHorizontal:responsiveSize(6),
+    height:responsiveSize(70)
 },
 
 divider:{
@@ -33,51 +34,61 @@ divider:{
 },
 
 iconContainer:{
-    width:28,
-    height:28,
-    borderRadius:6,
+    width:responsiveSize(28),
+    height:responsiveSize(28),
+    borderRadius:responsiveSize(6),
     justifyContent:"center",
     alignItems:"center",
-    padding:2
+    padding:responsiveSize(2)
 
 },
 
 title:{
-    fontSize:12,
+    fontSize:responsiveSize(12),
     color:AppColor.primaryText,
     fontWeight:"500",
 },
 
 value:{
-    marginTop:5,
-    fontSize:14,
+    marginTop:responsiveSize(5),
+    fontSize:responsiveSize(14),
     fontWeight:"700",
     color: AppColor.primaryText,
 },
 
 bottomRow:{
-    marginTop:5,
+    marginTop:responsiveSize(5),
     flexDirection:"row",
     alignItems:"center",
 },
 
 changeContainer:{
-    paddingHorizontal:5,
-    paddingVertical:4,
-    borderRadius:10,
+    paddingHorizontal:responsiveSize(5),
+    paddingVertical:responsiveSize(4),
+    borderRadius:responsiveSize(10),
     backgroundColor:"#EAFBF3",
 },
 
 change:{
     fontWeight:"700",
     color:AppColor.successColor,
-    fontSize:10,
+    fontSize:responsiveSize(10),
 },
 
 subtitle:{
-    marginLeft:4,
-    fontSize:10,
+    marginLeft:responsiveSize(4),
+    fontSize:responsiveSize(10),
     color: AppColor.placeHolder,
+},
+
+rowFlex:{
+    flexDirection:"row",
+    flex:1,
+},
+
+infoWrap:{
+    flex:1,
+    marginLeft:responsiveSize(4),
 },
 
 });

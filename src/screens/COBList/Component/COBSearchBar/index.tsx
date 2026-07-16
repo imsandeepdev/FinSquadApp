@@ -3,11 +3,11 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
 } from "react-native";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { AppColor } from "../../../../res";
+import { useTheme } from "../../../../utils/provider/themeProvider";
+import getStyles from "./styles";
 
 interface Props {
   value: string;
@@ -20,18 +20,21 @@ const SearchBar = ({
   onChange,
   onFilterPress,
 }: Props) => {
+  const { theme: { themeColor } } = useTheme();
+  const styles = getStyles(themeColor);
+
   return (
     <View style={styles.container}>
       <View style={styles.searchBox}>
         <Ionicons
           name="search"
           size={20}
-          color={AppColor.secAppText}
+          color={themeColor.secAppText}
         />
 
         <TextInput
           placeholder="Search customer..."
-          placeholderTextColor="#9CA3AF"
+          placeholderTextColor={themeColor.placeHolder}
           value={value}
           onChangeText={onChange}
           style={styles.input}
@@ -44,7 +47,7 @@ const SearchBar = ({
         <Ionicons
           name="options-outline"
           size={22}
-          color="#FFF"
+          color={themeColor.white}
         />
       </TouchableOpacity>
     </View>
@@ -52,41 +55,3 @@ const SearchBar = ({
 };
 
 export default React.memo(SearchBar);
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    marginHorizontal: 16,
-    marginBottom: 10,
-    alignItems: "center",
-  },
-
-  searchBox: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#FFF",
-    borderRadius: 14,
-    paddingHorizontal: 14,
-    height: 50,
-    elevation: 1,
-  },
-
-  input: {
-    flex: 1,
-    marginLeft: 10,
-    fontSize: 15,
-    color: AppColor.primaryText,
-  },
-
-  filterButton: {
-    width: 50,
-    height: 50,
-    marginLeft: 10,
-    borderRadius: 14,
-    backgroundColor: AppColor.appColor,
-    justifyContent: "center",
-    alignItems: "center",
-    elevation: 2,
-  },
-});

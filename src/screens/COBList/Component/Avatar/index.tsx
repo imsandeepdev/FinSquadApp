@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-
+import { View, Text } from "react-native";
+import { useTheme } from "../../../../utils/provider/themeProvider";
+import getStyles from "./styles";
 
 interface Props {
   name: string;
@@ -25,6 +26,9 @@ const textColors = [
 ];
 
 const Avatar = ({ name }: Props) => {
+  const { theme: { themeColor } } = useTheme();
+  const styles = getStyles(themeColor);
+
   const initials = name
     .split(" ")
     .map((item) => item[0])
@@ -56,18 +60,3 @@ const Avatar = ({ name }: Props) => {
 };
 
 export default React.memo(Avatar);
-
-const styles = StyleSheet.create({
-  container: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  text: {
-    fontSize: 18,
-    fontWeight: "700",
-  },
-});

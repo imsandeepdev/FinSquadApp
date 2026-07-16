@@ -12,7 +12,6 @@ import {
 import { AppButton, AppTextInput, ResetPasswordFooter, StoryScreen } from "../../components";
 import { getStyles } from './styles';
 import { useTheme } from "../../utils/provider/themeProvider";
-import { responsiveSize } from "../../res";
 import {useNavigation} from '@react-navigation/native';
 
 const Login = () => {
@@ -114,16 +113,10 @@ const Login = () => {
         behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
         <ScrollView
-          contentContainerStyle={{ flexGrow: 1 , backgroundColor: themeColor.appColor}}
+          contentContainerStyle={styles.scrollContent}
           keyboardShouldPersistTaps="handled"
         >
-          <View
-            style={{
-              flex: 1,
-              marginTop: responsiveSize(20),
-            
-            }}
-          >
+          <View style={styles.bodyContainer}>
             {/* HEADER */}
             <View style={styles.cardViewTopContainer}>
               <Text style={styles.cardViewTopTitleText}>
@@ -175,17 +168,11 @@ const Login = () => {
               />
 
               {/* REMEMBER ME */}
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginTop: 10,
-                }}
-              >
+              <View style={styles.rememberMeRow}>
                 <Pressable
                   onPress={() => setRememberMe(!rememberMe)}
                 >
-                  <Text style={{ color: themeColor.primaryText }}>
+                  <Text style={styles.rememberMeText}>
                     {rememberMe
                       ? "☑ Remember Me"
                       : "☐ Remember Me"}
@@ -194,17 +181,17 @@ const Login = () => {
               </View>
 
               {/* LOGIN BUTTON */}
-              <View style={{ marginTop: responsiveSize(20) }}>
+              <View style={styles.loginButtonContainer}>
                 <AppButton
                   onPress={handleLogin}
                   title={
                     loading ? "Signing in..." : "Sign in"
                   }
                   disabled={loading}
-                  containerStyle={{
-                    opacity: loading ? 0.6 : 1,
-                    marginHorizontal:0
-                  }}
+                  containerStyle={[
+                    styles.loginButton,
+                    { opacity: loading ? 0.6 : 1 },
+                  ]}
                 />
               </View>
 

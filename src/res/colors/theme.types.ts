@@ -38,11 +38,17 @@ export type ThemeColorType = {
 
   transparent_SecAppColor: string;
 
+  // layered surfaces / states (NEW - must exist on every theme)
+  surface: string;
+  overlay: string;
+  disabled: string;
+  shadow: string;
+
 };
 
 export type ThemeMode = 'light' | 'dark';
 
 export type AppThemeTypes = {
-  themeMode: ThemeMode;
+  mode: ThemeMode;
   themeColor: ThemeColorType;
 };

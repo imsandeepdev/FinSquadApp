@@ -1,7 +1,6 @@
 import React from "react";
 import {
   View,
-  StyleSheet,
 } from "react-native";
 import { getStyles } from "./styles";
 import { useTheme } from "../../utils/provider/themeProvider";

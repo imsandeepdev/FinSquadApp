@@ -1,12 +1,10 @@
 import React, { useCallback, useMemo, useState } from "react";
 import {
-  StyleSheet,
   View,
   FlatList,
   Text,
   RefreshControl,
 } from "react-native";
-import { AppColor } from "../../res";
 import COBTopBar, { TabType } from "./Component/COBTopBar";
 import { customers } from "./const";
 import { Customer } from "./types";
@@ -17,10 +15,14 @@ import BottomSummary from "./Component/BottomSummary";
 import { ScrollView } from "react-native-gesture-handler";
 import {useNavigation} from '@react-navigation/native';
 import { NAVIGATE_NAME } from "../../utils/const";
+import { useTheme } from "../../utils/provider/themeProvider";
+import getStyles from "./styles";
 
 
 const COBListScreen = () => {
 const navigation = useNavigation<any>();
+  const { theme: { themeColor } } = useTheme();
+  const styles = getStyles(themeColor);
   const [search, setSearch] = useState("");
   const [selectedTab, setSelectedTab] =
     useState<TabType>("OFFLINE");
@@ -103,8 +105,8 @@ const navigation = useNavigation<any>();
 
   return (
      <StoryScreen>
-        <ScrollView 
-        contentContainerStyle={{flexGrow:1}}
+        <ScrollView
+        contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}>
       <AppHeader
         title={"COB List"}
@@ -124,10 +126,7 @@ const navigation = useNavigation<any>();
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={EmptyComponent}
-        contentContainerStyle={{
-          paddingBottom: 130,
-          flexGrow: 1,
-        }}
+        contentContainerStyle={styles.listContent}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
@@ -157,28 +156,3 @@ const navigation = useNavigation<any>();
 };
 
 export default COBListScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: AppColor.background,
-  },
-
-  emptyContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  emptyTitle: {
-    fontSize: 20,
-    fontWeight: "700",
-    color: AppColor.primaryText,
-  },
-
-  emptySubTitle: {
-    marginTop: 8,
-    fontSize: 14,
-    color: AppColor.secAppText,
-  },
-});

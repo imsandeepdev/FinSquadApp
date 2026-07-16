@@ -2,31 +2,33 @@ import React from "react";
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
 } from "react-native";
 
 import LinearGradient from "react-native-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { useTheme } from "../../../utils/provider/themeProvider";
+import { getStyles } from "./styles";
+import { responsiveSize } from "../../../res";
 
 const SmartTaskCard = () => {
+  const { theme: { themeColor } } = useTheme();
+  const styles = getStyles(themeColor);
+
   return (
     <View style={styles.container}>
 
       {/* Header */}
-
       <View style={styles.header}>
-
         <View style={styles.left}>
 
           <View style={styles.iconBox}>
             <Ionicons
               name="sparkles"
-              size={24}
-              color="#fff"
+              size={responsiveSize(20)}
+              color={themeColor.white}
             />
           </View>
-
           <View>
 
             <Text style={styles.title}>
@@ -57,8 +59,8 @@ const SmartTaskCard = () => {
 
         <Ionicons
           name="people"
-          size={22}
-          color="#2563EB"
+          size={responsiveSize(18)}
+          color={themeColor.infoColor}
         />
 
         <View style={styles.content}>
@@ -81,8 +83,8 @@ const SmartTaskCard = () => {
 
         <Ionicons
           name="cash"
-          size={22}
-          color="#16A34A"
+          size={responsiveSize(18)}
+          color={themeColor.successColor}
         />
 
         <View style={styles.content}>
@@ -129,14 +131,11 @@ const SmartTaskCard = () => {
 
         <Ionicons
           name="bulb"
-          size={22}
-          color="#fff"
+          size={responsiveSize(22)}
+          color={themeColor.white}
         />
 
-        <View style={{
-          marginLeft:12,
-          flex:1,
-        }}>
+        <View style={styles.aiContent}>
 
           <Text style={styles.aiTitle}>
             AI Recommendation
@@ -179,155 +178,3 @@ const SmartTaskCard = () => {
 };
 
 export default SmartTaskCard;
-
-const styles = StyleSheet.create({
-
-container:{
-marginHorizontal:20,
-marginTop:20,
-marginBottom:30,
-padding:20,
-backgroundColor:"#fff",
-borderRadius:25,
-
-elevation:8,
-
-shadowColor:"#000",
-
-shadowOpacity:.08,
-
-shadowOffset:{
-width:0,
-height:5,
-},
-
-shadowRadius:10,
-
-},
-
-header:{
-flexDirection:"row",
-justifyContent:"space-between",
-alignItems:"center",
-},
-
-left:{
-flexDirection:"row",
-alignItems:"center",
-},
-
-iconBox:{
-height:55,
-width:55,
-borderRadius:28,
-backgroundColor:"#7C3AED",
-justifyContent:"center",
-alignItems:"center",
-marginRight:12,
-},
-
-title:{
-fontSize:20,
-fontWeight:"700",
-color:"#071A52",
-},
-
-subtitle:{
-color:"#64748B",
-},
-
-priority:{
-backgroundColor:"#FEE2E2",
-paddingHorizontal:12,
-paddingVertical:6,
-borderRadius:20,
-},
-
-priorityText:{
-color:"#DC2626",
-fontWeight:"700",
-},
-
-taskCard:{
-marginTop:20,
-flexDirection:"row",
-alignItems:"center",
-},
-
-content:{
-marginLeft:15,
-},
-
-taskTitle:{
-fontWeight:"700",
-fontSize:16,
-color:"#071A52",
-},
-
-taskSub:{
-marginTop:3,
-color:"#64748B",
-},
-
-progressTop:{
-marginTop:25,
-flexDirection:"row",
-justifyContent:"space-between",
-},
-
-progressLabel:{
-fontWeight:"600",
-},
-
-progressValue:{
-fontWeight:"700",
-color:"#2563EB",
-},
-
-progressBg:{
-marginTop:10,
-height:10,
-backgroundColor:"#E2E8F0",
-borderRadius:20,
-},
-
-progressFill:{
-height:10,
-width:"76%",
-backgroundColor:"#16A34A",
-borderRadius:20,
-},
-
-aiCard:{
-marginTop:25,
-padding:18,
-borderRadius:18,
-flexDirection:"row",
-},
-
-aiTitle:{
-fontWeight:"700",
-fontSize:16,
-color:"#fff",
-},
-
-aiText:{
-marginTop:5,
-color:"#fff",
-lineHeight:20,
-},
-
-button:{
-marginTop:25,
-paddingVertical:16,
-borderRadius:18,
-alignItems:"center",
-},
-
-buttonText:{
-color:"#fff",
-fontSize:16,
-fontWeight:"700",
-},
-
-});

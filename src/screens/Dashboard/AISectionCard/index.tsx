@@ -11,6 +11,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useTheme } from '../../../utils/provider/themeProvider';
 import { getStyles } from './styles';
+import { responsiveSize } from '../../../res';
 
 const AISectionCard=()=>{
 
@@ -23,14 +24,14 @@ return(
     <LinearGradient
     colors={gridSection}
     >
-    <View style={{paddingHorizontal:10, paddingVertical:6}}>
+    <View style={styles.contentPad}>
     <View style={styles.header}>
 
         <View style={styles.leftHeader}>
 
         <Icon
         name="sparkles"
-        size={12}
+        size={responsiveSize(12)}
         color={themeColor.secAppColor}
         />
 
@@ -72,7 +73,7 @@ return(
         </Text>
         </Text>
         </View>
-        
+
     </View>
 
     </View>

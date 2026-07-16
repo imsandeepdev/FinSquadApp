@@ -6,6 +6,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import StatCard from "./StatCard";
 import { useTheme } from "../../../utils/provider/themeProvider";
 import { getStyles } from "./styles";
+import { responsiveSize } from "../../../res";
 
 const PerformanceSection=()=>{
 
@@ -14,12 +15,12 @@ const styles = getStyles(themeColor);
 
 return(
 <View style={styles.container}>
-    <StatCard 
+    <StatCard
     icon={
         <Icon
         name="people"
-        size={18}
-        color="#fff"
+        size={responsiveSize(18)}
+        color={themeColor.white}
         />
     }
     iconBackground={themeColor.appColor}
@@ -33,7 +34,7 @@ return(
     icon={
     <Icon
     name="trending-up"
-    size={18}
+    size={responsiveSize(18)}
     color={themeColor.white}
     />
     }
@@ -48,7 +49,7 @@ return(
     icon={
     <Icon
     name="calendar"
-    size={18}
+    size={responsiveSize(18)}
     color={themeColor.white}
     />
     }

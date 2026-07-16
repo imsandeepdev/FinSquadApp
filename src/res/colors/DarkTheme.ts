@@ -1,3 +1,5 @@
+import { ThemeColorType } from "./theme.types";
+
 export const DarkTheme = {
   mode: "dark",
 
@@ -34,6 +36,7 @@ export const DarkTheme = {
     primaryText: "#F3F4F6",
     primaryLightText: "#D1D5DB",
     secondaryText: "#9CA3AF",
+    secondaryLightText: "#8891A0",
 
     errorText: "#FF453A",
     infoText: "#60A5FA",
@@ -55,5 +58,5 @@ export const DarkTheme = {
     // NEW (IMPORTANT FOR FINTECH UI)
     disabled: "#374151",
     shadow: "rgba(0,0,0,0.4)",
-  },
+  } satisfies ThemeColorType,
 } as const;

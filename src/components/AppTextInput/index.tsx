@@ -6,7 +6,6 @@ import {
   TextInput,
 } from 'react-native';
 
-import { AppColor, responsiveSize } from '../../res';
 import { AppTextInputProps } from './types';
 import { useTheme } from '../../utils/provider/themeProvider';
 import { getStyles } from './styles';
@@ -86,14 +85,12 @@ const AppTextInput = React.forwardRef<TextInput, AppTextInputProps>(
             {rightOnPress ? (
               <Pressable
                 onPress={rightOnPress}
-                style={({ pressed }) => ({
-                  opacity: pressed ? 0.5 : 1,
-                  paddingHorizontal: 6,
-                  alignItems: "center",
-                  justifyContent: "center",
-                })}
+                style={({ pressed }) => [
+                  Style.rightButton,
+                  { opacity: pressed ? 0.5 : 1 },
+                ]}
               >
-              
+
               </Pressable>
             ) : null}
 
@@ -117,11 +114,7 @@ const AppTextInput = React.forwardRef<TextInput, AppTextInputProps>(
         }
         {isError&&
         <View>
-          <Text style={{
-            marginTop: 4, 
-            color:  AppColor.errorColor,
-            fontSize: responsiveSize(12),
-          }}numberOfLines={1}>{errorMessage}</Text>
+          <Text style={Style.errorText} numberOfLines={1}>{errorMessage}</Text>
         </View>}
       </View>
     );

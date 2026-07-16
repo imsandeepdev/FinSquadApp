@@ -11,6 +11,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { useTheme } from "../../../utils/provider/themeProvider";
 import { getStyles } from "./styles";
 import { NAVIGATE_NAME } from "../../../utils/const";
+import { responsiveSize } from "../../../res";
 
 const actions = [
   {
@@ -90,7 +91,7 @@ const QuickActions = ({onPress}:QuickActionType) => {
             >
               <Ionicons
                 name={item.icon}
-                size={26}
+                size={responsiveSize(26)}
                 color={item.color}
               />
             </View>

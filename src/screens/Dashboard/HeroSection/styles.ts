@@ -1,18 +1,32 @@
 import {StyleSheet} from "react-native";
 import { ThemeColorType } from "../../../res/colors/theme.types";
+import { responsiveSize } from "../../../res";
 
 export const getStyles = (AppColor: ThemeColorType) =>
  StyleSheet.create({
 
+flexOne:{
+flex:1,
+},
+
+profileRow:{
+flexDirection:"row",
+alignItems:"center",
+},
+
+infoWrap:{
+marginHorizontal:responsiveSize(10),
+},
+
 container:{
-borderBottomLeftRadius:30,
-borderBottomRightRadius:30,
+borderBottomLeftRadius:responsiveSize(30),
+borderBottomRightRadius:responsiveSize(30),
 overflow:"hidden",
 },
 
 topBody:{
-padding:20,
-},  
+padding:responsiveSize(20),
+},
 
 top:{
 flexDirection:"row",
@@ -20,54 +34,54 @@ justifyContent:"space-between",
 },
 
 greeting:{
-fontSize:12,
-color:"#fff",
+fontSize:responsiveSize(12),
+color:AppColor.white,
 },
 
 name:{
-fontSize:18,
+fontSize:responsiveSize(18),
 fontWeight:"700",
 color:"#999",
-marginTop:10,
+marginTop:responsiveSize(10),
 },
 
 role:{
-fontSize:14,
+fontSize:responsiveSize(14),
 color:"#D6E4FF",
-marginTop:5,
+marginTop:responsiveSize(5),
 },
 
 empChip:{
-marginTop:5,
-paddingHorizontal:14,
-paddingVertical:8,
-borderRadius:25,
+marginTop:responsiveSize(5),
+paddingHorizontal:responsiveSize(14),
+paddingVertical:responsiveSize(8),
+borderRadius:responsiveSize(25),
 backgroundColor:"rgba(255,255,255,.1)",
 alignSelf:"flex-start",
 flexDirection:"row",
 },
 
 empText:{
-color:"#fff",
-fontSize:12,
-marginLeft:5,
+color:AppColor.white,
+fontSize:responsiveSize(12),
+marginLeft:responsiveSize(5),
 },
 
 locationRow:{
-marginTop:5,
+marginTop:responsiveSize(5),
 flexDirection:"row",
 },
 
 location:{
 color:"#D6E4FF",
-marginLeft:5,
-fontSize:12,
+marginLeft:responsiveSize(5),
+fontSize:responsiveSize(12),
 },
 
 notification:{
-width:40,
-height:40,
-borderRadius:20,
+width:responsiveSize(40),
+height:responsiveSize(40),
+borderRadius:responsiveSize(20),
 backgroundColor:"rgba(255,255,255,.08)",
 justifyContent:"center",
 alignItems:"center",
@@ -75,68 +89,68 @@ alignItems:"center",
 
 badge:{
 position:"absolute",
-top:0,
-right:0,
-width:16,
-height:16,
-borderRadius:8,
+top:responsiveSize(0),
+right:responsiveSize(0),
+width:responsiveSize(16),
+height:responsiveSize(16),
+borderRadius:responsiveSize(8),
 backgroundColor:"#FF3B30",
 justifyContent:"center",
 alignItems:"center",
 },
 
 badgeText:{
-color:"#fff",
+color:AppColor.white,
 fontWeight:"700",
-fontSize:10,
+fontSize:responsiveSize(10),
 },
 
 middle:{
-marginTop:20,
+marginTop:responsiveSize(20),
 flexDirection:"row",
 justifyContent:"space-between",
 alignItems:"center",
 },
 
 profileWrap:{
-width:90,
-height:90,
-borderRadius:50,
-padding:3,
+width:responsiveSize(90),
+height:responsiveSize(90),
+borderRadius:responsiveSize(50),
+padding:responsiveSize(3),
 backgroundColor:"#7C3AED",
 },
 
 profile:{
 width:"100%",
 height:"100%",
-borderRadius:45,
+borderRadius:responsiveSize(45),
 },
 
 online:{
 position:"absolute",
-bottom:4,
-right:10,
-width:12,
-height:12,
-borderRadius:10,
+bottom:responsiveSize(4),
+right:responsiveSize(10),
+width:responsiveSize(12),
+height:responsiveSize(12),
+borderRadius:responsiveSize(10),
 backgroundColor:"#22C55E",
 },
 
 robot:{
-width:140,
-height:140,
+width:responsiveSize(140),
+height:responsiveSize(140),
 justifyContent:"center",
 alignItems:"center",
 },
 
 robotText:{
-fontSize:90,
+fontSize:responsiveSize(90),
 },
 
 achievement:{
-marginTop:10,
-padding:15,
-borderRadius:15,
+marginTop:responsiveSize(10),
+padding:responsiveSize(15),
+borderRadius:responsiveSize(15),
 backgroundColor:"rgba(255,255,255,.08)",
 flexDirection:"row",
 justifyContent:"space-between",
@@ -148,16 +162,16 @@ fontWeight:"700",
 },
 
 top10:{
-color:"#fff",
+color:AppColor.white,
 },
 
 divider:{
-width:1,
+width:responsiveSize(1),
 backgroundColor:"rgba(255,255,255,.2)",
 },
 
 level:{
-color:"#fff",
+color:AppColor.white,
 fontWeight:"700",
 },
 
@@ -166,100 +180,100 @@ color:"#D6E4FF",
 },
 
 portfolio:{
-marginHorizontal:0,
-marginTop:-40,
-marginRight: 15,
-marginLeft:15,
+marginHorizontal:responsiveSize(0),
+marginTop:responsiveSize(-40),
+marginRight:responsiveSize(15),
+marginLeft:responsiveSize(15),
 },
 
 portfolioGradient:{
-borderRadius:16,
+borderRadius:responsiveSize(16),
 flexDirection:"row",
 borderWidth:0.5,
 borderColor: AppColor.appLightColor
 },
 
 wallet:{
-width:40,
-height:40,
-borderRadius:20,
+width:responsiveSize(40),
+height:responsiveSize(40),
+borderRadius:responsiveSize(20),
 backgroundColor:"#c3c0c9",
 justifyContent:"center",
 alignItems:"center",
 },
 
 walletText:{
-fontSize:20,
+fontSize:responsiveSize(20),
 },
 
 portfolioInfo:{
-marginLeft:10,
+marginLeft:responsiveSize(10),
 },
 
 portTitle:{
 color:"#D6E4FF",
-fontSize:14
+fontSize:responsiveSize(14)
 },
 
 amount:{
-fontSize:16,
+fontSize:responsiveSize(16),
 fontWeight:"700",
-color:"#fff",
-marginTop:4,
+color:AppColor.white,
+marginTop:responsiveSize(4),
 },
 
 growthRow:{
-marginTop:5,
+marginTop:responsiveSize(5),
 flexDirection:"row",
 alignItems:"center",
 },
 
 growth:{
-backgroundColor:"#16A34A",
-paddingHorizontal:4,
-paddingVertical:4,
-borderRadius:5,
+backgroundColor:AppColor.successColor,
+paddingHorizontal:responsiveSize(4),
+paddingVertical:responsiveSize(4),
+borderRadius:responsiveSize(5),
 },
 
 growthText:{
-color:"#fff",
+color:AppColor.white,
 fontWeight:"700",
-fontSize:12
+fontSize:responsiveSize(12)
 },
 
 month:{
-marginLeft:10,
+marginLeft:responsiveSize(10),
 color:"#D6E4FF",
 },
 
 particle1:{
 position:"absolute",
-width:5,
-height:5,
-borderRadius:3,
-backgroundColor:"#fff",
-top:30,
-left:30,
+width:responsiveSize(5),
+height:responsiveSize(5),
+borderRadius:responsiveSize(3),
+backgroundColor:AppColor.white,
+top:responsiveSize(30),
+left:responsiveSize(30),
 },
 
 particle2:{
 position:"absolute",
-width:8,
-height:8,
-borderRadius:4,
+width:responsiveSize(8),
+height:responsiveSize(8),
+borderRadius:responsiveSize(4),
 backgroundColor:"#60A5FA",
-top:120,
-right:120,
+top:responsiveSize(120),
+right:responsiveSize(120),
 },
 
 particle3:{
 position:"absolute",
-width:4,
-height:4,
-borderRadius:2,
+width:responsiveSize(4),
+height:responsiveSize(4),
+borderRadius:responsiveSize(2),
 backgroundColor:"#A78BFA",
-top:200,
-left:250,
+top:responsiveSize(200),
+left:responsiveSize(250),
 },
 
 
@@ -268,39 +282,39 @@ header: {
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: AppColor.appColor,
-    paddingHorizontal: 16,
-    paddingVertical: 10,
+    paddingHorizontal: responsiveSize(16),
+    paddingVertical: responsiveSize(10),
 },
 
 profileButton: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: 20,
+    paddingHorizontal: responsiveSize(14),
+    paddingVertical: responsiveSize(8),
+    borderRadius: responsiveSize(20),
     backgroundColor: "rgba(255,255,255,0.15)",
 },
 
 profileButtonText: {
-    color: "#fff",
-    fontSize: 13,
+    color: AppColor.white,
+    fontSize: responsiveSize(13),
     fontWeight: "600",
-    marginRight: 4,
+    marginRight: responsiveSize(4),
 },
 
 hideProfileBtn: {
-    height: 36,
+    height: responsiveSize(36),
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "rgba(255,255,255,.12)",
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: 22,
+    paddingHorizontal: responsiveSize(14),
+    paddingVertical: responsiveSize(8),
+    borderRadius: responsiveSize(22),
 },
 
 hideProfileText: {
-    color: "#fff",
+    color: AppColor.white,
     fontWeight: "600",
-    marginRight: 4,
+    marginRight: responsiveSize(4),
 },
 });

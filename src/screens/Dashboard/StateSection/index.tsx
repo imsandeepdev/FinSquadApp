@@ -3,10 +3,12 @@ import React from "react";
 import {
   View,
   Text,
-  StyleSheet,
 } from "react-native";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { useTheme } from "../../../utils/provider/themeProvider";
+import { getStyles } from "./styles";
+import { responsiveSize } from "../../../res";
 
 const data = [
   {
@@ -36,6 +38,8 @@ const data = [
 ];
 
 const StatsSection = () => {
+  const { theme: { themeColor } } = useTheme();
+  const styles = getStyles(themeColor);
 
   return (
 
@@ -52,7 +56,7 @@ const StatsSection = () => {
                 key={index}
                 style={styles.card}
               >
-                <View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>
+                <View style={styles.cardInner}>
                   <View
                     style={[
                       styles.iconBox,
@@ -63,12 +67,12 @@ const StatsSection = () => {
                   >
                     <Ionicons
                       name={item.icon}
-                      size={24}
+                      size={responsiveSize(24)}
                       color={item.color}
                     />
                   </View>
 
-                  <View style={{ marginLeft: 10, flex: 1 }}>
+                  <View style={styles.infoWrap}>
                     <Text style={styles.value}>
                       {item.value}
                     </Text>
@@ -87,62 +91,3 @@ const StatsSection = () => {
 }
 
 export default StatsSection;
-
-const styles = StyleSheet.create({
-
-  container: {
-    marginHorizontal: 20,
-    marginTop: 20,
-  },
-
-  heading: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#071A52",
-    marginBottom: 15,
-  },
-
-  row: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-  },
-
-  card: {
-    width: "48%",
-    backgroundColor: "#fff",
-    borderRadius: 14,
-    padding: 10,
-    marginBottom: 15,
-    elevation: 5,
-    shadowColor: "#000",
-    shadowOpacity: .08,
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowRadius: 10,
-  },
-
-  iconBox: {
-    height: 50,
-    width: 50,
-    borderRadius: 25,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  value: {
-    fontSize: 18,
-    fontWeight: "700",
-    marginTop: 2,
-    color: "#071A52",
-  },
-
-  title: {
-    marginTop: 4,
-    fontSize: 12,
-    color: "#64748B",
-  },
-
-});

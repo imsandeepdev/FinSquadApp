@@ -21,7 +21,7 @@ export const getStyles = (AppColor: ThemeColorType) =>
     backgroundColor: AppColor.lightWhite,
     marginHorizontal: responsiveSize(20),
     borderRadius: responsiveSize(8),
-    borderWidth: 2,
+    borderWidth: responsiveSize(2),
     borderColor: AppColor.placeHolder,
   },
   texInputView: {
@@ -31,7 +31,7 @@ export const getStyles = (AppColor: ThemeColorType) =>
     borderRadius: responsiveSize(8),
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 2,
+    borderWidth: responsiveSize(2),
     borderColor: AppColor.appColor,
   },
   textInputStyle: {

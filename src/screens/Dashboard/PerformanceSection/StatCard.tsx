@@ -31,7 +31,7 @@ const styles = getStyles(themeColor);
 
 return(
 <View style={styles.card}>
-    <View style={{flexDirection:"row",flex:1}}>
+    <View style={styles.rowFlex}>
         <View
             style={[
             styles.iconContainer,
@@ -41,7 +41,7 @@ return(
             {icon}
         </View>
 
-        <View style={{flex:1, marginLeft:4}}>
+        <View style={styles.infoWrap}>
             <Text style={styles.title} numberOfLines={2}>
             {title}
             </Text>

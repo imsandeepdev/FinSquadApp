@@ -1,5 +1,6 @@
 import {StyleSheet} from "react-native";
 import { ThemeColorType } from "../../../res/colors/theme.types";
+import { responsiveSize } from "../../../res";
 
 export const getStyles = (AppColor: ThemeColorType) =>
 StyleSheet.create({
@@ -9,10 +10,10 @@ StyleSheet.create({
     },
 
     heading:{
-    fontSize:16,
+    fontSize:responsiveSize(16),
     fontWeight:"700",
-    color:"#071A52",
-    marginBottom:10,
+    color:AppColor.primaryText,
+    marginBottom:responsiveSize(10),
     },
 
     grid:{
@@ -23,38 +24,38 @@ StyleSheet.create({
 
     card:{
     width:"31%",
-    backgroundColor:"#fff",
-    paddingVertical:14,
-    borderRadius:20,
+    backgroundColor:AppColor.cardColor,
+    paddingVertical:responsiveSize(14),
+    borderRadius:responsiveSize(20),
     alignItems:"center",
-    marginBottom:15,
+    marginBottom:responsiveSize(15),
     elevation:5,
     shadowColor:"#000",
     shadowOpacity:.08,
     shadowOffset:{
     width:0,
-    height:4,
+    height:responsiveSize(4),
     },
-    shadowRadius:10,
+    shadowRadius:responsiveSize(10),
     },
 
     iconContainer:{
-    height:50,
-    width:50,
-    borderRadius:25,
+    height:responsiveSize(50),
+    width:responsiveSize(50),
+    borderRadius:responsiveSize(25),
     justifyContent:"center",
     alignItems:"center",
     },
 
     title:{
-    marginTop:8,
-    fontSize:12,
+    marginTop:responsiveSize(8),
+    fontSize:responsiveSize(12),
     fontWeight:"600",
     color:AppColor.primaryText,
     },
     subtitle:{
-    marginTop:2,
-    fontSize:10,
+    marginTop:responsiveSize(2),
+    fontSize:responsiveSize(10),
     color:AppColor.placeHolder,
     textAlign:"center",
     },

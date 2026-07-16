@@ -199,9 +199,7 @@ const CustomerOnboardingScreen = () => {
 
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          paddingBottom: 120,
-        }}
+        contentContainerStyle={styles.scrollContent}
       >
         {renderStep()}
       </ScrollView>

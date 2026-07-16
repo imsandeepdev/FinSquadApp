@@ -1,17 +1,24 @@
 import {StyleSheet} from "react-native";
 import { ThemeColorType } from "../../../res/colors/theme.types";
+import { responsiveSize } from "../../../res";
 
 export const getStyles = (AppColor: ThemeColorType) =>
 StyleSheet.create({
         viewContainer: {
         borderWidth:1,
-        borderRadius:15,
+        borderRadius:responsiveSize(15),
         overflow:"hidden"
 
         },
+
+        contentPad:{
+        paddingHorizontal:responsiveSize(10),
+        paddingVertical:responsiveSize(6),
+        },
+
         container:
         {
-            marginHorizontal:0,
+            marginHorizontal:responsiveSize(0),
         },
 
         header:
@@ -27,16 +34,16 @@ StyleSheet.create({
         },
 
         heading:{
-        marginLeft:8,
-        fontSize:12,
+        marginLeft:responsiveSize(8),
+        fontSize:responsiveSize(12),
         fontWeight:"700",
-        color:"#fff",
+        color:AppColor.white,
         },
 
         button:{
-        paddingHorizontal:6,
-        paddingVertical:4,
-        borderRadius:20,
+        paddingHorizontal:responsiveSize(6),
+        paddingVertical:responsiveSize(4),
+        borderRadius:responsiveSize(20),
         backgroundColor:"rgba(255,255,255,.08)",
         flexDirection:"row",
         alignItems:"center",
@@ -45,62 +52,62 @@ StyleSheet.create({
 
         buttonText:{
         color:AppColor.primaryText,
-        fontSize:12,
+        fontSize:responsiveSize(12),
         fontWeight:'500'
         },
 
         content:{
-        marginVertical:6,
+        marginVertical:responsiveSize(6),
         flexDirection:"row",
         },
 
         aiCircle:{
-        width:40,
-        height:40,
-        borderRadius:20,
+        width:responsiveSize(40),
+        height:responsiveSize(40),
+        borderRadius:responsiveSize(20),
         backgroundColor:AppColor.secAppColor,
         justifyContent:"center",
         alignItems:"center",
         },
 
         aiText:{
-        fontSize:16,
+        fontSize:responsiveSize(16),
         fontWeight:"700",
         color:AppColor.appLightColor,
         },
 
         textContainer:{
         flex:1,
-        marginLeft:10,
+        marginLeft:responsiveSize(10),
         },
 
         title:{
-        fontSize:14,
+        fontSize:responsiveSize(14),
         fontWeight:"700",
         color:AppColor.appLightColor,
         },
 
         subtitle:{
-        marginTop:4,
-        fontSize:12,
+        marginTop:responsiveSize(4),
+        fontSize:responsiveSize(12),
         color:AppColor.lightWhite,
         },
 
         green:{
         color:AppColor.successColor,
         fontWeight:"700",
-        fontSize:12,
+        fontSize:responsiveSize(12),
         },
 
         arrowRow:{
-        marginTop:10,
+        marginTop:responsiveSize(10),
         flexDirection:"row",
         justifyContent:"space-between",
         alignItems:"center",
         },
 
         arrow:{
-        fontSize:14,
+        fontSize:responsiveSize(14),
         color:"#64748B",
         },
 
@@ -109,10 +116,10 @@ StyleSheet.create({
         },
 
         avatar:{
-        width:40,
-        height:40,
-        borderRadius:20,
-        marginLeft:-8,
+        width:responsiveSize(40),
+        height:responsiveSize(40),
+        borderRadius:responsiveSize(20),
+        marginLeft:responsiveSize(-8),
         borderWidth:1,
         borderColor:"#071A70",
 

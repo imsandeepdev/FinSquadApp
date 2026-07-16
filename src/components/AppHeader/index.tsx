@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image, Pressable } from 'react-native';
 import { getStyles } from './styles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { AppColor, responsiveSize } from '../../res';
+import { responsiveSize } from '../../res';
 import { useTheme } from '../../utils/provider/themeProvider';
 
 
@@ -18,11 +18,12 @@ const AppHeader: React.FC<HeaderProps> = ({
   title,
   leftIcon = "arrow-back",
   onPress,
-  leftIconColor = AppColor.appLightColor,
+  leftIconColor,
   leftIconSize = responsiveSize(20),
 }) => {
   const { theme: { themeColor } } = useTheme();
   const Styles = getStyles(themeColor);
+  const resolvedLeftIconColor = leftIconColor || themeColor.appLightColor;
   return (
     <View style={Styles.container}>
       {leftIcon &&
@@ -33,10 +34,10 @@ const AppHeader: React.FC<HeaderProps> = ({
           { opacity: pressed ? 0.5 : 1 },
         ]}
       >
-        <Ionicons 
-          name={leftIcon} 
-          size={leftIconSize} 
-          color={leftIconColor} 
+        <Ionicons
+          name={leftIcon}
+          size={leftIconSize}
+          color={resolvedLeftIconColor}
         />
       </Pressable>}
 

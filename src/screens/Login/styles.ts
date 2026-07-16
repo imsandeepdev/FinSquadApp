@@ -7,7 +7,29 @@ export const getStyles = (AppColor: ThemeColorType) =>
  StyleSheet.create({
     safe: { flex: 1, backgroundColor: AppColor.appColor},
     container: { flex: 1 },
-    title: { 
+    scrollContent: {
+        flexGrow: 1,
+        backgroundColor: AppColor.appColor,
+    },
+    bodyContainer: {
+        flex: 1,
+        marginTop: responsiveSize(20),
+    },
+    rememberMeRow: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginTop: responsiveSize(10),
+    },
+    rememberMeText: {
+        color: AppColor.primaryText,
+    },
+    loginButtonContainer: {
+        marginTop: responsiveSize(20),
+    },
+    loginButton: {
+        marginHorizontal: responsiveSize(0),
+    },
+    title: {
         fontSize: responsiveSize(18), 
         fontWeight: "600", 
         marginBottom: responsiveSize(8), 
@@ -20,11 +42,11 @@ export const getStyles = (AppColor: ThemeColorType) =>
         backgroundColor: AppColor.secLightAppColor , 
         borderTopRightRadius: responsiveSize(20), 
         borderTopLeftRadius: responsiveSize(20), 
-        position:'absolute', 
-        top:responsiveSize(-10), 
-        bottom:0,
-        left:0, 
-        right:0 
+        position:'absolute',
+        top:responsiveSize(-10),
+        bottom:responsiveSize(0),
+        left:responsiveSize(0),
+        right:responsiveSize(0)
     },
     topImageContainer: {
         alignItems: "center", 
@@ -38,7 +60,7 @@ export const getStyles = (AppColor: ThemeColorType) =>
         backgroundColor:  AppColor.appLightColor ,
         borderTopLeftRadius: responsiveSize(20),
         borderTopRightRadius: responsiveSize(20)    ,
-        padding: 20,
+        padding: responsiveSize(20),
         // borderTopWidth: 0.6,
         // borderBottomWidth:0,
         // borderColor: AppColor.appColor,

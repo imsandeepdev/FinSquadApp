@@ -13,6 +13,7 @@ import LinearGradient from "react-native-linear-gradient";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useTheme } from "../../../utils/provider/themeProvider";
 import { getStyles } from "./styles";
+import { responsiveSize } from "../../../res";
 
 const HeroSection=()=>{
 const { theme: { themeColor } } = useTheme();
@@ -38,7 +39,7 @@ return(
 {
 !expanded &&
 <View style={styles.header}>
-    <View style={{ flex: 1 }}>
+    <View style={styles.flexOne}>
 
         <Text style={styles.greeting}>
             Good Morning ☀️
@@ -69,8 +70,8 @@ return(
                     ? "chevron-up"
                     : "chevron-forward"
             }
-            size={18}
-            color="#fff"
+            size={responsiveSize(18)}
+            color={themeColor.white}
         />
 
     </TouchableOpacity>
@@ -78,8 +79,8 @@ return(
 </View>}
 
 {
-expanded &&  
-<View style={{ flex: 1 }}>  
+expanded &&
+<View style={styles.flexOne}>
 <LinearGradient
     colors={gridientColor}
     start={{x:0,y:0}}
@@ -93,8 +94,8 @@ expanded &&
     <View style={styles.particle3}/>
     <View style={styles.topBody}>
         <View style={styles.top}>
-        <View style={{flex:1}}>
-        <View style={{flexDirection:"row",alignItems:"center"}}>
+        <View style={styles.flexOne}>
+        <View style={styles.profileRow}>
 
         <View style={styles.profileWrap}>
             <Image
@@ -106,15 +107,15 @@ expanded &&
             <View style={styles.online}/>
         </View>
 
-        <View style={{marginHorizontal:10}}>
+        <View style={styles.infoWrap}>
         <Text style={styles.greeting}> {'Good Morning ☀️'}</Text>
         <Text style={styles.name}>{'Riya Nandi'}</Text>
         <Text style={styles.role}>{'Senior Relationship Manager'}</Text>
         <View style={styles.empChip}>
             <Icon
                 name="lock-closed"
-                size={12}
-                color="#fff"
+                size={responsiveSize(12)}
+                color={themeColor.white}
             />
             <Text style={styles.empText}>{'EMP102345'}</Text>
         </View>
@@ -122,7 +123,7 @@ expanded &&
         <View style={styles.locationRow}>
             <Icon
                 name="location-outline"
-                size={14}
+                size={responsiveSize(14)}
                 color="#e9eaef"
             />
             <Text style={styles.location}>{'Varanasi Branch'}</Text>
@@ -154,11 +155,11 @@ expanded &&
 
     <Icon
         name="chevron-up"
-        size={18}
-        color="#fff"
+        size={responsiveSize(18)}
+        color={themeColor.white}
     />
 </TouchableOpacity>
-       
+
 
         </View>
     </View>

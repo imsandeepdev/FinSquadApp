@@ -9,7 +9,7 @@ const getStyles = (AppColor: ThemeColorType) =>
     },
 
     resetBottomLine: {
-      height: 1,
+      height: responsiveSize(1),
       backgroundColor: AppColor.borderColor,
       opacity: 0.6,
       width: "100%",

@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import {AppButton} from '../AppButton';
 import { getStyles } from './styles';
-import {AppColor} from '../../res';
 import { useTheme } from '../../utils/provider/themeProvider';
 
 interface LoaderType {
@@ -36,11 +35,12 @@ const AppLoader = ({
   title,
   titleStyle,
   activityIndicator,
-  loaderColor = AppColor.appColor,
+  loaderColor,
   buttonOnPress,
 }: LoaderType) => {
    const { theme: { themeColor } } = useTheme();
     const Styles = getStyles(themeColor);
+    const resolvedLoaderColor = loaderColor || themeColor.appColor;
   return (
     <Modal visible={visible} onRequestClose={onRequestClose} transparent={true}>
       <View style={Styles.mainView}>
@@ -62,7 +62,7 @@ const AppLoader = ({
               )}
               {activityIndicator && (
                 <View>
-                  <ActivityIndicator size="large" color={loaderColor} />
+                  <ActivityIndicator size="large" color={resolvedLoaderColor} />
                 </View>
               )}
             </View>

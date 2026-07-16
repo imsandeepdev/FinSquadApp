@@ -2,9 +2,10 @@ import React from "react";
 import {
   View,
   Text,
-  StyleSheet,
 } from "react-native";
 import { AppTextInput } from "../../../components";
+import { useTheme } from "../../../utils/provider/themeProvider";
+import { getStyles } from "./styles";
 
 interface Props {
   data: any;
@@ -15,6 +16,9 @@ const CustomerMaster: React.FC<Props> = ({
   data,
   updateData,
 }) => {
+  const { theme: { themeColor } } = useTheme();
+  const styles = getStyles(themeColor);
+
   return (
     <View style={styles.container}>
 
@@ -129,17 +133,3 @@ const CustomerMaster: React.FC<Props> = ({
 };
 
 export default CustomerMaster;
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 20,
-    paddingTop: 15,
-  },
-
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#8A97B3",
-    marginBottom: 15,
-  },
-});

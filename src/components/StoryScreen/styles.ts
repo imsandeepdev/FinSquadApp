@@ -1,8 +1,10 @@
 import {Platform, StyleSheet} from 'react-native';
-import {AppColor} from '../../res';
+import { responsiveSize } from '../../res';
+import { ThemeColorType } from '../../res/colors/theme.types';
 const isDarkMode = true;
 
-const Styles = StyleSheet.create({
+export const getStyles = (AppColor: ThemeColorType) =>
+  StyleSheet.create({
   statusBar: {
     flex: 0,
     backgroundColor: AppColor.appColor,
@@ -22,10 +24,10 @@ const Styles = StyleSheet.create({
     flex: 1,
     backgroundColor: AppColor.modelBackground,
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    top: responsiveSize(0),
+    left: responsiveSize(0),
+    right: responsiveSize(0),
+    bottom: responsiveSize(0),
   },
   headViewStyle: {
     alignItems: 'center',
@@ -36,9 +38,9 @@ const Styles = StyleSheet.create({
   },
 
   androidBottomBar: {
-    height: 48, // standard Android nav bar height
-    paddingBottom: Number(Platform.Version) >= 29 ? 16 : 0, // gesture navigation
+    height: responsiveSize(48), // standard Android nav bar height
+    paddingBottom: Number(Platform.Version) >= 29 ? responsiveSize(16) : responsiveSize(0), // gesture navigation
   },
 });
 
-export {Styles};
+export default getStyles;

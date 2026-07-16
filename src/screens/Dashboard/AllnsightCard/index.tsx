@@ -2,14 +2,19 @@ import React from "react";
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
 } from "react-native";
 
 import LinearGradient from "react-native-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { useTheme } from "../../../utils/provider/themeProvider";
+import { getStyles } from "./styles";
+import { responsiveSize } from "../../../res";
 
 const AIInsightCard = () => {
+  const { theme: { themeColor } } = useTheme();
+  const styles = getStyles(themeColor);
+
   return (
     <View style={styles.container}>
 
@@ -18,12 +23,12 @@ const AIInsightCard = () => {
         <View style={styles.aiIcon}>
           <Ionicons
             name="sparkles"
-            size={24}
-            color="#fff"
+            size={responsiveSize(24)}
+            color={themeColor.white}
           />
         </View>
 
-        <View style={{flex:1}}>
+        <View style={styles.flexOne}>
           <Text style={styles.title}>
             AI Assistant
           </Text>
@@ -45,8 +50,8 @@ const AIInsightCard = () => {
 
         <Ionicons
           name="person"
-          size={20}
-          color="#3B82F6"
+          size={responsiveSize(20)}
+          color={themeColor.infoColor}
         />
 
         <Text style={styles.text}>
@@ -59,8 +64,8 @@ const AIInsightCard = () => {
 
         <Ionicons
           name="cash"
-          size={20}
-          color="#16A34A"
+          size={responsiveSize(20)}
+          color={themeColor.successColor}
         />
 
         <Text style={styles.text}>
@@ -73,7 +78,7 @@ const AIInsightCard = () => {
 
         <Ionicons
           name="trending-up"
-          size={20}
+          size={responsiveSize(20)}
           color="#F59E0B"
         />
 
@@ -117,8 +122,8 @@ const AIInsightCard = () => {
 
           <Ionicons
             name="analytics"
-            size={18}
-            color="#fff"
+            size={responsiveSize(18)}
+            color={themeColor.white}
           />
 
           <Text style={styles.buttonText}>
@@ -134,204 +139,3 @@ const AIInsightCard = () => {
 };
 
 export default AIInsightCard;
-
-const styles = StyleSheet.create({
-
-container:{
-
-marginHorizontal:20,
-
-marginTop:20,
-
-backgroundColor:"#fff",
-
-borderRadius:25,
-
-padding:20,
-
-elevation:8,
-
-shadowColor:"#000",
-
-shadowOpacity:.08,
-
-shadowOffset:{
-width:0,
-height:5,
-},
-
-shadowRadius:12,
-
-},
-
-header:{
-
-flexDirection:"row",
-
-alignItems:"center",
-
-},
-
-aiIcon:{
-
-height:55,
-
-width:55,
-
-borderRadius:28,
-
-backgroundColor:"#7C3AED",
-
-justifyContent:"center",
-
-alignItems:"center",
-
-marginRight:15,
-
-},
-
-title:{
-
-fontSize:20,
-
-fontWeight:"700",
-
-color:"#071A52",
-
-},
-
-subtitle:{
-
-marginTop:3,
-
-color:"#64748B",
-
-},
-
-live:{
-
-paddingHorizontal:10,
-
-paddingVertical:5,
-
-backgroundColor:"#DCFCE7",
-
-borderRadius:20,
-
-},
-
-liveText:{
-
-color:"#16A34A",
-
-fontWeight:"700",
-
-fontSize:12,
-
-},
-
-item:{
-
-marginTop:20,
-
-flexDirection:"row",
-
-alignItems:"center",
-
-},
-
-text:{
-
-marginLeft:12,
-
-fontSize:15,
-
-color:"#334155",
-
-flex:1,
-
-},
-
-progressSection:{
-
-marginTop:25,
-
-},
-
-progressTop:{
-
-flexDirection:"row",
-
-justifyContent:"space-between",
-
-},
-
-progressTitle:{
-
-fontSize:15,
-
-fontWeight:"600",
-
-},
-
-percent:{
-
-fontWeight:"700",
-
-color:"#2563EB",
-
-},
-
-progressBackground:{
-
-marginTop:10,
-
-height:10,
-
-backgroundColor:"#E2E8F0",
-
-borderRadius:20,
-
-},
-
-progressFill:{
-
-height:10,
-
-width:"82%",
-
-borderRadius:20,
-
-backgroundColor:"#2563EB",
-
-},
-
-button:{
-
-marginTop:25,
-
-paddingVertical:16,
-
-borderRadius:18,
-
-justifyContent:"center",
-
-alignItems:"center",
-
-flexDirection:"row",
-
-},
-
-buttonText:{
-
-marginLeft:10,
-
-fontSize:16,
-
-fontWeight:"700",
-
-color:"#fff",
-
-},
-
-});

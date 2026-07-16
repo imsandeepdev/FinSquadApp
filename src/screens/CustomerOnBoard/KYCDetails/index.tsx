@@ -2,9 +2,10 @@ import React from "react";
 import {
   View,
   Text,
-  StyleSheet,
 } from "react-native";
 import { AppTextInput } from "../../../components";
+import { useTheme } from "../../../utils/provider/themeProvider";
+import { getStyles } from "./styles";
 
 
 interface Props {
@@ -16,6 +17,9 @@ const KYCDetails: React.FC<Props> = ({
   data,
   updateData,
 }) => {
+  const { theme: { themeColor } } = useTheme();
+  const styles = getStyles(themeColor);
+
   return (
     <View style={styles.container}>
 
@@ -29,7 +33,7 @@ const KYCDetails: React.FC<Props> = ({
 
         <View style={styles.statusCircle} />
 
-        <View style={{ flex: 1 }}>
+        <View style={styles.statusTextWrap}>
 
           <Text style={styles.statusTitle}>
             KYC Verification
@@ -133,81 +137,3 @@ const KYCDetails: React.FC<Props> = ({
 };
 
 export default KYCDetails;
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-  },
-
-  title: {
-    fontSize: 20,
-    fontWeight: "700",
-    color: "#2144B5",
-    marginBottom: 15,
-  },
-
-  statusCard: {
-    backgroundColor: "#F3F8FF",
-
-    borderRadius: 16,
-
-    padding: 16,
-
-    flexDirection: "row",
-
-    alignItems: "center",
-
-    marginBottom: 20,
-
-    borderWidth: 1,
-
-    borderColor: "#D9E7FF",
-  },
-
-  statusCircle: {
-    width: 14,
-    height: 14,
-    borderRadius: 7,
-    backgroundColor: "#F6AD55",
-    marginRight: 12,
-  },
-
-  statusTitle: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#2144B5",
-  },
-
-  statusSub: {
-    marginTop: 4,
-    fontSize: 13,
-    color: "#75849A",
-  },
-
-  pending: {
-    color: "#F59E0B",
-    fontWeight: "700",
-    fontSize: 14,
-  },
-
-  card: {
-    backgroundColor: "#fff",
-
-    borderRadius: 18,
-
-    padding: 16,
-
-    shadowColor: "#000",
-
-    shadowOpacity: 0.05,
-
-    shadowRadius: 10,
-
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-
-    elevation: 3,
-  },
-});

@@ -49,6 +49,11 @@ export const AppColor = {
   // BACKGROUND SYSTEM
   background: "#000000",
   cardColor: "#1C1C1E",
+  surface: "#121212",
 
   transparent_SecAppColor: "rgba(26,127,142,0.12)",
+
+  overlay: "rgba(0,0,0,0.5)",
+  disabled: "#374151",
+  shadow: "rgba(0,0,0,0.4)",
 } satisfies ThemeColorType;

@@ -2,10 +2,11 @@ import React from "react";
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
 } from "react-native";
 import { AppTextInput } from "../../../components";
+import { useTheme } from "../../../utils/provider/themeProvider";
+import { getStyles } from "./styles";
 
 
 interface Props {
@@ -17,6 +18,9 @@ const NomineeDetails: React.FC<Props> = ({
   data,
   updateData,
 }) => {
+  const { theme: { themeColor } } = useTheme();
+  const styles = getStyles(themeColor);
+
   return (
     <View style={styles.container}>
 
@@ -96,22 +100,8 @@ const NomineeDetails: React.FC<Props> = ({
           Co-Applicant
         </Text>
 
-        <View
-          style={[
-            styles.badge,
-            {
-              backgroundColor: "#FFF4D8",
-            },
-          ]}
-        >
-          <Text
-            style={[
-              styles.badgeText,
-              {
-                color: "#B7791F",
-              },
-            ]}
-          >
+        <View style={styles.badgeOptional}>
+          <Text style={styles.badgeTextOptional}>
             Optional
           </Text>
         </View>
@@ -183,76 +173,3 @@ const NomineeDetails: React.FC<Props> = ({
 };
 
 export default NomineeDetails;
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-  },
-
-  headerRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 12,
-  },
-
-  title: {
-    fontSize: 20,
-    fontWeight: "700",
-    color: "#2144B5",
-  },
-
-  badge: {
-    backgroundColor: "#E8F8EC",
-    paddingHorizontal: 12,
-    paddingVertical: 5,
-    borderRadius: 20,
-  },
-
-  badgeText: {
-    color: "#2F855A",
-    fontWeight: "600",
-    fontSize: 12,
-  },
-
-  card: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 18,
-    padding: 16,
-
-    shadowColor: "#000",
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-
-    elevation: 3,
-  },
-
-  space: {
-    height: 25,
-  },
-
-  addButton: {
-    height: 48,
-    borderRadius: 12,
-    backgroundColor: "#F3F7FF",
-
-    borderWidth: 1,
-    borderColor: "#2144B5",
-    borderStyle: "dashed",
-
-    justifyContent: "center",
-    alignItems: "center",
-
-    marginBottom: 15,
-  },
-
-  addText: {
-    color: "#2144B5",
-    fontWeight: "700",
-    fontSize: 16,
-  },
-});

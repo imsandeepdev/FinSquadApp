@@ -15,6 +15,7 @@ import Dashboard from '../../screens/Dashboard';
 import AIWealthCoachScreen from '../../screens/AIBased';
 import { getStyles } from './styles';
 import { useTheme } from '../../utils/provider/themeProvider';
+import { responsiveSize } from '../../res';
 
 
 /* -----------------------------
@@ -35,26 +36,23 @@ const Tab:any = createBottomTabNavigator<BottomTabParamList>();
    Dummy Screens
 ------------------------------ */
 
-const ClientScreen: React.FC = () => (
-  <View style={{
-       flex: 1,
-    backgroundColor: '#081120',
-  }} />
-);
+const ClientScreen: React.FC = () => {
+  const { theme: { themeColor } } = useTheme();
+  const styles = getStyles(themeColor);
+  return <View style={styles.screen} />;
+};
 
-const TaskScreen: React.FC = () => (
-  <View style={{
-       flex: 1,
-    backgroundColor: '#081120',
-  }} />
-);
+const TaskScreen: React.FC = () => {
+  const { theme: { themeColor } } = useTheme();
+  const styles = getStyles(themeColor);
+  return <View style={styles.screen} />;
+};
 
-const AccountScreen: React.FC = () => (
-  <View style={{
-       flex: 1,
-    backgroundColor: '#081120',
-  }} />
-);
+const AccountScreen: React.FC = () => {
+  const { theme: { themeColor } } = useTheme();
+  const styles = getStyles(themeColor);
+  return <View style={styles.screen} />;
+};
 
 /* -----------------------------
    AI Button Props
@@ -136,7 +134,7 @@ const BottomTabs: React.FC = () => {
           return (
             <Ionicons
               name={iconName}
-              size={24}
+              size={responsiveSize(24)}
               color={focused ? themeColor.appColor : themeColor.lightBlack}
             />
           );

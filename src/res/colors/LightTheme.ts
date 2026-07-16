@@ -1,3 +1,5 @@
+import { ThemeColorType } from "./theme.types";
+
 export const LightTheme = {
   mode: "light",
 
@@ -9,7 +11,12 @@ export const LightTheme = {
     lightBlack: "#6B7280", // secondary text role
     lightWhite: "#F3F4F6", // surface / input / soft background
 
+    background: "#F9FAFB",
+    cardColor: "#FFFFFF",
+    surface: "#F3F4F6", // NEW - layered surface, one step above background
+
     modelBackground: "rgba(0,0,0,0.35)",
+    overlay: "rgba(0,0,0,0.35)", // NEW
     barStyle: "dark-content",
 
     // status colors
@@ -33,7 +40,7 @@ export const LightTheme = {
 
     // text system (clean hierarchy)
     primaryText: "#1F2937",
-    primaryLightText: " #4B5563",
+    primaryLightText: "#4B5563",
     secondaryText: "#F3F4F6",
     secondaryLightText: "#D1D5DB",
 
@@ -51,11 +58,11 @@ export const LightTheme = {
     // borders
     borderColor: "#E5E7EB",
 
-    // backgrounds
-    background: "#F9FAFB",
-    cardColor: "#FFFFFF",
-
     // overlay
     transparent_SecAppColor: "rgba(26,127,142,0.08)",
-  },
-};
+
+    // NEW (parity with DarkTheme)
+    disabled: "#D1D5DB",
+    shadow: "rgba(0,0,0,0.08)",
+  } satisfies ThemeColorType,
+} as const;

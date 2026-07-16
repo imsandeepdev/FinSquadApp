@@ -89,13 +89,13 @@ const Dashboard = () => {
       <StatsSection/>
 
 
-      <View style={{paddingHorizontal:16, paddingVertical:5}}>
+      <View style={styles.aiSectionWrapper}>
         <AISectionCard/>
       </View>
       {/* <PortfolioCard/> */}
       {/* <StatsSection/> */}
       {/* <AIInsightCard/> */}
-      <View style={{paddingHorizontal:16, paddingVertical:10}}>
+      <View style={styles.quickActionsWrapper}>
 
       <QuickActions
       onPress={(item:any)=>{

@@ -2,7 +2,6 @@ import React from "react";
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
 } from "react-native";
 
@@ -10,7 +9,8 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import Avatar from "../Avatar/index"
 import StatusBadge from "../StatusBadge/index";
-import { AppColor } from "../../../../res";
+import { useTheme } from "../../../../utils/provider/themeProvider";
+import getStyles from "./styles";
 import { Customer } from "../../types";
 
 interface Props {
@@ -24,6 +24,9 @@ const CustomerCard = ({
   onPress,
   onMenuPress,
 }: Props) => {
+  const { theme: { themeColor } } = useTheme();
+  const styles = getStyles(themeColor);
+
   return (
     <TouchableOpacity
       activeOpacity={0.85}
@@ -46,7 +49,7 @@ const CustomerCard = ({
           <Ionicons
             name="call-outline"
             size={14}
-            color={AppColor.secAppColor}
+            color={themeColor.secAppColor}
           />
           <Text style={styles.mobile}>{item.mobile}</Text>
         </View>
@@ -55,7 +58,7 @@ const CustomerCard = ({
           <Ionicons
             name="location-outline"
             size={14}
-            color={AppColor.secAppColor}
+            color={themeColor.secAppColor}
           />
           <Text style={styles.village}>
             {item.village}
@@ -74,7 +77,7 @@ const CustomerCard = ({
           <Ionicons
             name="ellipsis-vertical"
             size={18}
-            color={AppColor.secAppText}
+            color={themeColor.secAppText}
           />
         </TouchableOpacity>
       </View>
@@ -83,68 +86,3 @@ const CustomerCard = ({
 };
 
 export default React.memo(CustomerCard);
-
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: AppColor.white,
-    marginHorizontal: 16,
-    marginVertical: 6,
-    borderRadius: 15,
-    padding: 12,
-    flexDirection: "row",
-    alignItems: "center",
-    elevation: 2,
-    shadowColor: "#000",
-    shadowOpacity: 0.08,
-    shadowRadius: 5,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-  },
-
-  infoContainer: {
-    flex: 1,
-    marginLeft: 14,
-  },
-
-  name: {
-    fontSize: 14,
-    fontWeight: "700",
-    color: AppColor.primaryText,
-  },
-
-  code: {
-    marginTop: 2,
-    fontSize: 12,
-    color: AppColor.primaryLightText,
-  },
-
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 6,
-  },
-
-  mobile: {
-    marginLeft: 5,
-    fontSize: 12,
-    color: AppColor.primaryLightText,
-  },
-
-  village: {
-    marginLeft: 5,
-    fontSize: 12,
-    color: AppColor.primaryLightText,
-  },
-
-  rightSection: {
-    alignItems: "flex-end",
-    justifyContent: "space-between",
-    height: 80,
-  },
-
-  menuButton: {
-    padding: 4,
-  },
-});

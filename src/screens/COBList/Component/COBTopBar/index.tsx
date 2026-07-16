@@ -3,9 +3,9 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
 } from "react-native";
-import { AppColor } from "../../../../res";
+import { useTheme } from "../../../../utils/provider/themeProvider";
+import getStyles from "./styles";
 
 export type TabType = "OFFLINE" | "ONLINE";
 
@@ -22,6 +22,9 @@ const COBTabBar = ({
   onlineCount,
   onChange,
 }: Props) => {
+  const { theme: { themeColor } } = useTheme();
+  const styles = getStyles(themeColor);
+
   const renderTab = (
     title: TabType,
     count: number,
@@ -43,7 +46,7 @@ const COBTabBar = ({
           style={[
             styles.text,
             {
-              color: selected ? AppColor.white : AppColor.primaryText,
+              color: selected ? themeColor.white : themeColor.primaryText,
             },
           ]}>
           {title} ({count})
@@ -54,34 +57,10 @@ const COBTabBar = ({
 
   return (
     <View style={styles.container}>
-      {renderTab("OFFLINE", offlineCount, AppColor.appColor)}
-      {renderTab("ONLINE", onlineCount, AppColor.appColor)}
+      {renderTab("OFFLINE", offlineCount, themeColor.appColor)}
+      {renderTab("ONLINE", onlineCount, themeColor.appColor)}
     </View>
   );
 };
 
 export default React.memo(COBTabBar);
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    margin: 16,
-    backgroundColor: AppColor.appLightColor,
-    borderRadius: 12,
-    padding: 4,
-    borderWidth:0.5,
-    borderColor: AppColor.appColor
-  },
-
-  tab: {
-    flex: 1,
-    paddingVertical: 12,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-
-  text: {
-    fontWeight: "600",
-    fontSize: 14,
-  },
-});

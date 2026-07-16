@@ -2,9 +2,10 @@ import React from "react";
 import {
   View,
   Text,
-  StyleSheet,
   ScrollView,
 } from "react-native";
+import { useTheme } from "../../../utils/provider/themeProvider";
+import { getStyles } from "./styles";
 
 interface Props {
   data: any;
@@ -13,6 +14,9 @@ interface Props {
 const ReviewSubmit: React.FC<Props> = ({
   data,
 }) => {
+  const { theme: { themeColor } } = useTheme();
+  const styles = getStyles(themeColor);
+
   const Card = ({
     title,
     children,
@@ -44,10 +48,7 @@ const ReviewSubmit: React.FC<Props> = ({
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={{
-        padding: 20,
-        paddingBottom: 40,
-      }}
+      contentContainerStyle={styles.scrollContent}
     >
       <Text style={styles.title}>
         Review & Submit
@@ -207,100 +208,3 @@ const ReviewSubmit: React.FC<Props> = ({
 };
 
 export default ReviewSubmit;
-
-const styles = StyleSheet.create({
-
-  title: {
-    fontSize: 24,
-    fontWeight: "700",
-    color: "#2144B5",
-    marginBottom: 20,
-  },
-
-  card: {
-    backgroundColor: "#FFFFFF",
-
-    borderRadius: 18,
-
-    padding: 16,
-
-    marginBottom: 16,
-
-    shadowColor: "#000",
-
-    shadowOpacity: 0.05,
-
-    shadowRadius: 8,
-
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-
-    elevation: 2,
-  },
-
-  cardTitle: {
-    fontSize: 18,
-
-    fontWeight: "700",
-
-    color: "#2144B5",
-
-    marginBottom: 15,
-  },
-
-  row: {
-    flexDirection: "row",
-
-    justifyContent: "space-between",
-
-    marginBottom: 10,
-  },
-
-  label: {
-    fontSize: 15,
-
-    color: "#75849A",
-
-    flex: 1,
-  },
-
-  value: {
-    flex: 1,
-
-    textAlign: "right",
-
-    color: "#000",
-
-    fontWeight: "600",
-  },
-
-  declaration: {
-    backgroundColor: "#EEF4FF",
-
-    borderRadius: 18,
-
-    padding: 16,
-
-    marginTop: 10,
-  },
-
-  declarationTitle: {
-    fontSize: 18,
-
-    fontWeight: "700",
-
-    color: "#2144B5",
-  },
-
-  declarationText: {
-    marginTop: 10,
-
-    lineHeight: 22,
-
-    color: "#75849A",
-
-    fontSize: 14,
-  },
-});

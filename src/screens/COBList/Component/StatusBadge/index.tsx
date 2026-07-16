@@ -1,12 +1,15 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { AppColor } from "../../../../res";
+import { View, Text } from "react-native";
+import { useTheme } from "../../../../utils/provider/themeProvider";
+import getStyles from "./styles";
 
 interface Props {
   status: "ACTIVE" | "INACTIVE";
 }
 
 const StatusBadge = ({ status }: Props) => {
+  const { theme: { themeColor } } = useTheme();
+  const styles = getStyles(themeColor);
   const active = status === "ACTIVE";
 
   return (
@@ -21,7 +24,7 @@ const StatusBadge = ({ status }: Props) => {
         style={[
           styles.dot,
           {
-            backgroundColor: active ? AppColor.successColor : AppColor.errorColor,
+            backgroundColor: active ? themeColor.successColor : themeColor.errorColor,
           },
         ]}
       />
@@ -30,7 +33,7 @@ const StatusBadge = ({ status }: Props) => {
         style={[
           styles.text,
           {
-            color: active ? AppColor.successColor : AppColor.errorColor,
+            color: active ? themeColor.successColor : themeColor.errorColor,
           },
         ]}>
         {active ? "Active" : "Inactive"}
@@ -40,25 +43,3 @@ const StatusBadge = ({ status }: Props) => {
 };
 
 export default React.memo(StatusBadge);
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 30,
-  },
-
-  dot: {
-    width: 7,
-    height: 7,
-    borderRadius: 4,
-    marginRight: 5,
-  },
-
-  text: {
-    fontWeight: "600",
-    fontSize: 12,
-  },
-});

@@ -2,9 +2,10 @@ import React from "react";
 import {
   View,
   Text,
-  StyleSheet,
 } from "react-native";
 import { AppTextInput } from "../../../components";
+import { useTheme } from "../../../utils/provider/themeProvider";
+import { getStyles } from "./styles";
 
 interface Props {
   data: any;
@@ -15,6 +16,9 @@ const InvestmentDetails: React.FC<Props> = ({
   data,
   updateData,
 }) => {
+  const { theme: { themeColor } } = useTheme();
+  const styles = getStyles(themeColor);
+
   return (
     <View style={styles.container}>
 
@@ -157,70 +161,3 @@ const InvestmentDetails: React.FC<Props> = ({
 };
 
 export default InvestmentDetails;
-
-const styles = StyleSheet.create({
-
-  container: {
-    padding: 20,
-  },
-
-  title: {
-    fontSize: 20,
-    fontWeight: "700",
-    color: "#2144B5",
-    marginBottom: 15,
-  },
-
-  summaryCard: {
-    backgroundColor: "#EEF4FF",
-
-    borderRadius: 18,
-
-    padding: 16,
-
-    marginBottom: 20,
-
-    borderWidth: 1,
-
-    borderColor: "#D8E5FF",
-  },
-
-  summaryTitle: {
-    fontSize: 17,
-
-    fontWeight: "700",
-
-    color: "#2144B5",
-  },
-
-  summaryText: {
-    marginTop: 8,
-
-    fontSize: 14,
-
-    color: "#75849A",
-
-    lineHeight: 22,
-  },
-
-  card: {
-    backgroundColor: "#FFFFFF",
-
-    borderRadius: 18,
-
-    padding: 16,
-
-    shadowColor: "#000",
-
-    shadowOpacity: 0.05,
-
-    shadowRadius: 10,
-
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-
-    elevation: 3,
-  },
-});

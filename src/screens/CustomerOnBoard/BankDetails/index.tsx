@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   Switch,
 } from "react-native";
 import { AppTextInput } from "../../../components";
+import { useTheme } from "../../../utils/provider/themeProvider";
+import { getStyles } from "./styles";
 
 
 interface Props {
@@ -17,6 +18,8 @@ const BankDetails: React.FC<Props> = ({
   data,
   updateData,
 }) => {
+  const { theme: { themeColor } } = useTheme();
+  const styles = getStyles(themeColor);
   const [isPrimary, setIsPrimary] = useState(true);
 
   return (
@@ -121,8 +124,8 @@ const BankDetails: React.FC<Props> = ({
               );
             }}
             trackColor={{
-              false: "#D8DDE8",
-              true: "#2144B5",
+              false: themeColor.borderColor,
+              true: themeColor.appTextColor,
             }}
           />
 
@@ -135,52 +138,3 @@ const BankDetails: React.FC<Props> = ({
 };
 
 export default BankDetails;
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-  },
-
-  title: {
-    fontSize: 20,
-    fontWeight: "700",
-    color: "#2144B5",
-    marginBottom: 15,
-  },
-
-  card: {
-    backgroundColor: "#fff",
-    borderRadius: 18,
-    padding: 16,
-
-    shadowColor: "#000",
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-
-    elevation: 3,
-  },
-
-  switchRow: {
-    marginTop: 20,
-
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-
-  switchTitle: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#2144B5",
-  },
-
-  switchSub: {
-    marginTop: 4,
-    fontSize: 13,
-    color: "#75849A",
-  },
-});

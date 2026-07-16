@@ -23,18 +23,18 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  const systemTheme: ColorSchemeName = Appearance.getColorScheme();
+  const systemTheme: ColorSchemeName = Appearance.getColorScheme() ?? 'light';
 
-  const getInitialTheme = (): any =>
+  const getInitialTheme = (): AppThemeTypes =>
     systemTheme !== 'dark' ? LightTheme : DarkTheme;
 
-  const [theme, setTheme] = useState<any>(getInitialTheme);
+  const [theme, setTheme] = useState<AppThemeTypes>(getInitialTheme);
 
   // Listen to system theme changes
   useEffect(() => {
     const listener = Appearance.addChangeListener(({ colorScheme }) => {
       if (colorScheme) {
-        setTheme(colorScheme !== 'dark' ? DarkTheme : LightTheme);
+        setTheme(colorScheme !== 'dark' ? LightTheme : DarkTheme);
       }
     });
 
@@ -42,7 +42,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   }, []);
 
   const toggleTheme = () => {
-    setTheme((prev:any) =>
+    setTheme((prev: AppThemeTypes) =>
       prev.mode === 'light' ? DarkTheme : LightTheme
     );
   };

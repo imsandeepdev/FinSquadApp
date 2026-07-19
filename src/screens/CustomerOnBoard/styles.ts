@@ -22,13 +22,13 @@ StyleSheet.create({
   stepText: {
     color: AppColor.primaryText,
     fontWeight: "700",
-    fontSize: appSize.font_Medium,
+    fontSize: appSize.font_Small,
   },
 
   title: {
     textAlign: "center",
-    marginTop: responsiveSize(10),
-    fontSize: appSize.font_Large,
+    marginTop: responsiveSize(4),
+    fontSize: appSize.font_Regular,
     fontWeight: "700",
     color: AppColor.appTextColor,
   },

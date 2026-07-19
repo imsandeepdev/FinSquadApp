@@ -1,7 +1,9 @@
 import React, {
   createContext,
   useContext,
+  useCallback,
   useEffect,
+  useMemo,
   useState,
   ReactNode,
 } from 'react';
@@ -41,14 +43,23 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     return () => listener.remove();
   }, []);
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     setTheme((prev: AppThemeTypes) =>
       prev.mode === 'light' ? DarkTheme : LightTheme
     );
-  };
+  }, []);
+
+  // Without this, a brand-new object is created on every ThemeProvider
+  // render, which forces every single screen/component in the app
+  // (all of them call useTheme()) to re-render even when the theme
+  // itself hasn't changed.
+  const value = useMemo(
+    () => ({ theme, toggleTheme }),
+    [theme, toggleTheme],
+  );
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={value}>
       {children}
     </ThemeContext.Provider>
   );

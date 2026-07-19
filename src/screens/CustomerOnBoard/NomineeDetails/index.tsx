@@ -1,18 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
   TouchableOpacity,
+  Pressable,
 } from "react-native";
-import { AppTextInput } from "../../../components";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { AppTextInput, AppDatePicker, AppDropdown } from "../../../components";
 import { useTheme } from "../../../utils/provider/themeProvider";
 import { getStyles } from "./styles";
-
 
 interface Props {
   data: any;
   updateData: (key: string, value: string) => void;
 }
+
+const RELATIONSHIP_OPTIONS = [
+  "Father",
+  "Mother",
+  "Spouse",
+  "Son",
+  "Daughter",
+  "Brother",
+  "Sister",
+  "Other",
+];
 
 const NomineeDetails: React.FC<Props> = ({
   data,
@@ -20,6 +32,30 @@ const NomineeDetails: React.FC<Props> = ({
 }) => {
   const { theme: { themeColor } } = useTheme();
   const styles = getStyles(themeColor);
+
+  // "Same as Nominee" — when checked, co-applicant's shared fields
+  // (name, relationship, DOB, mobile) mirror the nominee's and are locked.
+  const [sameAsNominee, setSameAsNominee] = useState(false);
+
+  const applyNomineeToCoApplicant = () => {
+    updateData("coName", data.nomineeName || "");
+    updateData("coRelation", data.nomineeRelation || "");
+    updateData("coDob", data.nomineeDob || "");
+    updateData("coMobile", data.nomineeMobile || "");
+  };
+
+  const toggleSameAsNominee = () => {
+    const next = !sameAsNominee;
+    setSameAsNominee(next);
+    if (next) applyNomineeToCoApplicant();
+  };
+
+  // Keep co-applicant fields in sync if the nominee's details are edited
+  // afterwards, as long as the checkbox is still checked.
+  useEffect(() => {
+    if (sameAsNominee) applyNomineeToCoApplicant();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data.nomineeName, data.nomineeRelation, data.nomineeDob, data.nomineeMobile]);
 
   return (
     <View style={styles.container}>
@@ -49,22 +85,19 @@ const NomineeDetails: React.FC<Props> = ({
           }
         />
 
-        <AppTextInput
+        <AppDropdown
           title="Relationship"
-          placeholder="Father / Mother / Wife"
+          placeholder="Select relationship"
           value={data.nomineeRelation}
-          onChangeText={(text) =>
-            updateData("nomineeRelation", text)
-          }
+          options={RELATIONSHIP_OPTIONS}
+          onSelect={(value) => updateData("nomineeRelation", value)}
         />
 
-        <AppTextInput
+        <AppDatePicker
           title="Date of Birth"
-          placeholder="DD/MM/YYYY"
           value={data.nomineeDob}
-          onChangeText={(text) =>
-            updateData("nomineeDob", text)
-          }
+          onChange={(date) => updateData("nomineeDob", date)}
+          maxDate={new Date()}
         />
 
         <AppTextInput
@@ -91,6 +124,17 @@ const NomineeDetails: React.FC<Props> = ({
 
       </View>
 
+      <Pressable style={styles.sameAsRow} onPress={toggleSameAsNominee}>
+        <View style={[styles.checkboxBox, sameAsNominee && styles.checkboxBoxChecked]}>
+          {sameAsNominee && (
+            <Ionicons name="checkmark" size={16} color={themeColor.white} />
+          )}
+        </View>
+        <Text style={styles.sameAsLabel}>
+          Nominee details same for Co-Applicant
+        </Text>
+      </Pressable>
+
       {/* CO APPLICANT */}
 
       <View style={styles.space} />
@@ -109,11 +153,11 @@ const NomineeDetails: React.FC<Props> = ({
 
       <View style={styles.card}>
 
-        <TouchableOpacity style={styles.addButton}>
+        {/* <TouchableOpacity style={styles.addButton}>
           <Text style={styles.addText}>
             + Add Co-Applicant
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <AppTextInput
           title="Name"
@@ -122,24 +166,24 @@ const NomineeDetails: React.FC<Props> = ({
           onChangeText={(text) =>
             updateData("coName", text)
           }
+          restInputTextProps={{ editable: !sameAsNominee }}
         />
 
-        <AppTextInput
+        <AppDropdown
           title="Relationship"
-          placeholder="Relationship"
+          placeholder="Select relationship"
           value={data.coRelation}
-          onChangeText={(text) =>
-            updateData("coRelation", text)
-          }
+          options={RELATIONSHIP_OPTIONS}
+          onSelect={(value) => updateData("coRelation", value)}
+          disabled={sameAsNominee}
         />
 
-        <AppTextInput
+        <AppDatePicker
           title="Date of Birth"
-          placeholder="DD/MM/YYYY"
           value={data.coDob}
-          onChangeText={(text) =>
-            updateData("coDob", text)
-          }
+          onChange={(date) => updateData("coDob", date)}
+          maxDate={new Date()}
+          disabled={sameAsNominee}
         />
 
         <AppTextInput
@@ -161,6 +205,7 @@ const NomineeDetails: React.FC<Props> = ({
           keyboardType="phone-pad"
           maxLength={10}
           value={data.coMobile}
+          restInputTextProps={{ editable: !sameAsNominee }}
           onChangeText={(text) =>
             updateData("coMobile", text)
           }

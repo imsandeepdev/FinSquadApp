@@ -30,9 +30,16 @@ const CustomerOnboardingScreen = () => {
   const [customerData, setCustomerData] = useState({
     fullName: "",
     dob: "",
+    gender: "",
+    address: "",
     mobile: "",
+    email: "",
     aadhaar: "",
     pan: "",
+    occupation: "",
+    income: "",
+    maritalStatus: "",
+    centreCode: "",
 
     nomineeName: "",
     nomineeRelation: "",

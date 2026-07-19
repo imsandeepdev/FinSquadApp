@@ -4,7 +4,9 @@ import {
   Pressable,
   Text,
   TextInput,
+  ActivityIndicator,
 } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { AppTextInputProps } from './types';
 import { useTheme } from '../../utils/provider/themeProvider';
@@ -39,7 +41,8 @@ const AppTextInput = React.forwardRef<TextInput, AppTextInputProps>(
     showTitle = false,
     titleMessage = '',
     returnKeyType,
-    autoCapitalize
+    autoCapitalize,
+    rightLoading = false,
   },
   ref) => {
     const { theme: { themeColor } } = useTheme();
@@ -58,7 +61,17 @@ const AppTextInput = React.forwardRef<TextInput, AppTextInputProps>(
         !showTitle ?
         <View style={[Style.mainView, { borderColor: isError ? themeColor.errorColor : themeColor.placeHolder }]}>
           <View style={[Style.bodyView, { borderColor: isError ? themeColor.errorColor : themeColor.placeHolder }]}>
-           
+
+            {/* LEFT ICON */}
+            {leftIcon ? (
+              <View style={Style.leftIconView} {...leftIconProps}>
+                <Ionicons
+                  name={leftIcon}
+                  size={leftIconSize}
+                  color={leftIconColor || themeColor.placeHolder}
+                />
+              </View>
+            ) : null}
 
             {/* TEXT INPUT */}
             <View style={Style.flexView}>
@@ -82,7 +95,11 @@ const AppTextInput = React.forwardRef<TextInput, AppTextInputProps>(
             </View>
 
             {/* RIGHT BUTTON */}
-            {rightOnPress ? (
+            {rightLoading ? (
+              <View style={Style.rightButton}>
+                <ActivityIndicator size="small" color={themeColor.appColor} />
+              </View>
+            ) : rightOnPress ? (
               <Pressable
                 onPress={rightOnPress}
                 style={({ pressed }) => [
@@ -90,7 +107,14 @@ const AppTextInput = React.forwardRef<TextInput, AppTextInputProps>(
                   { opacity: pressed ? 0.5 : 1 },
                 ]}
               >
-
+                {rightIcon ? (
+                  <Ionicons
+                    name={rightIcon}
+                    size={rightIconSize}
+                    color={rightIconColor || themeColor.placeHolder}
+                    {...rightIconProps}
+                  />
+                ) : null}
               </Pressable>
             ) : null}
 

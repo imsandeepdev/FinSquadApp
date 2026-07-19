@@ -9,6 +9,9 @@ export const customers: Customer[] = [
     village: "Rampur",
     status: "ACTIVE",
     mode: "OFFLINE",
+    centreCode: "CTR_1001",
+    monthlyIncome: 18000,
+    existingMonthlyEMI: 1500,
   },
   {
     id: "2",
@@ -18,6 +21,9 @@ export const customers: Customer[] = [
     village: "Bhatauli",
     status: "ACTIVE",
     mode: "ONLINE",
+    centreCode: "CTR_1002",
+    monthlyIncome: 14500,
+    existingMonthlyEMI: 2200,
   },
   {
     id: "3",
@@ -27,6 +33,9 @@ export const customers: Customer[] = [
     village: "Kalyanpur",
     status: "INACTIVE",
     mode: "OFFLINE",
+    centreCode: "CTR_1003",
+    monthlyIncome: 9500,
+    existingMonthlyEMI: 0,
   },
   {
     id: "4",
@@ -36,6 +45,9 @@ export const customers: Customer[] = [
     village: "Shahpur",
     status: "ACTIVE",
     mode: "ONLINE",
+    centreCode: "CTR_1004",
+    monthlyIncome: 22000,
+    existingMonthlyEMI: 1800,
   },
   {
     id: "5",
@@ -45,6 +57,9 @@ export const customers: Customer[] = [
     village: "Maldah",
     status: "INACTIVE",
     mode: "OFFLINE",
+    centreCode: "CTR_1005",
+    monthlyIncome: 8200,
+    existingMonthlyEMI: 500,
   },
   {
     id: "6",
@@ -54,5 +69,8 @@ export const customers: Customer[] = [
     village: "Hasanpur",
     status: "ACTIVE",
     mode: "ONLINE",
+    centreCode: "CTR_1004",
+    monthlyIncome: 16000,
+    existingMonthlyEMI: 3000,
   },
 ];

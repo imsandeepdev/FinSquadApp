@@ -1,11 +1,12 @@
 import { StyleSheet } from "react-native";
-import { responsiveSize } from "../../../res";
+import { appSize, responsiveSize } from "../../../res";
 import { ThemeColorType } from "../../../res/colors/theme.types";
 
 export const getStyles = (themeColor: ThemeColorType) =>
   StyleSheet.create({
     container: {
-      padding: responsiveSize(20),
+      paddingVertical: responsiveSize(10),
+      paddingHorizontal: responsiveSize(18),
     },
 
     headerRow: {
@@ -16,7 +17,7 @@ export const getStyles = (themeColor: ThemeColorType) =>
     },
 
     title: {
-      fontSize: responsiveSize(20),
+      fontSize: appSize.font_Large,
       fontWeight: "700",
       color: themeColor.appTextColor,
     },
@@ -50,7 +51,8 @@ export const getStyles = (themeColor: ThemeColorType) =>
     card: {
       backgroundColor: themeColor.cardColor,
       borderRadius: responsiveSize(18),
-      padding: responsiveSize(16),
+      paddingVertical: responsiveSize(10),
+      paddingHorizontal: responsiveSize(15),
 
       shadowColor: themeColor.black,
       shadowOpacity: 0.05,
@@ -61,6 +63,8 @@ export const getStyles = (themeColor: ThemeColorType) =>
       },
 
       elevation: 3,
+      borderWidth: 1,
+      borderColor: themeColor.borderColor,
     },
 
     space: {
@@ -86,6 +90,33 @@ export const getStyles = (themeColor: ThemeColorType) =>
       color: themeColor.appTextColor,
       fontWeight: "700",
       fontSize: responsiveSize(16),
+    },
+
+    sameAsRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginVertical: responsiveSize(10),
+    },
+
+    checkboxBox: {
+      width: responsiveSize(22),
+      height: responsiveSize(22),
+      borderRadius: responsiveSize(5),
+      borderWidth: 1.5,
+      borderColor: themeColor.appColor,
+      alignItems: "center",
+      justifyContent: "center",
+      marginRight: responsiveSize(10),
+    },
+
+    checkboxBoxChecked: {
+      backgroundColor: themeColor.appColor,
+    },
+
+    sameAsLabel: {
+      fontSize: appSize.font_Medium,
+      fontWeight: "500",
+      color: themeColor.appTextColor,
     },
   });
 

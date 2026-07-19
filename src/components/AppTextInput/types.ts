@@ -28,6 +28,8 @@ export interface AppTextInputProps {
   restInputTextProps?: any;
   isError?: boolean;
   errorMessage?: string;
+  /** Shows a spinner instead of rightIcon inside the right-side button (e.g. while an async lookup is running). */
+  rightLoading?: boolean;
   showTitle?: boolean;
   titleMessage?: string;
   returnKeyType?: any;

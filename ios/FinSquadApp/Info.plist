@@ -35,6 +35,12 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSCameraUsageDescription</key>
+	<string>FinSquadApp needs camera access to capture document photos for customer onboarding.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>FinSquadApp needs photo library access to upload document images for customer onboarding.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>FinSquadApp needs permission to save captured document photos.</string>
 	<key>RCTNewArchEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

@@ -1,24 +1,25 @@
 import { StyleSheet } from "react-native";
-import { responsiveSize } from "../../../res";
+import { appSize, responsiveSize } from "../../../res";
 import { ThemeColorType } from "../../../res/colors/theme.types";
 
 export const getStyles = (themeColor: ThemeColorType) =>
   StyleSheet.create({
     container: {
-      padding: responsiveSize(20),
+      padding: responsiveSize(18),
     },
 
     title: {
-      fontSize: responsiveSize(20),
+      fontSize: appSize.font_Large,
       fontWeight: "700",
       color: themeColor.appTextColor,
-      marginBottom: responsiveSize(15),
+      marginBottom: responsiveSize(10),
     },
 
     card: {
       backgroundColor: themeColor.cardColor,
       borderRadius: responsiveSize(18),
-      padding: responsiveSize(16),
+      paddingHorizontal: responsiveSize(15),
+      paddingVertical: responsiveSize(10),
 
       shadowColor: themeColor.black,
       shadowOpacity: 0.05,
@@ -29,6 +30,8 @@ export const getStyles = (themeColor: ThemeColorType) =>
       },
 
       elevation: 3,
+      borderWidth: 1,
+      borderColor: themeColor.borderColor,
     },
 
     switchRow: {

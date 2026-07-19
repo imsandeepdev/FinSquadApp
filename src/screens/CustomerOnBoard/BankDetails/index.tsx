@@ -4,7 +4,7 @@ import {
   Text,
   Switch,
 } from "react-native";
-import { AppTextInput } from "../../../components";
+import { AppTextInput, AppDropdown, AppDocumentUpload } from "../../../components";
 import { useTheme } from "../../../utils/provider/themeProvider";
 import { getStyles } from "./styles";
 
@@ -90,19 +90,25 @@ const BankDetails: React.FC<Props> = ({
           }
         />
 
-        <AppTextInput
+        <AppDropdown
           title="Account Type"
-          placeholder="Savings / Current"
+          placeholder="Select account type"
           value={data.accountType}
-          onChangeText={text =>
-            updateData(
-              "accountType",
-              text
-            )
-          }
+          options={["Savings", "Current"]}
+          onSelect={value => updateData("accountType", value)}
         />
 
-        <View style={styles.switchRow}>
+        <AppDocumentUpload
+          title="Bank Document"
+          docTypeOptions={["Cancelled Cheque", "Bank Passbook", "Bank Statement"]}
+          docTypeValue={data.bankDocType}
+          onDocTypeSelect={value => updateData("bankDocType", value)}
+          imageUri={data.bankDocumentUri}
+          onImageSelected={uri => updateData("bankDocumentUri", uri)}
+          onImageRemoved={() => updateData("bankDocumentUri", "")}
+        />
+
+        {/* <View style={styles.switchRow}>
 
           <View>
             <Text style={styles.switchTitle}>
@@ -129,7 +135,7 @@ const BankDetails: React.FC<Props> = ({
             }}
           />
 
-        </View>
+        </View> */}
 
       </View>
 

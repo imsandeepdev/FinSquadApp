@@ -7,11 +7,30 @@ export interface AppDocumentUploadProps {
   docTypeValue?: string;
   onDocTypeSelect: (value: string) => void;
 
-  /** Local file URI of the captured/selected image, if any. */
+  /**
+   * Single-image mode (e.g. Bank Details — one cheque/passbook photo).
+   * Ignored if front/back props below are supplied.
+   */
   imageUri?: string;
-  onImageSelected: (uri: string) => void;
+  onImageSelected?: (uri: string) => void;
   onImageRemoved?: () => void;
+
+  /**
+   * Front/back mode (e.g. Nominee / Co-Applicant ID proof) — renders two
+   * side-by-side upload slots instead of one. Supplying either
+   * onFrontImageSelected or onBackImageSelected switches the component
+   * into this mode.
+   */
+  frontImageUri?: string;
+  backImageUri?: string;
+  onFrontImageSelected?: (uri: string) => void;
+  onBackImageSelected?: (uri: string) => void;
+  onFrontImageRemoved?: () => void;
+  onBackImageRemoved?: () => void;
 
   isError?: boolean;
   errorMessage?: string;
+
+  /** Locks the doc-type dropdown and both upload slots (e.g. "same as nominee" sync). View-only. */
+  disabled?: boolean;
 }

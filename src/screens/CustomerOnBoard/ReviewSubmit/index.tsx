@@ -3,19 +3,34 @@ import {
   View,
   Text,
   ScrollView,
+  Pressable,
 } from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import { useTheme } from "../../../utils/provider/themeProvider";
 import { getStyles } from "./styles";
+import { centres } from "../../CentreManagement/const";
 
 interface Props {
   data: any;
+  updateData: (key: string, value: string) => void;
 }
+
+const docStatus = (front?: string, back?: string) => {
+  if (front && back) return "Uploaded (Front & Back)";
+  if (front || back) return "Partially uploaded";
+  return "Not uploaded";
+};
+
+const singleDocStatus = (uri?: string) => (uri ? "Uploaded" : "Not uploaded");
 
 const ReviewSubmit: React.FC<Props> = ({
   data,
+  updateData,
 }) => {
   const { theme: { themeColor } } = useTheme();
   const styles = getStyles(themeColor);
+
+  const declarationAccepted = data.declarationAccepted === "true";
 
   const Card = ({
     title,
@@ -34,7 +49,7 @@ const ReviewSubmit: React.FC<Props> = ({
     label: string,
     value: string,
   ) => (
-    <View style={styles.row}>
+    <View style={styles.row} key={label}>
       <Text style={styles.label}>
         {label}
       </Text>
@@ -44,6 +59,9 @@ const ReviewSubmit: React.FC<Props> = ({
       </Text>
     </View>
   );
+
+  const centre = centres.find((c) => c.code === data.centreCode);
+  const hasCoApplicant = !!(data.coName || data.coRelation || data.coDob || data.coMobile);
 
   return (
     <ScrollView
@@ -58,30 +76,18 @@ const ReviewSubmit: React.FC<Props> = ({
 
       <Card title="Customer">
 
-        {Item(
-          "Name",
-          data.fullName
-        )}
-
-        {Item(
-          "DOB",
-          data.dob
-        )}
-
-        {Item(
-          "Mobile",
-          data.mobile
-        )}
-
-        {Item(
-          "PAN",
-          data.pan
-        )}
-
-        {Item(
-          "Aadhaar",
-          data.aadhaar
-        )}
+        {Item("Name", data.fullName)}
+        {Item("DOB", data.dob)}
+        {Item("Gender", data.gender)}
+        {Item("Mobile", data.mobile)}
+        {Item("Email", data.email)}
+        {Item("Aadhaar", data.aadhaar)}
+        {Item("PAN", data.pan)}
+        {Item("Occupation", data.occupation)}
+        {Item("Annual Income", data.income)}
+        {Item("Marital Status", data.maritalStatus)}
+        {Item("Address", data.address)}
+        {Item("Linked Centre", centre?.name || data.centreCode)}
 
       </Card>
 
@@ -89,19 +95,34 @@ const ReviewSubmit: React.FC<Props> = ({
 
       <Card title="Nominee">
 
-        {Item(
-          "Name",
-          data.nomineeName
-        )}
+        {Item("Name", data.nomineeName)}
+        {Item("Relation", data.nomineeRelation)}
+        {Item("DOB", data.nomineeDob)}
+        {Item("Mobile", data.nomineeMobile)}
+        {Item("Aadhaar", data.nomineeAadhaar)}
+        {Item("ID Proof Type", data.nomineeDocType)}
+        {Item("ID Proof", docStatus(data.nomineeDocFrontUri, data.nomineeDocBackUri))}
 
-        {Item(
-          "Relation",
-          data.nomineeRelation
-        )}
+      </Card>
 
-        {Item(
-          "DOB",
-          data.nomineeDob
+      {/* CO-APPLICANT */}
+
+      <Card title="Co-Applicant">
+
+        {hasCoApplicant ? (
+          <>
+            {Item("Name", data.coName)}
+            {Item("Relation", data.coRelation)}
+            {Item("DOB", data.coDob)}
+            {Item("Mobile", data.coMobile)}
+            {Item("Aadhaar", data.coAadhaar)}
+            {Item("ID Proof Type", data.coDocType)}
+            {Item("ID Proof", docStatus(data.coDocFrontUri, data.coDocBackUri))}
+          </>
+        ) : (
+          <Text style={styles.emptyCardText}>
+            No co-applicant added (optional).
+          </Text>
         )}
 
       </Card>
@@ -110,25 +131,14 @@ const ReviewSubmit: React.FC<Props> = ({
 
       <Card title="Bank">
 
-        {Item(
-          "Bank",
-          data.bankName
-        )}
-
-        {Item(
-          "Account Holder",
-          data.accountHolder
-        )}
-
-        {Item(
-          "Account Number",
-          data.accountNumber
-        )}
-
-        {Item(
-          "IFSC",
-          data.ifsc
-        )}
+        {Item("Bank", data.bankName)}
+        {Item("Account Holder", data.accountHolder)}
+        {Item("Account Number", data.accountNumber)}
+        {Item("IFSC", data.ifsc)}
+        {Item("Branch", data.branch)}
+        {Item("Account Type", data.accountType)}
+        {Item("Document Type", data.bankDocType)}
+        {Item("Document", singleDocStatus(data.bankDocumentUri))}
 
       </Card>
 
@@ -136,51 +146,27 @@ const ReviewSubmit: React.FC<Props> = ({
 
       <Card title="KYC">
 
-        {Item(
-          "PAN",
-          data.kycPan
-        )}
-
-        {Item(
-          "Aadhaar",
-          data.kycAadhaar
-        )}
-
-        {Item(
-          "Passport",
-          data.passport
-        )}
-
-        {Item(
-          "CKYC",
-          data.ckyc
-        )}
+        {Item("Passport", data.passport)}
+        {Item("Driving License", data.dl)}
+        {Item("Voter ID", data.voterId)}
+        {Item("CKYC", data.ckyc)}
+        {Item("KYC Document Type", data.kycDocType)}
+        {Item("KYC Document", docStatus(data.kycDocFrontUri, data.kycDocBackUri))}
 
       </Card>
 
-      {/* INVESTMENT */}
+      {/* LOAN REQUIREMENT */}
 
-      <Card title="Investment">
+      <Card title="Loan Requirement">
 
-        {Item(
-          "Amount",
-          data.investmentAmount
-        )}
-
-        {Item(
-          "Type",
-          data.investmentType
-        )}
-
-        {Item(
-          "Risk",
-          data.riskProfile
-        )}
-
-        {Item(
-          "Horizon",
-          data.horizon
-        )}
+        {Item("Purpose", data.loanPurpose)}
+        {Item("Indicative Amount", data.loanAmountRequired)}
+        {Item("Repayment Frequency", data.repaymentFrequency)}
+        {Item("Existing Loans", data.existingLoans)}
+        {Item("Existing Monthly EMI", data.existingEmi)}
+        {Item("Household Expenses", data.householdExpenses)}
+        {Item("Dependents", data.dependents)}
+        {Item("Other Income Source", data.otherIncomeSource)}
 
       </Card>
 
@@ -193,13 +179,34 @@ const ReviewSubmit: React.FC<Props> = ({
         </Text>
 
         <Text style={styles.declarationText}>
-          I hereby confirm that the
-          information provided above
-          is true and correct to the
-          best of my knowledge and
-          all supporting documents
-          have been verified.
+          I hereby confirm that the information provided
+          above is true and correct to the best of my
+          knowledge, and that the documents uploaded
+          are genuine and belong to the applicant.
         </Text>
+
+        <Pressable
+          style={styles.declarationCheckRow}
+          onPress={() =>
+            updateData("declarationAccepted", declarationAccepted ? "" : "true")
+          }
+        >
+          <View style={[styles.checkboxBox, declarationAccepted && styles.checkboxBoxChecked]}>
+            {declarationAccepted && (
+              <Ionicons name="checkmark" size={16} color={themeColor.white} />
+            )}
+          </View>
+
+          <Text style={styles.declarationAcceptLabel}>
+            I agree to the above declaration
+          </Text>
+        </Pressable>
+
+        {!declarationAccepted && (
+          <Text style={styles.declarationRequiredNote}>
+            Required before this application can be submitted.
+          </Text>
+        )}
 
       </View>
 

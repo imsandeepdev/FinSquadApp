@@ -5,13 +5,14 @@ import {
   ScrollView,
   TouchableOpacity,
   Dimensions,
+  Alert,
 } from "react-native";
 import { AppHeader, StepProgressBar, StoryScreen } from "../../components";
 import CustomerMaster from "./CustomerMaster";
 import NomineeDetails from "./NomineeDetails";
 import BankDetails from "./BankDetails";
 import KYCDetails from "./KYCDetails";
-import InvestmentDetails from "./InvestmentDetails";
+import LoanPurposeDetails from "./LoanPurposeDetails";
 import ReviewSubmit from "./ReviewSubmit";
 import { getStyles } from "./styles";
 import { useTheme } from "../../utils/provider/themeProvider";
@@ -28,6 +29,7 @@ const CustomerOnboardingScreen = () => {
   const [step, setStep] = useState(1);
 
   const [customerData, setCustomerData] = useState({
+    // Customer Master
     fullName: "",
     dob: "",
     gender: "",
@@ -41,18 +43,58 @@ const CustomerOnboardingScreen = () => {
     maritalStatus: "",
     centreCode: "",
 
+    // Nominee
     nomineeName: "",
     nomineeRelation: "",
     nomineeDob: "",
+    nomineeMobile: "",
+    nomineeAadhaar: "",
+    nomineeDocType: "",
+    nomineeDocFrontUri: "",
+    nomineeDocBackUri: "",
 
+    // Co-Applicant
+    coName: "",
+    coRelation: "",
+    coDob: "",
+    coMobile: "",
+    coAadhaar: "",
+    coDocType: "",
+    coDocFrontUri: "",
+    coDocBackUri: "",
+
+    // Bank Details
     bankName: "",
+    accountHolder: "",
     accountNumber: "",
+    confirmAccount: "",
     ifsc: "",
+    branch: "",
+    accountType: "",
+    bankDocType: "",
+    bankDocumentUri: "",
 
-    kycNumber: "",
+    // KYC (PAN/Aadhaar already captured in Customer Master, not repeated here)
+    passport: "",
+    dl: "",
+    voterId: "",
+    ckyc: "",
+    kycDocType: "",
+    kycDocFrontUri: "",
+    kycDocBackUri: "",
 
-    investmentAmount: "",
-    investmentType: "",
+    // Loan Purpose & Repayment Capacity
+    loanPurpose: "",
+    loanAmountRequired: "",
+    repaymentFrequency: "",
+    existingLoans: "",
+    existingEmi: "",
+    householdExpenses: "",
+    dependents: "",
+    otherIncomeSource: "",
+
+    // Review & Submit
+    declarationAccepted: "",
   });
 
   const updateData = (key: string, value: string) => {
@@ -65,10 +107,27 @@ const CustomerOnboardingScreen = () => {
   const nextStep = () => {
     if (step < TOTAL_STEPS) {
       setStep(step + 1);
-    } else {
-      console.log(customerData);
+      return;
     }
+
+    if (customerData.declarationAccepted !== "true") {
+      Alert.alert(
+        "Declaration required",
+        "Please accept the declaration at the bottom of the review before submitting."
+      );
+      return;
+    }
+
+    console.log(customerData);
+    Alert.alert(
+      "Application Submitted",
+      "Customer onboarding details have been submitted successfully.",
+      [{ text: "OK", onPress: () => navigation.goBack() }]
+    );
   };
+
+  const isSubmitStep = step === TOTAL_STEPS;
+  const isSubmitBlocked = isSubmitStep && customerData.declarationAccepted !== "true";
 
   const previousStep = () => {
     if (step > 1) {
@@ -91,7 +150,7 @@ const CustomerOnboardingScreen = () => {
         return "KYC Details";
 
       case 5:
-        return "Investment";
+        return "Loan Requirement";
 
       case 6:
         return "Review & Submit";
@@ -113,7 +172,7 @@ const CustomerOnboardingScreen = () => {
         return "Next: KYC";
 
       case 4:
-        return "Next: Investment";
+        return "Next: Loan Requirement";
 
       case 5:
         return "Next: Review";
@@ -162,7 +221,7 @@ const CustomerOnboardingScreen = () => {
 
       case 5:
         return (
-          <InvestmentDetails
+          <LoanPurposeDetails
             data={customerData}
             updateData={updateData}
           />
@@ -172,6 +231,7 @@ const CustomerOnboardingScreen = () => {
         return (
           <ReviewSubmit
             data={customerData}
+            updateData={updateData}
           />
         );
 
@@ -225,11 +285,12 @@ const CustomerOnboardingScreen = () => {
         )}
 
         <TouchableOpacity
-          style={styles.nextButton}
+          style={[styles.nextButton, isSubmitBlocked && styles.nextButtonDisabled]}
           onPress={nextStep}
+          activeOpacity={isSubmitBlocked ? 1 : 0.7}
         >
           <Text style={styles.nextText}>
-            {nextButtonTitle()} 
+            {nextButtonTitle()}
           </Text>
         </TouchableOpacity>
         </View>

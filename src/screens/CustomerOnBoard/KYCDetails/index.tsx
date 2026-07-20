@@ -3,7 +3,7 @@ import {
   View,
   Text,
 } from "react-native";
-import { AppTextInput } from "../../../components";
+import { AppTextInput, AppDocumentUpload } from "../../../components";
 import { useTheme } from "../../../utils/provider/themeProvider";
 import { getStyles } from "./styles";
 
@@ -12,6 +12,8 @@ interface Props {
   data: any;
   updateData: (key: string, value: string) => void;
 }
+
+const KYC_DOC_OPTIONS = ["Passport", "Driving License", "Voter ID"];
 
 const KYCDetails: React.FC<Props> = ({
   data,
@@ -53,34 +55,13 @@ const KYCDetails: React.FC<Props> = ({
 
       {/* Form */}
 
+      {/*
+        PAN and Aadhaar are already captured in Customer Master (Step 1) —
+        collecting them again here would just be asking twice, so those two
+        fields have been removed from this step.
+      */}
+
       <View style={styles.card}>
-
-        <AppTextInput
-          title="PAN Number"
-          placeholder="ABCDE1234F"
-          maxLength={10}
-          value={data.kycPan}
-          onChangeText={(text) =>
-            updateData(
-              "kycPan",
-              text.toUpperCase()
-            )
-          }
-        />
-
-        <AppTextInput
-          title="Aadhaar Number"
-          placeholder="XXXX XXXX XXXX"
-          keyboardType="numeric"
-          maxLength={12}
-          value={data.kycAadhaar}
-          onChangeText={(text) =>
-            updateData(
-              "kycAadhaar",
-              text
-            )
-          }
-        />
 
         <AppTextInput
           title="Passport Number"
@@ -128,6 +109,19 @@ const KYCDetails: React.FC<Props> = ({
               text
             )
           }
+        />
+
+        <AppDocumentUpload
+          title="KYC Document"
+          docTypeOptions={KYC_DOC_OPTIONS}
+          docTypeValue={data.kycDocType}
+          onDocTypeSelect={(value) => updateData("kycDocType", value)}
+          frontImageUri={data.kycDocFrontUri}
+          backImageUri={data.kycDocBackUri}
+          onFrontImageSelected={(uri) => updateData("kycDocFrontUri", uri)}
+          onBackImageSelected={(uri) => updateData("kycDocBackUri", uri)}
+          onFrontImageRemoved={() => updateData("kycDocFrontUri", "")}
+          onBackImageRemoved={() => updateData("kycDocBackUri", "")}
         />
 
       </View>

@@ -90,6 +90,10 @@ bottomViewContainer: {
     alignItems: "center",
   },
 
+  nextButtonDisabled: {
+    opacity: 0.45,
+  },
+
   nextText: {
     color: AppColor.appLightTextColor,
     fontWeight: "700",

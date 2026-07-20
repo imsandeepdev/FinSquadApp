@@ -75,6 +75,12 @@ export const getStyles = (themeColor: ThemeColorType) =>
       fontWeight: "600",
     },
 
+    emptyCardText: {
+      color: themeColor.secondaryLightText,
+      fontSize: responsiveSize(14),
+      fontStyle: "italic",
+    },
+
     declaration: {
       backgroundColor: themeColor.appLightColor,
 
@@ -83,6 +89,9 @@ export const getStyles = (themeColor: ThemeColorType) =>
       padding: responsiveSize(16),
 
       marginTop: responsiveSize(10),
+
+      borderWidth: 1,
+      borderColor: themeColor.borderColor,
     },
 
     declarationTitle: {
@@ -101,6 +110,41 @@ export const getStyles = (themeColor: ThemeColorType) =>
       color: themeColor.secondaryLightText,
 
       fontSize: responsiveSize(14),
+    },
+
+    declarationCheckRow: {
+      flexDirection: "row",
+      alignItems: "flex-start",
+      marginTop: responsiveSize(14),
+    },
+
+    checkboxBox: {
+      width: responsiveSize(22),
+      height: responsiveSize(22),
+      borderRadius: responsiveSize(5),
+      borderWidth: 1.5,
+      borderColor: themeColor.appColor,
+      alignItems: "center",
+      justifyContent: "center",
+      marginRight: responsiveSize(10),
+      marginTop: responsiveSize(1),
+    },
+
+    checkboxBoxChecked: {
+      backgroundColor: themeColor.appColor,
+    },
+
+    declarationAcceptLabel: {
+      flex: 1,
+      fontSize: responsiveSize(14),
+      fontWeight: "600",
+      color: themeColor.appTextColor,
+    },
+
+    declarationRequiredNote: {
+      marginTop: responsiveSize(8),
+      fontSize: responsiveSize(12),
+      color: themeColor.errorColor,
     },
   });
 

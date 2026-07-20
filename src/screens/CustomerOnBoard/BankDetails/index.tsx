@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
-  Switch,
 } from "react-native";
 import { AppTextInput, AppDropdown, AppDocumentUpload } from "../../../components";
 import { useTheme } from "../../../utils/provider/themeProvider";
@@ -20,7 +19,6 @@ const BankDetails: React.FC<Props> = ({
 }) => {
   const { theme: { themeColor } } = useTheme();
   const styles = getStyles(themeColor);
-  const [isPrimary, setIsPrimary] = useState(true);
 
   return (
     <View style={styles.container}>
@@ -107,35 +105,6 @@ const BankDetails: React.FC<Props> = ({
           onImageSelected={uri => updateData("bankDocumentUri", uri)}
           onImageRemoved={() => updateData("bankDocumentUri", "")}
         />
-
-        {/* <View style={styles.switchRow}>
-
-          <View>
-            <Text style={styles.switchTitle}>
-              Primary Account
-            </Text>
-
-            <Text style={styles.switchSub}>
-              Use for investment payouts
-            </Text>
-          </View>
-
-          <Switch
-            value={isPrimary}
-            onValueChange={value => {
-              setIsPrimary(value);
-              updateData(
-                "primaryAccount",
-                value.toString()
-              );
-            }}
-            trackColor={{
-              false: themeColor.borderColor,
-              true: themeColor.appTextColor,
-            }}
-          />
-
-        </View> */}
 
       </View>
 

@@ -6,7 +6,7 @@ import {
   Pressable,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { AppTextInput, AppDatePicker, AppDropdown } from "../../../components";
+import { AppTextInput, AppDatePicker, AppDropdown, AppDocumentUpload } from "../../../components";
 import { useTheme } from "../../../utils/provider/themeProvider";
 import { getStyles } from "./styles";
 
@@ -26,6 +26,14 @@ const RELATIONSHIP_OPTIONS = [
   "Other",
 ];
 
+const ID_PROOF_OPTIONS = [
+  "Aadhaar Card",
+  "PAN Card",
+  "Voter ID",
+  "Driving License",
+  "Passport",
+];
+
 const NomineeDetails: React.FC<Props> = ({
   data,
   updateData,
@@ -33,8 +41,9 @@ const NomineeDetails: React.FC<Props> = ({
   const { theme: { themeColor } } = useTheme();
   const styles = getStyles(themeColor);
 
-  // "Same as Nominee" — when checked, co-applicant's shared fields
-  // (name, relationship, DOB, mobile) mirror the nominee's and are locked.
+  // "Same as Nominee" — when checked, every co-applicant field (name,
+  // relationship, DOB, mobile, Aadhaar, ID doc type + front/back photos)
+  // mirrors the nominee's and is locked.
   const [sameAsNominee, setSameAsNominee] = useState(false);
 
   const applyNomineeToCoApplicant = () => {
@@ -42,6 +51,10 @@ const NomineeDetails: React.FC<Props> = ({
     updateData("coRelation", data.nomineeRelation || "");
     updateData("coDob", data.nomineeDob || "");
     updateData("coMobile", data.nomineeMobile || "");
+    updateData("coAadhaar", data.nomineeAadhaar || "");
+    updateData("coDocType", data.nomineeDocType || "");
+    updateData("coDocFrontUri", data.nomineeDocFrontUri || "");
+    updateData("coDocBackUri", data.nomineeDocBackUri || "");
   };
 
   const toggleSameAsNominee = () => {
@@ -55,7 +68,16 @@ const NomineeDetails: React.FC<Props> = ({
   useEffect(() => {
     if (sameAsNominee) applyNomineeToCoApplicant();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data.nomineeName, data.nomineeRelation, data.nomineeDob, data.nomineeMobile]);
+  }, [
+    data.nomineeName,
+    data.nomineeRelation,
+    data.nomineeDob,
+    data.nomineeMobile,
+    data.nomineeAadhaar,
+    data.nomineeDocType,
+    data.nomineeDocFrontUri,
+    data.nomineeDocBackUri,
+  ]);
 
   return (
     <View style={styles.container}>
@@ -120,6 +142,19 @@ const NomineeDetails: React.FC<Props> = ({
           onChangeText={(text) =>
             updateData("nomineeAadhaar", text)
           }
+        />
+
+        <AppDocumentUpload
+          title="Nominee ID Proof"
+          docTypeOptions={ID_PROOF_OPTIONS}
+          docTypeValue={data.nomineeDocType}
+          onDocTypeSelect={(value) => updateData("nomineeDocType", value)}
+          frontImageUri={data.nomineeDocFrontUri}
+          backImageUri={data.nomineeDocBackUri}
+          onFrontImageSelected={(uri) => updateData("nomineeDocFrontUri", uri)}
+          onBackImageSelected={(uri) => updateData("nomineeDocBackUri", uri)}
+          onFrontImageRemoved={() => updateData("nomineeDocFrontUri", "")}
+          onBackImageRemoved={() => updateData("nomineeDocBackUri", "")}
         />
 
       </View>
@@ -187,19 +222,6 @@ const NomineeDetails: React.FC<Props> = ({
         />
 
         <AppTextInput
-          title="PAN Number"
-          placeholder="ABCDE1234F"
-          maxLength={10}
-          value={data.coPan}
-          onChangeText={(text) =>
-            updateData(
-              "coPan",
-              text.toUpperCase()
-            )
-          }
-        />
-
-        <AppTextInput
           title="Mobile Number"
           placeholder="Enter mobile"
           keyboardType="phone-pad"
@@ -209,6 +231,32 @@ const NomineeDetails: React.FC<Props> = ({
           onChangeText={(text) =>
             updateData("coMobile", text)
           }
+        />
+
+        <AppTextInput
+          title="Aadhaar Number"
+          placeholder="XXXX XXXX XXXX"
+          keyboardType="numeric"
+          maxLength={12}
+          value={data.coAadhaar}
+          restInputTextProps={{ editable: !sameAsNominee }}
+          onChangeText={(text) =>
+            updateData("coAadhaar", text)
+          }
+        />
+
+        <AppDocumentUpload
+          title="Co-Applicant ID Proof"
+          docTypeOptions={ID_PROOF_OPTIONS}
+          docTypeValue={data.coDocType}
+          onDocTypeSelect={(value) => updateData("coDocType", value)}
+          frontImageUri={data.coDocFrontUri}
+          backImageUri={data.coDocBackUri}
+          onFrontImageSelected={(uri) => updateData("coDocFrontUri", uri)}
+          onBackImageSelected={(uri) => updateData("coDocBackUri", uri)}
+          onFrontImageRemoved={() => updateData("coDocFrontUri", "")}
+          onBackImageRemoved={() => updateData("coDocBackUri", "")}
+          disabled={sameAsNominee}
         />
 
       </View>

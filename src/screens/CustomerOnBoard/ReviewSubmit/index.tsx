@@ -76,6 +76,7 @@ const ReviewSubmit: React.FC<Props> = ({
 
       <Card title="Customer">
 
+        {Item("Loan Type", data.loanTypeName)}
         {Item("Name", data.fullName)}
         {Item("DOB", data.dob)}
         {Item("Gender", data.gender)}
@@ -142,16 +143,17 @@ const ReviewSubmit: React.FC<Props> = ({
 
       </Card>
 
-      {/* KYC */}
+      {/* FAMILY DETAILS */}
 
-      <Card title="KYC">
+      <Card title="Family Details">
 
-        {Item("Passport", data.passport)}
-        {Item("Driving License", data.dl)}
-        {Item("Voter ID", data.voterId)}
-        {Item("CKYC", data.ckyc)}
-        {Item("KYC Document Type", data.kycDocType)}
-        {Item("KYC Document", docStatus(data.kycDocFrontUri, data.kycDocBackUri))}
+        {Item("Name", data.familyName)}
+        {Item("Relation", data.familyRelation)}
+        {Item("DOB", data.familyDob)}
+        {Item("Mobile", data.familyMobile)}
+        {Item("Aadhaar", data.familyAadhaar)}
+        {Item("ID Proof Type", data.familyDocType)}
+        {Item("ID Proof", docStatus(data.familyDocFrontUri, data.familyDocBackUri))}
 
       </Card>
 
@@ -167,6 +169,80 @@ const ReviewSubmit: React.FC<Props> = ({
         {Item("Household Expenses", data.householdExpenses)}
         {Item("Dependents", data.dependents)}
         {Item("Other Income Source", data.otherIncomeSource)}
+
+      </Card>
+
+      {/* INCOME ASSESSMENT */}
+
+      <Card title="Income Assessment">
+
+        {Item("Occupation Type", data.iaOccupationType)}
+        {Item("Business / Employer Name", data.iaEmployerName)}
+        {Item("Monthly Income", data.iaMonthlyIncome)}
+        {Item("Monthly Household Expenses", data.iaMonthlyExpenses)}
+        {Item("Other Income Sources", data.iaOtherIncomeSources)}
+        {Item("No. of Earning Members", data.iaEarningMembers)}
+        {Item("Total Household Income", data.iaTotalHouseholdIncome)}
+        {Item("Existing Loan EMI Outgo", data.existingEmi)}
+        {Item("Net Disposable Income", data.iaNetDisposableIncome)}
+        {Item("Loan Eligibility (Auto-calc)", data.iaLoanEligibility)}
+        {Item("Income Proof", singleDocStatus(data.iaIncomeProofUri))}
+        {Item("Bank Statement", singleDocStatus(data.iaBankStatementUri))}
+
+      </Card>
+
+      {/* GRT */}
+
+      <Card title="GRT (Group Recognition Test)">
+
+        {Item("Group Name", data.grtGroupName)}
+        {Item("No. of Group Members", data.grtMemberCount)}
+        {Item("GRT Conducted By", data.grtConductedBy)}
+        {Item("GRT Date", data.grtDate)}
+        {Item("Loan Purpose Understanding", data.grtLoanPurposeUnderstanding)}
+        {Item("Repayment Terms Understanding", data.grtRepaymentUnderstanding)}
+        {Item("Group Liability Understanding", data.grtGroupLiabilityUnderstanding)}
+        {Item("Members Present", data.grtMembersPresent)}
+        {Item("GRT Score", data.grtScore)}
+        {Item("GRT Result", data.grtResult)}
+        {Item("Remarks", data.grtRemarks)}
+        {Item("GRT Photo", singleDocStatus(data.grtPhotoUri))}
+
+      </Card>
+
+      {/* CENTRE FORMATION */}
+
+      <Card title="Centre Formation">
+
+        {Item("Centre Name", data.cfCentreName)}
+        {Item("Centre Code", data.cfCentreCode)}
+        {Item("Centre Leader Name", data.cfLeaderName)}
+        {Item("No. of Groups", data.cfGroupCount)}
+        {Item("No. of Members", data.cfMemberCount)}
+        {Item("Meeting Day", data.cfMeetingDay)}
+        {Item("Meeting Time", data.cfMeetingTime)}
+        {Item("Meeting Place", data.cfMeetingPlace)}
+        {Item("Formation Date", data.cfFormationDate)}
+        {Item("Field Officer", data.cfFieldOfficerName)}
+        {Item("Centre Photo", singleDocStatus(data.cfPhotoUri))}
+
+      </Card>
+
+      {/* HOUSE VERIFICATION */}
+
+      <Card title="House Verification">
+
+        {Item("Applicant Name", data.hvApplicantName)}
+        {Item("Verification Date", data.hvVerificationDate)}
+        {Item("Verified By", data.hvVerifiedBy)}
+        {Item("House Type", data.hvHouseType)}
+        {Item("Ownership Proof Type", data.hvOwnershipProofType)}
+        {Item("Duration of Stay", data.hvDurationOfStay)}
+        {Item("Address Matches Application", data.hvAddressMatches)}
+        {Item("Neighbor Verification Name", data.hvNeighborVerificationName)}
+        {Item("GPS Location Captured", data.hvGpsCaptured)}
+        {Item("House Photo", singleDocStatus(data.hvHousePhotoUri))}
+        {Item("Landmark Photo", singleDocStatus(data.hvLandmarkPhotoUri))}
 
       </Card>
 

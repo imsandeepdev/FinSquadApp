@@ -10,6 +10,7 @@ import {navigationRef} from './navigationService';
 import CustomerOnboardingScreen from '../screens/CustomerOnBoard';
 import { BottomTabs } from '../components';
 import COBListScreen from '../screens/COBList';
+import LoanTypeSelectionScreen from '../screens/LoanTypeSelection';
 import { NAVIGATE_NAME } from '../utils/const';
 
 
@@ -52,6 +53,11 @@ const AppNavigator = () => {
         <Stack.Screen
           name={NAVIGATE_NAME.COB_LIST_SCREEN}
           component={COBListScreen}
+        />
+
+        <Stack.Screen
+          name={NAVIGATE_NAME.LOAN_TYPE_SELECTION_SCREEN}
+          component={LoanTypeSelectionScreen}
         />
 
       </Stack.Navigator>

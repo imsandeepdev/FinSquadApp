@@ -3,5 +3,6 @@ export const NAVIGATE_NAME = {
     REGISTER: 'Register',
     AIWEALTH_COACH_SCREEN: 'AIWealthCoachScreen',
     CUSTOMER_ONBOARDING_SCREEN: 'CustomerOnboardingScreen',
-    COB_LIST_SCREEN:'COBListScreen'
+    COB_LIST_SCREEN:'COBListScreen',
+    LOAN_TYPE_SELECTION_SCREEN: 'LoanTypeSelectionScreen',
 }

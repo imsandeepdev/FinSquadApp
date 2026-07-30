@@ -51,7 +51,9 @@ const AppDocumentUpload: React.FC<AppDocumentUploadProps> = ({
   const [previewSlot, setPreviewSlot] = useState<PreviewSlot | null>(null);
 
   const isFrontBackMode = !!(onFrontImageSelected || onBackImageSelected);
-  const canUpload = !!docTypeValue && !disabled;
+  const hasDocType = !!docTypeOptions && docTypeOptions.length > 0;
+  const canUpload = hasDocType ? !!docTypeValue && !disabled : !disabled;
+  const uploadLabel = docTypeValue || title || "Document";
   const lockedMessage = "Synced from Nominee — uncheck \"Same as Nominee\" to edit";
 
   // On a native build where react-native-image-picker's native module hasn't
@@ -142,10 +144,10 @@ const AppDocumentUpload: React.FC<AppDocumentUploadProps> = ({
             style={styles.previewThumbWrap}
             onPress={() =>
               setPreviewSlot({
-                label: docTypeValue || "Document",
+                label: uploadLabel,
                 uri: imageUri,
-                onReplace: () => promptUpload(docTypeValue || "Document", onImageSelected!),
-                onRemove: () => confirmRemove(docTypeValue || "Document", onImageRemoved),
+                onReplace: () => promptUpload(uploadLabel, onImageSelected!),
+                onRemove: () => confirmRemove(uploadLabel, onImageRemoved),
               })
             }
           >
@@ -153,7 +155,7 @@ const AppDocumentUpload: React.FC<AppDocumentUploadProps> = ({
 
             <Pressable
               style={styles.removeBadge}
-              onPress={() => confirmRemove(docTypeValue || "Document", onImageRemoved)}
+              onPress={() => confirmRemove(uploadLabel, onImageRemoved)}
               hitSlop={8}
             >
               <Ionicons name="close" size={13} color={themeColor.white} />
@@ -162,7 +164,7 @@ const AppDocumentUpload: React.FC<AppDocumentUploadProps> = ({
 
           <View style={styles.previewInfo}>
             <Text style={styles.previewFileText} numberOfLines={1}>
-              {docTypeValue} uploaded
+              {uploadLabel} uploaded
             </Text>
 
             <View style={styles.previewActionsRow}>
@@ -170,10 +172,10 @@ const AppDocumentUpload: React.FC<AppDocumentUploadProps> = ({
                 style={styles.previewActionBtn}
                 onPress={() =>
                   setPreviewSlot({
-                    label: docTypeValue || "Document",
+                    label: uploadLabel,
                     uri: imageUri,
-                    onReplace: () => promptUpload(docTypeValue || "Document", onImageSelected!),
-                    onRemove: () => confirmRemove(docTypeValue || "Document", onImageRemoved),
+                    onReplace: () => promptUpload(uploadLabel, onImageSelected!),
+                    onRemove: () => confirmRemove(uploadLabel, onImageRemoved),
                   })
                 }
               >
@@ -185,7 +187,7 @@ const AppDocumentUpload: React.FC<AppDocumentUploadProps> = ({
 
               <Pressable
                 style={styles.previewActionBtn}
-                onPress={() => promptUpload(docTypeValue || "Document", onImageSelected!)}
+                onPress={() => promptUpload(uploadLabel, onImageSelected!)}
               >
                 <Ionicons name="refresh-outline" size={16} color={themeColor.appColor} />
                 <Text style={[styles.previewActionText, { color: themeColor.appColor }]}>
@@ -195,7 +197,7 @@ const AppDocumentUpload: React.FC<AppDocumentUploadProps> = ({
 
               <Pressable
                 style={styles.previewActionBtn}
-                onPress={() => confirmRemove(docTypeValue || "Document", onImageRemoved)}
+                onPress={() => confirmRemove(uploadLabel, onImageRemoved)}
               >
                 <Ionicons name="trash-outline" size={16} color={themeColor.errorColor} />
                 <Text style={[styles.previewActionText, { color: themeColor.errorColor }]}>
@@ -207,7 +209,7 @@ const AppDocumentUpload: React.FC<AppDocumentUploadProps> = ({
         </View>
       ) : (
         <Pressable
-          onPress={() => promptUpload(docTypeValue || "Document", onImageSelected!)}
+          onPress={() => promptUpload(uploadLabel, onImageSelected!)}
           style={[styles.uploadTile, !canUpload && styles.uploadTileDisabled]}
         >
           <View style={styles.uploadIconWrap}>
@@ -216,10 +218,18 @@ const AppDocumentUpload: React.FC<AppDocumentUploadProps> = ({
 
           <View style={styles.uploadTextWrap}>
             <Text style={styles.uploadTitleText}>
-              {canUpload ? `Upload ${docTypeValue}` : "Select document type first"}
+              {canUpload
+                ? `Upload ${uploadLabel}`
+                : hasDocType
+                ? "Select document type first"
+                : "Upload unavailable"}
             </Text>
             <Text style={styles.uploadSubText}>
-              {canUpload ? "Tap to take a photo or choose from gallery" : "Upload unlocks once a type is chosen"}
+              {canUpload
+                ? "Tap to take a photo or choose from gallery"
+                : hasDocType
+                ? "Upload unlocks once a type is chosen"
+                : "This upload is currently locked"}
             </Text>
           </View>
         </Pressable>
@@ -234,7 +244,7 @@ const AppDocumentUpload: React.FC<AppDocumentUploadProps> = ({
     onSelected: ((uri: string) => void) | undefined,
     onRemoved: (() => void) | undefined
   ) => {
-    const label = `${docTypeValue || "Document"} - ${side}`;
+    const label = `${uploadLabel} - ${side}`;
 
     if (uri) {
       return (
@@ -292,26 +302,28 @@ const AppDocumentUpload: React.FC<AppDocumentUploadProps> = ({
     <View style={styles.topView}>
       {title ? <Text style={styles.headerTitle}>{title}</Text> : null}
 
-      <AppDropdown
-        title={docTypeLabel}
-        placeholder="Select document type"
-        value={docTypeValue}
-        options={docTypeOptions}
-        onSelect={value => {
-          onDocTypeSelect(value);
-          // Selecting a different document type invalidates whatever was
-          // previously uploaded against the old type.
-          if (isFrontBackMode) {
-            if (frontImageUri) onFrontImageRemoved?.();
-            if (backImageUri) onBackImageRemoved?.();
-          } else if (imageUri) {
-            onImageRemoved?.();
-          }
-        }}
-        isError={isError}
-        errorMessage={errorMessage}
-        disabled={disabled}
-      />
+      {hasDocType && (
+        <AppDropdown
+          title={docTypeLabel}
+          placeholder="Select document type"
+          value={docTypeValue}
+          options={docTypeOptions!}
+          onSelect={value => {
+            onDocTypeSelect?.(value);
+            // Selecting a different document type invalidates whatever was
+            // previously uploaded against the old type.
+            if (isFrontBackMode) {
+              if (frontImageUri) onFrontImageRemoved?.();
+              if (backImageUri) onBackImageRemoved?.();
+            } else if (imageUri) {
+              onImageRemoved?.();
+            }
+          }}
+          isError={isError}
+          errorMessage={errorMessage}
+          disabled={disabled}
+        />
+      )}
 
       {isFrontBackMode ? (
         <View style={styles.slotsRow}>

@@ -3,9 +3,14 @@ export interface AppDocumentUploadProps {
 
   /** Label shown above the document-type dropdown. Defaults to "Document Type". */
   docTypeLabel?: string;
-  docTypeOptions: string[];
+  /**
+   * When omitted (or empty), the document-type dropdown is skipped
+   * entirely and the component behaves as a single fixed-purpose upload
+   * (e.g. "Upload Income Proof") — `title` is used as the label instead.
+   */
+  docTypeOptions?: string[];
   docTypeValue?: string;
-  onDocTypeSelect: (value: string) => void;
+  onDocTypeSelect?: (value: string) => void;
 
   /**
    * Single-image mode (e.g. Bank Details — one cheque/passbook photo).

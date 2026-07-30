@@ -7,28 +7,38 @@ import {
   Dimensions,
   Alert,
 } from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import { AppHeader, StepProgressBar, StoryScreen } from "../../components";
 import CustomerMaster from "./CustomerMaster";
 import NomineeDetails from "./NomineeDetails";
 import BankDetails from "./BankDetails";
-import KYCDetails from "./KYCDetails";
+import FamilyDetails from "./FamilyDetails";
 import LoanPurposeDetails from "./LoanPurposeDetails";
+import IncomeAssessment from "./IncomeAssessment";
+import GRTDetails from "./GRTDetails";
+import CentreFormationStep from "./CentreFormationStep";
+import HouseVerification from "./HouseVerification";
 import ReviewSubmit from "./ReviewSubmit";
 import { getStyles } from "./styles";
 import { useTheme } from "../../utils/provider/themeProvider";
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 
-const TOTAL_STEPS = 6;
+const TOTAL_STEPS = 10;
 
 const CustomerOnboardingScreen = () => {
 
   const navigation = useNavigation<any>();
+  const route = useRoute<any>();
   const { theme: { themeColor } } = useTheme();
   const styles = getStyles(themeColor);
   const [step, setStep] = useState(1);
 
   const [customerData, setCustomerData] = useState({
+    // Loan Type (selected on the previous "लोन का प्रकार चुनें" screen)
+    loanTypeCode: route.params?.loanTypeCode || "",
+    loanTypeName: route.params?.loanTypeName || "",
+
     // Customer Master
     fullName: "",
     dob: "",
@@ -74,14 +84,15 @@ const CustomerOnboardingScreen = () => {
     bankDocType: "",
     bankDocumentUri: "",
 
-    // KYC (PAN/Aadhaar already captured in Customer Master, not repeated here)
-    passport: "",
-    dl: "",
-    voterId: "",
-    ckyc: "",
-    kycDocType: "",
-    kycDocFrontUri: "",
-    kycDocBackUri: "",
+    // Family Details
+    familyName: "",
+    familyRelation: "",
+    familyDob: "",
+    familyMobile: "",
+    familyAadhaar: "",
+    familyDocType: "",
+    familyDocFrontUri: "",
+    familyDocBackUri: "",
 
     // Loan Purpose & Repayment Capacity
     loanPurpose: "",
@@ -92,6 +103,59 @@ const CustomerOnboardingScreen = () => {
     householdExpenses: "",
     dependents: "",
     otherIncomeSource: "",
+
+    // Income Assessment
+    iaOccupationType: "",
+    iaEmployerName: "",
+    iaMonthlyIncome: "",
+    iaMonthlyExpenses: "",
+    iaOtherIncomeSources: "",
+    iaEarningMembers: "",
+    iaTotalHouseholdIncome: "",
+    iaNetDisposableIncome: "",
+    iaLoanEligibility: "",
+    iaIncomeProofUri: "",
+    iaBankStatementUri: "",
+
+    // GRT (Group Recognition Test)
+    grtGroupName: "",
+    grtMemberCount: "",
+    grtConductedBy: "",
+    grtDate: "",
+    grtLoanPurposeUnderstanding: "",
+    grtRepaymentUnderstanding: "",
+    grtGroupLiabilityUnderstanding: "",
+    grtMembersPresent: "",
+    grtScore: "",
+    grtResult: "",
+    grtRemarks: "",
+    grtPhotoUri: "",
+
+    // Centre Formation
+    cfCentreName: "",
+    cfCentreCode: "",
+    cfLeaderName: "",
+    cfGroupCount: "",
+    cfMemberCount: "",
+    cfMeetingDay: "",
+    cfMeetingTime: "",
+    cfMeetingPlace: "",
+    cfFormationDate: "",
+    cfFieldOfficerName: "",
+    cfPhotoUri: "",
+
+    // House Verification
+    hvApplicantName: "",
+    hvVerificationDate: "",
+    hvVerifiedBy: "",
+    hvHouseType: "",
+    hvOwnershipProofType: "",
+    hvDurationOfStay: "",
+    hvAddressMatches: "",
+    hvNeighborVerificationName: "",
+    hvGpsCaptured: "",
+    hvHousePhotoUri: "",
+    hvLandmarkPhotoUri: "",
 
     // Review & Submit
     declarationAccepted: "",
@@ -147,12 +211,24 @@ const CustomerOnboardingScreen = () => {
         return "Bank Details";
 
       case 4:
-        return "KYC Details";
+        return "Family Details";
 
       case 5:
         return "Loan Requirement";
 
       case 6:
+        return "Income Assessment";
+
+      case 7:
+        return "GRT (Group Recognition Test)";
+
+      case 8:
+        return "Centre Formation";
+
+      case 9:
+        return "House Verification";
+
+      case 10:
         return "Review & Submit";
 
       default:
@@ -169,15 +245,27 @@ const CustomerOnboardingScreen = () => {
         return "Next: Bank Details";
 
       case 3:
-        return "Next: KYC";
+        return "Next: Family Details";
 
       case 4:
         return "Next: Loan Requirement";
 
       case 5:
-        return "Next: Review";
+        return "Next: Income Assessment";
 
       case 6:
+        return "Next: GRT";
+
+      case 7:
+        return "Next: Centre Formation";
+
+      case 8:
+        return "Next: House Verification";
+
+      case 9:
+        return "Next: Review";
+
+      case 10:
         return "Submit";
 
       default:
@@ -213,7 +301,7 @@ const CustomerOnboardingScreen = () => {
 
       case 4:
         return (
-          <KYCDetails
+          <FamilyDetails
             data={customerData}
             updateData={updateData}
           />
@@ -228,6 +316,38 @@ const CustomerOnboardingScreen = () => {
         );
 
       case 6:
+        return (
+          <IncomeAssessment
+            data={customerData}
+            updateData={updateData}
+          />
+        );
+
+      case 7:
+        return (
+          <GRTDetails
+            data={customerData}
+            updateData={updateData}
+          />
+        );
+
+      case 8:
+        return (
+          <CentreFormationStep
+            data={customerData}
+            updateData={updateData}
+          />
+        );
+
+      case 9:
+        return (
+          <HouseVerification
+            data={customerData}
+            updateData={updateData}
+          />
+        );
+
+      case 10:
         return (
           <ReviewSubmit
             data={customerData}
@@ -257,6 +377,15 @@ const CustomerOnboardingScreen = () => {
         <Text style={styles.title}>
           {renderTitle()}
         </Text>
+
+        {!!customerData.loanTypeName && (
+          <View style={styles.loanTypeChip}>
+            <Ionicons name="pricetag-outline" size={13} color={themeColor.successColor} />
+            <Text style={styles.loanTypeChipText}>
+              {customerData.loanTypeName}
+            </Text>
+          </View>
+        )}
 
         <StepProgressBar
           currentStep={step}

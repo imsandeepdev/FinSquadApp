@@ -19,6 +19,24 @@ StyleSheet.create({
     alignItems: "flex-end",
   },
 
+  loanTypeChip: {
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "center",
+    backgroundColor: AppColor.secLightAppColor,
+    paddingHorizontal: responsiveSize(12),
+    paddingVertical: responsiveSize(5),
+    borderRadius: responsiveSize(20),
+    marginTop: responsiveSize(6),
+  },
+
+  loanTypeChipText: {
+    color: AppColor.successColor,
+    fontWeight: "600",
+    fontSize: appSize.font_Small,
+    marginLeft: responsiveSize(5),
+  },
+
   stepText: {
     color: AppColor.primaryText,
     fontWeight: "700",

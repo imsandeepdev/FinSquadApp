@@ -143,7 +143,7 @@ const navigation = useNavigation<any>();
     </ScrollView>
      <FloatingButton
         onPress={() => {
-          navigation.navigate(NAVIGATE_NAME.CUSTOMER_ONBOARDING_SCREEN)
+          navigation.navigate(NAVIGATE_NAME.LOAN_TYPE_SELECTION_SCREEN)
         }}
       />
       <BottomSummary

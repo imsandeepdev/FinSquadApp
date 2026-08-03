@@ -4,13 +4,15 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import Login from '../screens/Login';
 import Register from '../screens/Register';
-import Dashboard from '../screens/Dashboard';
 import AIWealthCoachScreen from '../screens/AIBased';
 import {navigationRef} from './navigationService';
 import CustomerOnboardingScreen from '../screens/CustomerOnBoard';
 import { BottomTabs } from '../components';
 import COBListScreen from '../screens/COBList';
 import LoanTypeSelectionScreen from '../screens/LoanTypeSelection';
+import LoanApprovalScreen from '../screens/LoanApproval';
+import PreDisbursementScreen from '../screens/PreDisbursement';
+import RepaymentScreen from '../screens/Repayment';
 import { NAVIGATE_NAME } from '../utils/const';
 
 
@@ -58,6 +60,21 @@ const AppNavigator = () => {
         <Stack.Screen
           name={NAVIGATE_NAME.LOAN_TYPE_SELECTION_SCREEN}
           component={LoanTypeSelectionScreen}
+        />
+
+        <Stack.Screen
+          name={NAVIGATE_NAME.LOAN_APPROVAL_SCREEN}
+          component={LoanApprovalScreen}
+        />
+
+        <Stack.Screen
+          name={NAVIGATE_NAME.PRE_DISBURSEMENT_SCREEN}
+          component={PreDisbursementScreen}
+        />
+
+        <Stack.Screen
+          name={NAVIGATE_NAME.REPAYMENT_SCREEN}
+          component={RepaymentScreen}
         />
 
       </Stack.Navigator>

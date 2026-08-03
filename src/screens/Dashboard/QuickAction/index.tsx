@@ -2,8 +2,6 @@ import React from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
-  StyleSheet,
   Pressable,
 } from "react-native";
 
@@ -55,6 +53,27 @@ const actions = [
     subtitle: "View Reports and Analytics",
     color: "#0EA5E9",
     navigate: NAVIGATE_NAME.COB_LIST_SCREEN
+  },
+  {
+    icon: "checkmark-done", // Loan approval / sanction
+    title: "Loan Approval",
+    subtitle: "Review Sanctioned Loan Offers",
+    color: "#16A34A",
+    navigate: NAVIGATE_NAME.LOAN_APPROVAL_SCREEN
+  },
+  {
+    icon: "wallet", // Pre-disbursement setup
+    title: "Pre-Disbursement",
+    subtitle: "Verify & Confirm Disbursement",
+    color: "#7C3AED",
+    navigate: NAVIGATE_NAME.PRE_DISBURSEMENT_SCREEN
+  },
+  {
+    icon: "sync", // Repayment / EMI
+    title: "Repayment",
+    subtitle: "Track & Pay EMI Installments",
+    color: "#EA580C",
+    navigate: NAVIGATE_NAME.REPAYMENT_SCREEN
   },
 ];
 

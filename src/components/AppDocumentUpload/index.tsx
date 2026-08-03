@@ -80,7 +80,7 @@ const AppDocumentUpload: React.FC<AppDocumentUploadProps> = ({
   const openCamera = (onSelected: (uri: string) => void) => {
     try {
       launchCamera(PICKER_OPTIONS, r => handlePickerResponse(r, onSelected));
-    } catch (e) {
+    } catch {
       Alert.alert("Camera unavailable", NATIVE_MODULE_MISSING_MSG);
     }
   };
@@ -88,7 +88,7 @@ const AppDocumentUpload: React.FC<AppDocumentUploadProps> = ({
   const openGallery = (onSelected: (uri: string) => void) => {
     try {
       launchImageLibrary(PICKER_OPTIONS, r => handlePickerResponse(r, onSelected));
-    } catch (e) {
+    } catch {
       Alert.alert("Gallery unavailable", NATIVE_MODULE_MISSING_MSG);
     }
   };

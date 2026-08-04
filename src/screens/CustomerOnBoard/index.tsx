@@ -4,7 +4,6 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
-  Dimensions,
   Alert,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -17,14 +16,20 @@ import LoanPurposeDetails from "./LoanPurposeDetails";
 import IncomeAssessment from "./IncomeAssessment";
 import GRTDetails from "./GRTDetails";
 import CentreFormationStep from "./CentreFormationStep";
+import GRTApproval from "./GRTApproval";
 import HouseVerification from "./HouseVerification";
+import FIApproval from "./FIApproval";
 import ReviewSubmit from "./ReviewSubmit";
 import { getStyles } from "./styles";
 import { useTheme } from "../../utils/provider/themeProvider";
 import {useNavigation, useRoute} from '@react-navigation/native';
 
-
-const TOTAL_STEPS = 10;
+interface StepDef {
+  key: string;
+  title: string;
+  nextLabel: string;
+  Component: React.ComponentType<{ data: any; updateData: (key: string, value: string) => void }>;
+}
 
 const CustomerOnboardingScreen = () => {
 
@@ -38,6 +43,8 @@ const CustomerOnboardingScreen = () => {
     // Loan Type (selected on the previous "लोन का प्रकार चुनें" screen)
     loanTypeCode: route.params?.loanTypeCode || "",
     loanTypeName: route.params?.loanTypeName || "",
+    // Drives the branching below: GRT path vs FI path.
+    isMicrofinance: route.params?.isMicrofinance ? "true" : "false",
 
     // Customer Master
     fullName: "",
@@ -117,7 +124,7 @@ const CustomerOnboardingScreen = () => {
     iaIncomeProofUri: "",
     iaBankStatementUri: "",
 
-    // GRT (Group Recognition Test)
+    // GRT (Group Recognition Test) -- microfinance path only
     grtGroupName: "",
     grtMemberCount: "",
     grtConductedBy: "",
@@ -131,7 +138,7 @@ const CustomerOnboardingScreen = () => {
     grtRemarks: "",
     grtPhotoUri: "",
 
-    // Centre Formation
+    // Centre Formation -- microfinance path only
     cfCentreName: "",
     cfCentreCode: "",
     cfLeaderName: "",
@@ -144,7 +151,10 @@ const CustomerOnboardingScreen = () => {
     cfFieldOfficerName: "",
     cfPhotoUri: "",
 
-    // House Verification
+    // GRT Approval -- microfinance path only
+    grtApprovalStatus: "",
+
+    // FI / House Verification -- non-microfinance path only
     hvApplicantName: "",
     hvVerificationDate: "",
     hvVerifiedBy: "",
@@ -157,9 +167,14 @@ const CustomerOnboardingScreen = () => {
     hvHousePhotoUri: "",
     hvLandmarkPhotoUri: "",
 
+    // FI Approval -- non-microfinance path only
+    fiApprovalStatus: "",
+
     // Review & Submit
     declarationAccepted: "",
   });
+
+  const isMicrofinance = customerData.isMicrofinance === "true";
 
   const updateData = (key: string, value: string) => {
     setCustomerData(prev => ({
@@ -167,6 +182,39 @@ const CustomerOnboardingScreen = () => {
       [key]: value,
     }));
   };
+
+  // Steps 1-6 are common to every loan type. After Income Assessment, the
+  // flow branches per the loan application process doc:
+  //   Microfinance loan     -> GRT & Centre Formation -> GRT approval
+  //   Not a microfinance loan -> FI verification -> FI approval
+  // Both paths converge back into Review & Submit.
+  const STEPS: StepDef[] = [
+    { key: "customerMaster", title: "Customer Onboarding", nextLabel: "Next: Nominee", Component: CustomerMaster },
+    { key: "nominee", title: "Nominee & Co-Applicant", nextLabel: "Next: Bank Details", Component: NomineeDetails },
+    { key: "bank", title: "Bank Details", nextLabel: "Next: Family Details", Component: BankDetails },
+    { key: "family", title: "Family Details", nextLabel: "Next: Loan Requirement", Component: FamilyDetails },
+    { key: "loanPurpose", title: "Loan Requirement", nextLabel: "Next: Income Assessment", Component: LoanPurposeDetails },
+    {
+      key: "income",
+      title: "Income Assessment",
+      nextLabel: isMicrofinance ? "Next: GRT" : "Next: FI Verification",
+      Component: IncomeAssessment,
+    },
+    ...(isMicrofinance
+      ? [
+          { key: "grt", title: "GRT (Group Recognition Test)", nextLabel: "Next: Centre Formation", Component: GRTDetails },
+          { key: "centreFormation", title: "Centre Formation", nextLabel: "Next: GRT Approval", Component: CentreFormationStep },
+          { key: "grtApproval", title: "GRT Approval", nextLabel: "Next: Review", Component: GRTApproval },
+        ]
+      : [
+          { key: "fiVerification", title: "FI Verification", nextLabel: "Next: FI Approval", Component: HouseVerification },
+          { key: "fiApproval", title: "FI Approval", nextLabel: "Next: Review", Component: FIApproval },
+        ]),
+    { key: "review", title: "Review & Submit", nextLabel: "Submit", Component: ReviewSubmit },
+  ];
+
+  const TOTAL_STEPS = STEPS.length;
+  const currentStepDef = STEPS[step - 1];
 
   const nextStep = () => {
     if (step < TOTAL_STEPS) {
@@ -199,165 +247,16 @@ const CustomerOnboardingScreen = () => {
     }
   };
 
-  const renderTitle = () => {
-    switch (step) {
-      case 1:
-        return "Customer Onboarding";
-
-      case 2:
-        return "Nominee & Co-Applicant";
-
-      case 3:
-        return "Bank Details";
-
-      case 4:
-        return "Family Details";
-
-      case 5:
-        return "Loan Requirement";
-
-      case 6:
-        return "Income Assessment";
-
-      case 7:
-        return "GRT (Group Recognition Test)";
-
-      case 8:
-        return "Centre Formation";
-
-      case 9:
-        return "House Verification";
-
-      case 10:
-        return "Review & Submit";
-
-      default:
-        return "";
-    }
-  };
-
-  const nextButtonTitle = () => {
-    switch (step) {
-      case 1:
-        return "Next: Nominee";
-
-      case 2:
-        return "Next: Bank Details";
-
-      case 3:
-        return "Next: Family Details";
-
-      case 4:
-        return "Next: Loan Requirement";
-
-      case 5:
-        return "Next: Income Assessment";
-
-      case 6:
-        return "Next: GRT";
-
-      case 7:
-        return "Next: Centre Formation";
-
-      case 8:
-        return "Next: House Verification";
-
-      case 9:
-        return "Next: Review";
-
-      case 10:
-        return "Submit";
-
-      default:
-        return "Next";
-    }
-  };
-
   const renderStep = () => {
-    switch (step) {
-      case 1:
-        return (
-          <CustomerMaster
-            data={customerData}
-            updateData={updateData}
-          />
-        );
+    const StepComponent = currentStepDef?.Component;
+    if (!StepComponent) return null;
 
-      case 2:
-        return (
-          <NomineeDetails
-            data={customerData}
-            updateData={updateData}
-          />
-        );
-
-      case 3:
-        return (
-          <BankDetails
-            data={customerData}
-            updateData={updateData}
-          />
-        );
-
-      case 4:
-        return (
-          <FamilyDetails
-            data={customerData}
-            updateData={updateData}
-          />
-        );
-
-      case 5:
-        return (
-          <LoanPurposeDetails
-            data={customerData}
-            updateData={updateData}
-          />
-        );
-
-      case 6:
-        return (
-          <IncomeAssessment
-            data={customerData}
-            updateData={updateData}
-          />
-        );
-
-      case 7:
-        return (
-          <GRTDetails
-            data={customerData}
-            updateData={updateData}
-          />
-        );
-
-      case 8:
-        return (
-          <CentreFormationStep
-            data={customerData}
-            updateData={updateData}
-          />
-        );
-
-      case 9:
-        return (
-          <HouseVerification
-            data={customerData}
-            updateData={updateData}
-          />
-        );
-
-      case 10:
-        return (
-          <ReviewSubmit
-            data={customerData}
-            updateData={updateData}
-          />
-        );
-
-      default:
-        return null;
-    }
+    return (
+      <StepComponent
+        data={customerData}
+        updateData={updateData}
+      />
+    );
   };
 
   return (
@@ -375,7 +274,7 @@ const CustomerOnboardingScreen = () => {
         </View>
 
         <Text style={styles.title}>
-          {renderTitle()}
+          {currentStepDef?.title || ""}
         </Text>
 
         {!!customerData.loanTypeName && (
@@ -419,7 +318,7 @@ const CustomerOnboardingScreen = () => {
           activeOpacity={isSubmitBlocked ? 1 : 0.7}
         >
           <Text style={styles.nextText}>
-            {nextButtonTitle()}
+            {currentStepDef?.nextLabel || "Next"}
           </Text>
         </TouchableOpacity>
         </View>
@@ -429,4 +328,3 @@ const CustomerOnboardingScreen = () => {
 };
 
 export default CustomerOnboardingScreen;
-

@@ -185,6 +185,17 @@ export const getStyles = (themeColor: ThemeColorType) =>
     declineButtonText: {
       color: themeColor.errorColor,
     },
+
+    disabledButton: {
+      opacity: 0.5,
+    },
+
+    roleNote: {
+      fontSize: responsiveSize(11),
+      color: themeColor.placeHolder,
+      marginTop: responsiveSize(10),
+      textAlign: "center",
+    },
   });
 
 export default getStyles;

@@ -30,6 +30,7 @@ const LoanTypeSelectionScreen = () => {
     navigation.navigate(NAVIGATE_NAME.CUSTOMER_ONBOARDING_SCREEN, {
       loanTypeCode: item.code,
       loanTypeName: item.name,
+      isMicrofinance: item.isMicrofinance,
     });
   };
 

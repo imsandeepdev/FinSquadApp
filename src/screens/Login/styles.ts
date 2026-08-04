@@ -15,6 +15,55 @@ export const getStyles = (AppColor: ThemeColorType) =>
         flex: 1,
         marginTop: responsiveSize(20),
     },
+    roleLabel: {
+        fontSize: responsiveSize(13),
+        fontWeight: "600",
+        color: AppColor.primaryText,
+        marginBottom: responsiveSize(8),
+        marginTop: responsiveSize(4),
+    },
+
+    roleRow: {
+        flexDirection: "row",
+        marginBottom: responsiveSize(16),
+    },
+
+    roleCard: {
+        flex: 1,
+        alignItems: "center",
+        paddingVertical: responsiveSize(12),
+        borderRadius: responsiveSize(12),
+        borderWidth: 1.5,
+        borderColor: AppColor.borderColor,
+        backgroundColor: AppColor.cardColor,
+        marginRight: responsiveSize(10),
+    },
+
+    roleCardActive: {
+        borderColor: AppColor.appColor,
+        backgroundColor: AppColor.secLightAppColor,
+    },
+
+    roleCardIconWrap: {
+        width: responsiveSize(34),
+        height: responsiveSize(34),
+        borderRadius: responsiveSize(17),
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: AppColor.appLightColor,
+        marginBottom: responsiveSize(6),
+    },
+
+    roleCardText: {
+        fontSize: responsiveSize(13),
+        fontWeight: "700",
+        color: AppColor.primaryText,
+    },
+
+    roleCardTextActive: {
+        color: AppColor.appColor,
+    },
+
     rememberMeRow: {
         flexDirection: "row",
         justifyContent: "space-between",

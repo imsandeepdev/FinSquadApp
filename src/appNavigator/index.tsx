@@ -22,7 +22,7 @@ const AppNavigator = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator
-        initialRouteName="MainApp"
+        initialRouteName={NAVIGATE_NAME.LOGIN}
         screenOptions={{
           headerShown: false,
         }}>

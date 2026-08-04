@@ -14,4 +14,10 @@ export interface LoanTypeOption {
   badgeIcon?: string;
   badgeText?: string;
   accent: LoanTypeAccent;
+  /**
+   * Drives the branching in the Customer Onboarding assessment phase:
+   * true  -> GRT & Centre Formation -> GRT approval
+   * false -> FI verification -> FI approval
+   */
+  isMicrofinance: boolean;
 }

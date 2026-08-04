@@ -19,6 +19,7 @@ export const LOAN_TYPES: LoanTypeOption[] = [
     badgeIcon: "flash-outline",
     badgeText: "Disbursed in 24 hours",
     accent: PURPLE,
+    isMicrofinance: false,
   },
   {
     id: "C02",
@@ -30,6 +31,7 @@ export const LOAN_TYPES: LoanTypeOption[] = [
     badgeIcon: "flash-outline",
     badgeText: "Disbursed in 48 hours",
     accent: TEAL,
+    isMicrofinance: false,
   },
   {
     id: "C03",
@@ -41,6 +43,7 @@ export const LOAN_TYPES: LoanTypeOption[] = [
     badgeIcon: "location-outline",
     badgeText: "Branch only",
     accent: AMBER,
+    isMicrofinance: false,
   },
   {
     id: "C04",
@@ -52,6 +55,7 @@ export const LOAN_TYPES: LoanTypeOption[] = [
     badgeIcon: "flash-outline",
     badgeText: "Disbursed in 24 hours",
     accent: BROWN,
+    isMicrofinance: false,
   },
   {
     id: "C05",
@@ -63,6 +67,7 @@ export const LOAN_TYPES: LoanTypeOption[] = [
     badgeIcon: "people-outline",
     badgeText: "Centre meeting required",
     accent: MAROON,
+    isMicrofinance: true,
   },
   {
     id: "C06",
@@ -74,6 +79,7 @@ export const LOAN_TYPES: LoanTypeOption[] = [
     badgeIcon: "document-text-outline",
     badgeText: "Property documents required",
     accent: BLUE,
+    isMicrofinance: false,
   },
   {
     id: "C07",
@@ -85,6 +91,7 @@ export const LOAN_TYPES: LoanTypeOption[] = [
     badgeIcon: "school-outline",
     badgeText: "Admission proof required",
     accent: GREEN,
+    isMicrofinance: false,
   },
   {
     id: "C08",
@@ -96,6 +103,7 @@ export const LOAN_TYPES: LoanTypeOption[] = [
     badgeIcon: "document-text-outline",
     badgeText: "Property documents required",
     accent: PURPLE,
+    isMicrofinance: false,
   },
   {
     id: "C09",
@@ -107,6 +115,7 @@ export const LOAN_TYPES: LoanTypeOption[] = [
     badgeIcon: "leaf-outline",
     badgeText: "Kisan Credit Card linked",
     accent: TEAL,
+    isMicrofinance: false,
   },
   {
     id: "C10",
@@ -118,5 +127,6 @@ export const LOAN_TYPES: LoanTypeOption[] = [
     badgeIcon: "flash-outline",
     badgeText: "Disbursed in 48 hours",
     accent: AMBER,
+    isMicrofinance: false,
   },
 ];

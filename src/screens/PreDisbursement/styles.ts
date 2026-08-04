@@ -168,6 +168,17 @@ export const getStyles = (themeColor: ThemeColorType) =>
       marginHorizontal: 0,
       marginTop: responsiveSize(6),
     },
+
+    disabledButton: {
+      opacity: 0.5,
+    },
+
+    roleNote: {
+      fontSize: responsiveSize(11),
+      color: themeColor.placeHolder,
+      marginTop: responsiveSize(10),
+      textAlign: "center",
+    },
   });
 
 export default getStyles;

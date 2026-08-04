@@ -62,6 +62,10 @@ const ReviewSubmit: React.FC<Props> = ({
 
   const centre = centres.find((c) => c.code === data.centreCode);
   const hasCoApplicant = !!(data.coName || data.coRelation || data.coDob || data.coMobile);
+  const isMicrofinance = data.isMicrofinance === "true";
+  const approvalStatus = isMicrofinance
+    ? data.grtApprovalStatus || "Pending"
+    : data.fiApprovalStatus || "Pending";
 
   return (
     <ScrollView
@@ -191,58 +195,70 @@ const ReviewSubmit: React.FC<Props> = ({
 
       </Card>
 
-      {/* GRT */}
+      {isMicrofinance ? (
+        <>
+          {/* GRT */}
 
-      <Card title="GRT (Group Recognition Test)">
+          <Card title="GRT (Group Recognition Test)">
 
-        {Item("Group Name", data.grtGroupName)}
-        {Item("No. of Group Members", data.grtMemberCount)}
-        {Item("GRT Conducted By", data.grtConductedBy)}
-        {Item("GRT Date", data.grtDate)}
-        {Item("Loan Purpose Understanding", data.grtLoanPurposeUnderstanding)}
-        {Item("Repayment Terms Understanding", data.grtRepaymentUnderstanding)}
-        {Item("Group Liability Understanding", data.grtGroupLiabilityUnderstanding)}
-        {Item("Members Present", data.grtMembersPresent)}
-        {Item("GRT Score", data.grtScore)}
-        {Item("GRT Result", data.grtResult)}
-        {Item("Remarks", data.grtRemarks)}
-        {Item("GRT Photo", singleDocStatus(data.grtPhotoUri))}
+            {Item("Group Name", data.grtGroupName)}
+            {Item("No. of Group Members", data.grtMemberCount)}
+            {Item("GRT Conducted By", data.grtConductedBy)}
+            {Item("GRT Date", data.grtDate)}
+            {Item("Loan Purpose Understanding", data.grtLoanPurposeUnderstanding)}
+            {Item("Repayment Terms Understanding", data.grtRepaymentUnderstanding)}
+            {Item("Group Liability Understanding", data.grtGroupLiabilityUnderstanding)}
+            {Item("Members Present", data.grtMembersPresent)}
+            {Item("GRT Score", data.grtScore)}
+            {Item("GRT Result", data.grtResult)}
+            {Item("Remarks", data.grtRemarks)}
+            {Item("GRT Photo", singleDocStatus(data.grtPhotoUri))}
 
-      </Card>
+          </Card>
 
-      {/* CENTRE FORMATION */}
+          {/* CENTRE FORMATION */}
 
-      <Card title="Centre Formation">
+          <Card title="Centre Formation">
 
-        {Item("Centre Name", data.cfCentreName)}
-        {Item("Centre Code", data.cfCentreCode)}
-        {Item("Centre Leader Name", data.cfLeaderName)}
-        {Item("No. of Groups", data.cfGroupCount)}
-        {Item("No. of Members", data.cfMemberCount)}
-        {Item("Meeting Day", data.cfMeetingDay)}
-        {Item("Meeting Time", data.cfMeetingTime)}
-        {Item("Meeting Place", data.cfMeetingPlace)}
-        {Item("Formation Date", data.cfFormationDate)}
-        {Item("Field Officer", data.cfFieldOfficerName)}
-        {Item("Centre Photo", singleDocStatus(data.cfPhotoUri))}
+            {Item("Centre Name", data.cfCentreName)}
+            {Item("Centre Code", data.cfCentreCode)}
+            {Item("Centre Leader Name", data.cfLeaderName)}
+            {Item("No. of Groups", data.cfGroupCount)}
+            {Item("No. of Members", data.cfMemberCount)}
+            {Item("Meeting Day", data.cfMeetingDay)}
+            {Item("Meeting Time", data.cfMeetingTime)}
+            {Item("Meeting Place", data.cfMeetingPlace)}
+            {Item("Formation Date", data.cfFormationDate)}
+            {Item("Field Officer", data.cfFieldOfficerName)}
+            {Item("Centre Photo", singleDocStatus(data.cfPhotoUri))}
 
-      </Card>
+          </Card>
+        </>
+      ) : (
+        /* FI / HOUSE VERIFICATION */
 
-      {/* HOUSE VERIFICATION */}
+        <Card title="FI Verification">
 
-      <Card title="House Verification">
+          {Item("Applicant Name", data.hvApplicantName)}
+          {Item("Verification Date", data.hvVerificationDate)}
+          {Item("Verified By", data.hvVerifiedBy)}
+          {Item("House Type", data.hvHouseType)}
+          {Item("Ownership Proof Type", data.hvOwnershipProofType)}
+          {Item("Duration of Stay", data.hvDurationOfStay)}
+          {Item("Address Matches Application", data.hvAddressMatches)}
+          {Item("Neighbor Verification Name", data.hvNeighborVerificationName)}
+          {Item("GPS Location Captured", data.hvGpsCaptured)}
+          {Item("House Photo", singleDocStatus(data.hvHousePhotoUri))}
+          {Item("Landmark Photo", singleDocStatus(data.hvLandmarkPhotoUri))}
 
-        {Item("Applicant Name", data.hvApplicantName)}
-        {Item("Verification Date", data.hvVerificationDate)}
-        {Item("Verified By", data.hvVerifiedBy)}
-        {Item("House Type", data.hvHouseType)}
-        {Item("Ownership Proof Type", data.hvOwnershipProofType)}
-        {Item("Duration of Stay", data.hvDurationOfStay)}
-        {Item("Address Matches Application", data.hvAddressMatches)}
-        {Item("Neighbor Verification Name", data.hvNeighborVerificationName)}
-        {Item("GPS Location Captured", data.hvGpsCaptured)}
-        {Item("House Photo", singleDocStatus(data.hvHousePhotoUri))}
-        {Item("Landmark Photo", singleDocStatus(data.hvLandmarkPhotoUri))}
+        </Card>
+      )}
+
+      {/* APPROVAL */}
+
+      <Card title={isMicrofinance ? "GRT Approval" : "FI Approval"}>
+
+        {Item("Approval Status", approvalStatus)}
 
       </Card>
 

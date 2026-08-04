@@ -4,6 +4,7 @@ import LinearGradient from "react-native-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { AppButton, StoryScreen } from "../../components";
 import { useTheme } from "../../utils/provider/themeProvider";
+import { useRole, ROLE_LABELS } from "../../utils/provider/roleProvider";
 import { reset } from "../../appNavigator/navigationService";
 import { NAVIGATE_NAME } from "../../utils/const";
 import { getStyles } from "./styles";
@@ -18,7 +19,9 @@ import {
 const ProfileScreen = () => {
   const { theme: { themeColor } } = useTheme();
   const styles = getStyles(themeColor);
+  const { role } = useRole();
 
+  const roleLabel = role ? ROLE_LABELS[role] : AGENT_PROFILE.role;
   const gradientColors = [themeColor.appColor, themeColor.appColor, themeColor.secAppColor];
 
   const onMenuPress = (item: ProfileMenuItem) => {
@@ -71,7 +74,7 @@ const ProfileScreen = () => {
                 </Text>
 
                 <Text style={styles.heroRole} numberOfLines={1}>
-                  {AGENT_PROFILE.role}
+                  {roleLabel}
                 </Text>
 
                 <View style={styles.empChip}>

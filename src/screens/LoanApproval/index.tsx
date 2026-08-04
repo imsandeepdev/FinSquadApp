@@ -4,6 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { AppHeader, AppButton, StoryScreen } from "../../components";
 import { useTheme } from "../../utils/provider/themeProvider";
+import { useRole } from "../../utils/provider/roleProvider";
 import { getStyles } from "./styles";
 import { LOAN_APPROVAL_DATA } from "./const";
 
@@ -11,6 +12,7 @@ const LoanApprovalScreen = () => {
   const navigation = useNavigation<any>();
   const { theme: { themeColor } } = useTheme();
   const styles = getStyles(themeColor);
+  const { isBranchManager } = useRole();
 
   const { loanId, status, approvedAmount, breakdown, terms, documents } = LOAN_APPROVAL_DATA;
 
@@ -127,15 +129,23 @@ const LoanApprovalScreen = () => {
           <AppButton
             title="Accept & proceed"
             onPress={onAccept}
-            containerStyle={styles.acceptButton}
+            disabled={!isBranchManager}
+            containerStyle={[styles.acceptButton, !isBranchManager && styles.disabledButton]}
           />
 
           <AppButton
             title="Decline offer"
             onPress={onDecline}
-            containerStyle={styles.declineButton}
+            disabled={!isBranchManager}
+            containerStyle={[styles.declineButton, !isBranchManager && styles.disabledButton]}
             titleTextStyle={styles.declineButtonText}
           />
+
+          {!isBranchManager && (
+            <Text style={styles.roleNote}>
+              Only a Branch Manager can accept or decline this loan offer.
+            </Text>
+          )}
         </View>
 
       </ScrollView>

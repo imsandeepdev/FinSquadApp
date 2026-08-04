@@ -4,6 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { AppHeader, AppButton, StoryScreen } from "../../components";
 import { useTheme } from "../../utils/provider/themeProvider";
+import { useRole } from "../../utils/provider/roleProvider";
 import { getStyles } from "./styles";
 import { PRE_DISBURSEMENT_DATA } from "./const";
 
@@ -11,6 +12,7 @@ const PreDisbursementScreen = () => {
   const navigation = useNavigation<any>();
   const { theme: { themeColor } } = useTheme();
   const styles = getStyles(themeColor);
+  const { isBranchManager } = useRole();
   const [consentChecked, setConsentChecked] = useState(false);
 
   const { loanId, setupProgress, checklist, account } = PRE_DISBURSEMENT_DATA;
@@ -19,6 +21,8 @@ const PreDisbursementScreen = () => {
     status === "Done" ? themeColor.successColor : themeColor.infoColor;
 
   const onConfirm = () => {
+    if (!isBranchManager) return;
+
     if (!consentChecked) {
       Alert.alert(
         "Consent required",
@@ -126,7 +130,7 @@ const PreDisbursementScreen = () => {
 
           <Pressable
             style={styles.consentRow}
-            onPress={() => setConsentChecked((prev) => !prev)}
+            onPress={() => isBranchManager && setConsentChecked((prev) => !prev)}
           >
             <View style={[styles.checkboxBox, consentChecked && styles.checkboxBoxChecked]}>
               {consentChecked && (
@@ -143,8 +147,15 @@ const PreDisbursementScreen = () => {
         <AppButton
           title="Confirm disbursement"
           onPress={onConfirm}
-          containerStyle={styles.confirmButton}
+          disabled={!isBranchManager}
+          containerStyle={[styles.confirmButton, !isBranchManager && styles.disabledButton]}
         />
+
+        {!isBranchManager && (
+          <Text style={styles.roleNote}>
+            Only a Branch Manager can authorize and confirm disbursement.
+          </Text>
+        )}
 
       </ScrollView>
     </StoryScreen>

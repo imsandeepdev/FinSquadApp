@@ -78,6 +78,7 @@ const BottomTabs: React.FC = () => {
   const styles = getStyles(themeColor);
   return (
     <Tab.Navigator
+      initialRouteName="Dashboard"
       screenOptions={({route}: {route: any}) => ({
         headerShown: false,
         tabBarShowLabel: false,

@@ -13,6 +13,8 @@ import { ParamListBase } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Dashboard from '../../screens/Dashboard';
 import AIWealthCoachScreen from '../../screens/AIBased';
+import ProfileScreen from '../../screens/Profile';
+import ReportScreen from '../../screens/Report';
 import { getStyles } from './styles';
 import { useTheme } from '../../utils/provider/themeProvider';
 import { responsiveSize } from '../../res';
@@ -26,7 +28,7 @@ export interface BottomTabParamList extends ParamListBase {
   Dashboard: undefined;
   Clients: undefined;
   AI: undefined;
-  Tasks: undefined;
+  Report: undefined;
   Account: undefined;
 }
 
@@ -37,18 +39,6 @@ const Tab:any = createBottomTabNavigator<BottomTabParamList>();
 ------------------------------ */
 
 const ClientScreen: React.FC = () => {
-  const { theme: { themeColor } } = useTheme();
-  const styles = getStyles(themeColor);
-  return <View style={styles.screen} />;
-};
-
-const TaskScreen: React.FC = () => {
-  const { theme: { themeColor } } = useTheme();
-  const styles = getStyles(themeColor);
-  return <View style={styles.screen} />;
-};
-
-const AccountScreen: React.FC = () => {
   const { theme: { themeColor } } = useTheme();
   const styles = getStyles(themeColor);
   return <View style={styles.screen} />;
@@ -115,10 +105,10 @@ const BottomTabs: React.FC = () => {
                 : 'grid-outline';
               break;
 
-            case 'Tasks':
+            case 'Report':
               iconName = focused
-                ? 'checkbox'
-                : 'checkbox-outline';
+                ? 'bar-chart'
+                : 'bar-chart-outline';
               break;
 
             case 'Account':
@@ -165,13 +155,13 @@ const BottomTabs: React.FC = () => {
       />
 
       <Tab.Screen
-        name="Tasks"
-        component={TaskScreen}
+        name="Report"
+        component={ReportScreen}
       />
 
       <Tab.Screen
         name="Account"
-        component={AccountScreen}
+        component={ProfileScreen}
       />
     </Tab.Navigator>
   );

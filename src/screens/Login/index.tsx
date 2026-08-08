@@ -9,18 +9,28 @@ import {
   TextInput,
 } from "react-native";
 
-import { AppButton, AppTextInput, ResetPasswordFooter, StoryScreen } from "../../components";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { AppButton, AppTextInput, StoryScreen } from "../../components";
 import { getStyles } from './styles';
 import { useTheme } from "../../utils/provider/themeProvider";
-import { responsiveSize } from "../../res";
+import { useRole, UserRole } from "../../utils/provider/roleProvider";
 import {useNavigation} from '@react-navigation/native';
+
+const ROLE_OPTIONS: { id: UserRole; label: string; icon: string }[] = [
+  { id: "FIELD_OFFICER", label: "Field Officer", icon: "walk-outline" },
+  { id: "CREDIT_OFFICER", label: "Credit Officer", icon: "shield-checkmark-outline" },
+  { id: "BRANCH_MANAGER", label: "Branch Manager", icon: "business-outline" },
+];
 
 const Login = () => {
   const navigation = useNavigation<any>();
   const { theme: { themeColor } } = useTheme();
   const styles = getStyles(themeColor);
+  const { setRole } = useRole();
   const usernameRef = useRef<TextInput | null>(null);
   const passwordRef = useRef<TextInput | null>(null);
+
+  const [selectedRole, setSelectedRole] = useState<UserRole>("FIELD_OFFICER");
 
   // FORM STATE
   const [form, setForm] = useState({
@@ -56,18 +66,16 @@ const Login = () => {
     let valid = true;
     let newErrors = { username: "", password: "" };
 
-    const phoneRegex = /^[0-9]{10}$/;
-    const emailRegex = /\S+@\S+\.\S+/;
+    const userValid = /^[0-9]{10}$/;
 
     if (!form.username.trim()) {
       newErrors.username = "Username is required";
       valid = false;
     } else if (
-      !phoneRegex.test(form.username) &&
-      !emailRegex.test(form.username)
+      !userValid.test(form.username)
     ) {
       newErrors.username =
-        "Enter valid email or 10-digit mobile number";
+        "Enter valid username / mobile number";
       valid = false;
     }
 
@@ -96,11 +104,11 @@ const Login = () => {
       setTimeout(() => {
         setLoading(false);
         console.log("Login Success");
-         navigation.replace('Dashboard');
+        setRole(selectedRole);
+         navigation.replace('MainApp');
 
         // TODO:
         // store token
-        // navigate to dashboard
       }, 1500);
 
     } catch (error) {
@@ -116,20 +124,22 @@ const Login = () => {
         behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
         <ScrollView
-          contentContainerStyle={{ flexGrow: 1 }}
+          contentContainerStyle={styles.scrollContent}
           keyboardShouldPersistTaps="handled"
         >
-          <View
-            style={{
-              flex: 1,
-              marginTop: responsiveSize(20),
-            
-            }}
-          >
+          <View style={styles.bodyContainer}>
             {/* HEADER */}
             <View style={styles.cardViewTopContainer}>
+              <View style={styles.brandBadge}>
+                <Ionicons
+                  name="shield-checkmark"
+                  size={28}
+                  color={themeColor.lightWhite}
+                />
+              </View>
+
               <Text style={styles.cardViewTopTitleText}>
-                Welcome to Fin Squad
+                Welcome Back
               </Text>
               <Text style={styles.cardViewTopSubTitleText}>
                 Secure Banking Login
@@ -139,6 +149,9 @@ const Login = () => {
             {/* LOGIN CARD */}
             <View style={styles.cardView}>
               <Text style={styles.title}>Sign in</Text>
+              <Text style={styles.subtitle}>
+                Enter your credentials to continue
+              </Text>
 
               {/* USERNAME */}
               <AppTextInput
@@ -176,45 +189,98 @@ const Login = () => {
                 errorMessage={errors.password}
               />
 
-              {/* REMEMBER ME */}
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginTop: 10,
-                }}
-              >
+              {/* REMEMBER ME + FORGOT PASSWORD */}
+              <View style={styles.rememberMeRow}>
                 <Pressable
+                  style={styles.rememberMePressable}
                   onPress={() => setRememberMe(!rememberMe)}
                 >
-                  <Text style={{ color: themeColor.primaryText }}>
-                    {rememberMe
-                      ? "☑ Remember Me"
-                      : "☐ Remember Me"}
+                  <View
+                    style={[
+                      styles.checkbox,
+                      rememberMe && styles.checkboxChecked,
+                    ]}
+                  >
+                    {rememberMe && (
+                      <Ionicons name="checkmark" size={12} color={themeColor.lightWhite} />
+                    )}
+                  </View>
+                  <Text style={styles.rememberMeText}>
+                    Remember Me
+                  </Text>
+                </Pressable>
+
+                <Pressable onPress={() => console.log("Reset password")}>
+                  <Text style={styles.forgotPasswordText}>
+                    Forgot Password?
                   </Text>
                 </Pressable>
               </View>
 
+              {/* ROLE SELECTION */}
+              <Text style={styles.roleLabel}>
+                Sign in as
+              </Text>
+
+              <View style={styles.roleRow}>
+                {ROLE_OPTIONS.map((option, index) => {
+                  const active = option.id === selectedRole;
+                  const isLast = index === ROLE_OPTIONS.length - 1;
+                  return (
+                    <Pressable
+                      key={option.id}
+                      style={[
+                        styles.roleCard,
+                        active && styles.roleCardActive,
+                        isLast && styles.roleCardLast,
+                      ]}
+                      onPress={() => setSelectedRole(option.id)}
+                    >
+                      <View style={styles.roleCardIconWrap}>
+                        <Ionicons
+                          name={option.icon}
+                          size={16}
+                          color={active ? themeColor.appColor : themeColor.placeHolder}
+                        />
+                      </View>
+
+                      <Text
+                        style={[styles.roleCardText, active && styles.roleCardTextActive]}
+                        numberOfLines={1}
+                        adjustsFontSizeToFit
+                      >
+                        {option.label}
+                      </Text>
+                    </Pressable>
+                  );
+                })}
+              </View>
+
               {/* LOGIN BUTTON */}
-              <View style={{ marginTop: responsiveSize(20) }}>
+              <View style={styles.loginButtonContainer}>
                 <AppButton
                   onPress={handleLogin}
                   title={
                     loading ? "Signing in..." : "Sign in"
                   }
                   disabled={loading}
-                  containerStyle={{
-                    opacity: loading ? 0.6 : 1,
-                    marginHorizontal:0
-                  }}
+                  containerStyle={[
+                    styles.loginButton,
+                    { opacity: loading ? 0.6 : 1 },
+                  ]}
                 />
               </View>
 
-              {/* FOOTER */}
-              <View style={styles.resetBottomContainer}>
-                <ResetPasswordFooter
-                onResetPress={() => console.log("Reset password")}
-                />
+              <View style={styles.registerRowView}>
+                <Text style={styles.registerText}>
+                  {"Don't have an Account?"}
+                </Text>
+
+                <Pressable onPress={()=>{ navigation.replace('Register')}} style={styles.registerButton}>
+                  <Text style={styles.registerButtonText}>
+                    {'Sign Up'}
+                  </Text>
+                </Pressable>
               </View>
             </View>
           </View>

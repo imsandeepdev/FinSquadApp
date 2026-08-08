@@ -10,9 +10,9 @@ import {
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { showNavigationBar } from 'react-native-navigation-bar-color';
 
-import { Styles } from './styles';
-import { AppColor } from '../../res';
+import { getStyles } from './styles';
 import { AppLoader } from '../AppLoader';
+import { useTheme } from '../../utils/provider/themeProvider';
 
 interface StoryScreenProps {
   children?: ReactNode;
@@ -34,6 +34,8 @@ export const StoryScreen: React.FC<StoryScreenProps> = ({
   androidBottomIntense = true,
 }) => {
   const insets = useSafeAreaInsets();
+  const { theme: { themeColor } } = useTheme();
+  const Styles = getStyles(themeColor);
 
   useEffect(() => {
     showNavigationBar();

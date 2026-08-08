@@ -1,7 +1,9 @@
 import React, {
   createContext,
   useContext,
+  useCallback,
   useEffect,
+  useMemo,
   useState,
   ReactNode,
 } from 'react';
@@ -23,32 +25,41 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  const systemTheme: ColorSchemeName = Appearance.getColorScheme();
+  const systemTheme: ColorSchemeName = Appearance.getColorScheme() ?? 'light';
 
-  const getInitialTheme = (): any =>
+  const getInitialTheme = (): AppThemeTypes =>
     systemTheme !== 'dark' ? LightTheme : DarkTheme;
 
-  const [theme, setTheme] = useState<any>(getInitialTheme);
+  const [theme, setTheme] = useState<AppThemeTypes>(getInitialTheme);
 
   // Listen to system theme changes
   useEffect(() => {
     const listener = Appearance.addChangeListener(({ colorScheme }) => {
       if (colorScheme) {
-        setTheme(colorScheme !== 'dark' ? DarkTheme : LightTheme);
+        setTheme(colorScheme !== 'dark' ? LightTheme : DarkTheme);
       }
     });
 
     return () => listener.remove();
   }, []);
 
-  const toggleTheme = () => {
-    setTheme((prev:any) =>
+  const toggleTheme = useCallback(() => {
+    setTheme((prev: AppThemeTypes) =>
       prev.mode === 'light' ? DarkTheme : LightTheme
     );
-  };
+  }, []);
+
+  // Without this, a brand-new object is created on every ThemeProvider
+  // render, which forces every single screen/component in the app
+  // (all of them call useTheme()) to re-render even when the theme
+  // itself hasn't changed.
+  const value = useMemo(
+    () => ({ theme, toggleTheme }),
+    [theme, toggleTheme],
+  );
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={value}>
       {children}
     </ThemeContext.Provider>
   );

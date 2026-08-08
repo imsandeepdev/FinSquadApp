@@ -11,6 +11,8 @@ import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
 
 // @ts-ignore
 import { ThemeProvider } from './src/utils/provider/themeProvider';
+import { RoleProvider } from './src/utils/provider/roleProvider';
+import { LanguageProvider } from './src/utils/provider/languageProvider';
 import { Login } from './src/screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 // @ts-ignore
@@ -25,9 +27,11 @@ function App() {
   return (
     <SafeAreaProvider>
     <ThemeProvider>
-      
-      <AppNavigator/>
-    
+      <LanguageProvider>
+        <RoleProvider>
+          <AppNavigator/>
+        </RoleProvider>
+      </LanguageProvider>
     </ThemeProvider>
     </SafeAreaProvider>
   );

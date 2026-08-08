@@ -11,7 +11,7 @@ StyleSheet.create({
     marginTop: responsiveSize(12),
   },
   mainView: {
-    backgroundColor: AppColor.secLightAppColor,
+    backgroundColor: AppColor.appLightColor,
     height: responsiveSize(48),
     borderRadius: responsiveSize(4),
     alignItems: 'center',
@@ -19,7 +19,7 @@ StyleSheet.create({
     borderColor: AppColor.placeHolder,
   },
   showTitle_MainView: {
-    backgroundColor: AppColor.secLightAppColor,
+    backgroundColor: AppColor.appLightColor,
     height: responsiveSize(45),
     borderRadius: responsiveSize(4),
     alignItems: 'center',
@@ -79,8 +79,8 @@ StyleSheet.create({
   },
   absoluteView: {
     position: 'absolute',
-    top: -10,
-    left: 5,
+    top: responsiveSize(-10),
+    left: responsiveSize(5),
   },
   headerMainView: {
     height: responsiveSize(18),
@@ -97,5 +97,15 @@ StyleSheet.create({
     fontWeight: '500',
     color: AppColor.primaryLightText,
     marginBottom: responsiveSize(4),
+  },
+  rightButton: {
+    paddingHorizontal: responsiveSize(6),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  errorText: {
+    marginTop: responsiveSize(4),
+    color: AppColor.errorColor,
+    fontSize: responsiveSize(12),
   },
 });

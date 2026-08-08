@@ -4,9 +4,10 @@ import {
   Pressable,
   Text,
   TextInput,
+  ActivityIndicator,
 } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import { AppColor, responsiveSize } from '../../res';
 import { AppTextInputProps } from './types';
 import { useTheme } from '../../utils/provider/themeProvider';
 import { getStyles } from './styles';
@@ -39,7 +40,9 @@ const AppTextInput = React.forwardRef<TextInput, AppTextInputProps>(
     errorMessage = '',
     showTitle = false,
     titleMessage = '',
-    returnKeyType
+    returnKeyType,
+    autoCapitalize,
+    rightLoading = false,
   },
   ref) => {
     const { theme: { themeColor } } = useTheme();
@@ -58,7 +61,17 @@ const AppTextInput = React.forwardRef<TextInput, AppTextInputProps>(
         !showTitle ?
         <View style={[Style.mainView, { borderColor: isError ? themeColor.errorColor : themeColor.placeHolder }]}>
           <View style={[Style.bodyView, { borderColor: isError ? themeColor.errorColor : themeColor.placeHolder }]}>
-           
+
+            {/* LEFT ICON */}
+            {leftIcon ? (
+              <View style={Style.leftIconView} {...leftIconProps}>
+                <Ionicons
+                  name={leftIcon}
+                  size={leftIconSize}
+                  color={leftIconColor || themeColor.placeHolder}
+                />
+              </View>
+            ) : null}
 
             {/* TEXT INPUT */}
             <View style={Style.flexView}>
@@ -76,22 +89,32 @@ const AppTextInput = React.forwardRef<TextInput, AppTextInputProps>(
                 secureTextEntry={secureTextEntry}
                 onSubmitEditing={onSubmitEditing}
                 returnKeyType={returnKeyType}
+                autoCapitalize={autoCapitalize}
                 {...restInputTextProps}
               />
             </View>
 
             {/* RIGHT BUTTON */}
-            {rightOnPress ? (
+            {rightLoading ? (
+              <View style={Style.rightButton}>
+                <ActivityIndicator size="small" color={themeColor.appColor} />
+              </View>
+            ) : rightOnPress ? (
               <Pressable
                 onPress={rightOnPress}
-                style={({ pressed }) => ({
-                  opacity: pressed ? 0.5 : 1,
-                  paddingHorizontal: 6,
-                  alignItems: "center",
-                  justifyContent: "center",
-                })}
+                style={({ pressed }) => [
+                  Style.rightButton,
+                  { opacity: pressed ? 0.5 : 1 },
+                ]}
               >
-              
+                {rightIcon ? (
+                  <Ionicons
+                    name={rightIcon}
+                    size={rightIconSize}
+                    color={rightIconColor || themeColor.placeHolder}
+                    {...rightIconProps}
+                  />
+                ) : null}
               </Pressable>
             ) : null}
 
@@ -115,11 +138,7 @@ const AppTextInput = React.forwardRef<TextInput, AppTextInputProps>(
         }
         {isError&&
         <View>
-          <Text style={{
-            marginTop: 4, 
-            color:  AppColor.errorColor,
-            fontSize: responsiveSize(12),
-          }}numberOfLines={1}>{errorMessage}</Text>
+          <Text style={Style.errorText} numberOfLines={1}>{errorMessage}</Text>
         </View>}
       </View>
     );

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -10,7 +10,8 @@ import { AppTextInput, AppDatePicker, AppDropdown } from "../../../components";
 import { useTheme } from "../../../utils/provider/themeProvider";
 import { getStyles } from "./styles";
 import { centres } from "../../CentreManagement/const";
-import { fetchAadhaarDetails } from "./mockAadhaarApi";
+import { AadhaarLookupResult } from "./mockAadhaarApi";
+import AadhaarVerifyModal from "./AadhaarVerifyModal";
 
 interface Props {
   data: any;
@@ -27,69 +28,32 @@ const CustomerMaster: React.FC<Props> = ({
   const { theme: { themeColor } } = useTheme();
   const styles = getStyles(themeColor);
 
-  const [fetching, setFetching] = useState(false);
-  const [fetchError, setFetchError] = useState("");
-  const [fetched, setFetched] = useState(false);
+  const [verifyModalVisible, setVerifyModalVisible] = useState(false);
 
-  // Tracks which Aadhaar number we've already auto-fetched, so we don't
-  // re-trigger the "API call" repeatedly for the same completed number.
-  const autoFetchedFor = useRef<string>("");
+  const isVerified = (data.aadhaar || "").length === AADHAAR_LENGTH;
 
-  const runFetch = (aadhaarNumber: string) => {
-    setFetching(true);
-    setFetchError("");
-
-    fetchAadhaarDetails(aadhaarNumber)
-      .then(result => {
-        // Map whatever the (mock) API returned onto the form.
-        updateData("fullName", result.name);
-        updateData("dob", result.dob);
-        updateData("gender", result.gender);
-        updateData("address", result.address);
-        setFetched(true);
-      })
-      .catch((err: Error) => {
-        setFetched(false);
-        setFetchError(err.message);
-      })
-      .finally(() => setFetching(false));
-  };
-
-  const handleAadhaarChange = (text: string) => {
-    const digitsOnly = text.replace(/[^0-9]/g, "").slice(0, AADHAAR_LENGTH);
-    updateData("aadhaar", digitsOnly);
-
-    // Stale result / error should not linger once the number is edited again.
-    if (fetched) setFetched(false);
-    if (fetchError) setFetchError("");
-    if (digitsOnly.length < AADHAAR_LENGTH) autoFetchedFor.current = "";
-  };
-
-  // Auto-fetch as soon as a full 12-digit Aadhaar number is entered —
-  // no need to tap a button. The manual button on the field still works
-  // too, e.g. to retry after a "not found" error.
+  // Customer Master is always the 1st step of Customer On-Boarding — open
+  // the Aadhaar verification modal as soon as the agent lands here, unless
+  // this customer's Aadhaar has already been verified (e.g. navigating
+  // back to this step after completing it).
   useEffect(() => {
-    const aadhaar = data.aadhaar || "";
-    if (
-      aadhaar.length === AADHAAR_LENGTH &&
-      !fetching &&
-      autoFetchedFor.current !== aadhaar
-    ) {
-      autoFetchedFor.current = aadhaar;
-      runFetch(aadhaar);
+    if (!isVerified) {
+      setVerifyModalVisible(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data.aadhaar]);
+  }, []);
 
-  const handleManualFetch = () => {
-    const aadhaar = data.aadhaar || "";
-    if (aadhaar.length !== AADHAAR_LENGTH) {
-      setFetchError(`Enter a valid ${AADHAAR_LENGTH}-digit Aadhaar number`);
-      return;
-    }
-    autoFetchedFor.current = aadhaar;
-    runFetch(aadhaar);
+  const handleVerified = (aadhaarNumber: string, result: AadhaarLookupResult) => {
+    updateData("aadhaar", aadhaarNumber);
+    updateData("fullName", result.name);
+    updateData("dob", result.dob);
+    updateData("gender", result.gender);
+    updateData("address", result.address);
   };
+
+  const maskedAadhaar = isVerified
+    ? `XXXX XXXX ${data.aadhaar.slice(-4)}`
+    : "";
 
   return (
     <View style={styles.container}>
@@ -98,28 +62,21 @@ const CustomerMaster: React.FC<Props> = ({
         CUSTOMER MASTER
       </Text>
 
-      <AppTextInput
-        title="Aadhaar Number"
-        placeholder="XXXX XXXX XXXX"
-        keyboardType="numeric"
-        maxLength={AADHAAR_LENGTH}
-        value={data.aadhaar}
-        onChangeText={handleAadhaarChange}
-        leftIcon="finger-print-outline"
-        rightIcon="cloud-download-outline"
-        rightOnPress={handleManualFetch}
-        rightLoading={fetching}
-        isError={!!fetchError}
-        errorMessage={fetchError}
-      />
-
-      {fetching && (
-        <Text style={styles.fetchStatusText}>
-          Fetching details from Aadhaar…
+      <Pressable onPress={() => setVerifyModalVisible(true)} style={styles.verifyLinkRow}>
+        <Ionicons
+          name={isVerified ? "checkmark-circle" : "shield-checkmark-outline"}
+          size={16}
+          color={isVerified ? themeColor.successColor : themeColor.appColor}
+        />
+        <Text style={styles.verifyLinkText}>
+          {isVerified ? `Aadhaar verified — ${maskedAadhaar}` : "Verify Aadhaar (Number / Biometric)"}
         </Text>
-      )}
+        {isVerified && (
+          <Text style={styles.reVerifyText}>Re-verify</Text>
+        )}
+      </Pressable>
 
-      {fetched && !fetching && (
+      {isVerified && (
         <View style={styles.fetchSuccessRow}>
           <Ionicons name="checkmark-circle" size={16} color={themeColor.successColor} />
           <Text style={styles.fetchSuccessText}>
@@ -127,6 +84,13 @@ const CustomerMaster: React.FC<Props> = ({
           </Text>
         </View>
       )}
+
+      <AadhaarVerifyModal
+        visible={verifyModalVisible}
+        onClose={() => setVerifyModalVisible(false)}
+        initialAadhaar={data.aadhaar}
+        onVerified={handleVerified}
+      />
 
       <AppTextInput
         title="Full Name"

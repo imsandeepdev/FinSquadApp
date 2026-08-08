@@ -7,10 +7,11 @@ import React, {
   ReactNode,
 } from "react";
 
-export type UserRole = "FIELD_OFFICER" | "BRANCH_MANAGER";
+export type UserRole = "FIELD_OFFICER" | "CREDIT_OFFICER" | "BRANCH_MANAGER";
 
 export const ROLE_LABELS: Record<UserRole, string> = {
   FIELD_OFFICER: "Field Officer",
+  CREDIT_OFFICER: "Credit Officer",
   BRANCH_MANAGER: "Branch Manager",
 };
 
@@ -19,6 +20,7 @@ interface RoleContextProps {
   setRole: (role: UserRole) => void;
   isBranchManager: boolean;
   isFieldOfficer: boolean;
+  isCreditOfficer: boolean;
 }
 
 const RoleContext = createContext<RoleContextProps | undefined>(undefined);
@@ -42,6 +44,7 @@ export const RoleProvider = ({ children }: RoleProviderProps) => {
       setRole,
       isBranchManager: role === "BRANCH_MANAGER",
       isFieldOfficer: role === "FIELD_OFFICER",
+      isCreditOfficer: role === "CREDIT_OFFICER",
     }),
     [role, setRole]
   );

@@ -12,7 +12,8 @@ import { ParamListBase } from '@react-navigation/native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Dashboard from '../../screens/Dashboard';
-import AIWealthCoachScreen from '../../screens/AIBased';
+import AIInsightsScreen from '../../screens/AIInsights';
+import ClientsScreen from '../../screens/Clients';
 import ProfileScreen from '../../screens/Profile';
 import ReportScreen from '../../screens/Report';
 import { getStyles } from './styles';
@@ -33,16 +34,6 @@ export interface BottomTabParamList extends ParamListBase {
 }
 
 const Tab:any = createBottomTabNavigator<BottomTabParamList>();
-
-/* -----------------------------
-   Dummy Screens
------------------------------- */
-
-const ClientScreen: React.FC = () => {
-  const { theme: { themeColor } } = useTheme();
-  const styles = getStyles(themeColor);
-  return <View style={styles.screen} />;
-};
 
 /* -----------------------------
    AI Button Props
@@ -102,8 +93,8 @@ const BottomTabs: React.FC = () => {
 
             case 'AI':
               iconName = focused
-                ? 'grid'
-                : 'grid-outline';
+                ? 'sparkles'
+                : 'sparkles-outline';
               break;
 
             case 'Report':
@@ -137,12 +128,12 @@ const BottomTabs: React.FC = () => {
       /> */}
        <Tab.Screen
         name="AI"
-        component={AIWealthCoachScreen}
+        component={AIInsightsScreen}
       />
 
       <Tab.Screen
         name="Clients"
-        component={ClientScreen}
+        component={ClientsScreen}
       />
 
       <Tab.Screen

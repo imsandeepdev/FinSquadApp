@@ -12,6 +12,10 @@ interface HeaderProps {
   leftIconSize?: number;
   leftIconColor?: string;
   onPress?: () => void;
+  rightIcon?: any;
+  rightIconSize?: number;
+  rightIconColor?: string;
+  onRightPress?: () => void;
 }
 
 const AppHeader: React.FC<HeaderProps> = ({
@@ -20,10 +24,15 @@ const AppHeader: React.FC<HeaderProps> = ({
   onPress,
   leftIconColor,
   leftIconSize = responsiveSize(20),
+  rightIcon,
+  onRightPress,
+  rightIconColor,
+  rightIconSize = responsiveSize(20),
 }) => {
   const { theme: { themeColor } } = useTheme();
   const Styles = getStyles(themeColor);
   const resolvedLeftIconColor = leftIconColor || themeColor.appLightColor;
+  const resolvedRightIconColor = rightIconColor || themeColor.appLightColor;
   return (
     <View style={Styles.container}>
       {leftIcon &&
@@ -44,6 +53,21 @@ const AppHeader: React.FC<HeaderProps> = ({
       <View style={[Styles.titleContainer]}>
         <Text style={Styles.titleText} numberOfLines={1}>{title}</Text>
       </View>
+
+      {rightIcon &&
+      <Pressable
+        onPress={onRightPress}
+        style={({ pressed }) => [
+          Styles.rightButton,
+          { opacity: pressed ? 0.5 : 1 },
+        ]}
+      >
+        <Ionicons
+          name={rightIcon}
+          size={rightIconSize}
+          color={resolvedRightIconColor}
+        />
+      </Pressable>}
     </View>
   );
 };

@@ -13,6 +13,8 @@ import LoanTypeSelectionScreen from '../screens/LoanTypeSelection';
 import LoanApprovalScreen from '../screens/LoanApproval';
 import PreDisbursementScreen from '../screens/PreDisbursement';
 import RepaymentScreen from '../screens/Repayment';
+import LoanOriginationScreen from '../screens/LoanOrigination';
+import ApprovalQueueScreen from '../screens/ApprovalQueue';
 import { NAVIGATE_NAME } from '../utils/const';
 
 
@@ -75,6 +77,16 @@ const AppNavigator = () => {
         <Stack.Screen
           name={NAVIGATE_NAME.REPAYMENT_SCREEN}
           component={RepaymentScreen}
+        />
+
+        <Stack.Screen
+          name={NAVIGATE_NAME.LOAN_ORIGINATION_SCREEN}
+          component={LoanOriginationScreen}
+        />
+
+        <Stack.Screen
+          name={NAVIGATE_NAME.APPROVAL_QUEUE_SCREEN}
+          component={ApprovalQueueScreen}
         />
 
       </Stack.Navigator>

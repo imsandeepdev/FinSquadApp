@@ -17,7 +17,7 @@ const GRTApproval: React.FC<Props> = ({
 }) => {
   const { theme: { themeColor } } = useTheme();
   const styles = getStyles(themeColor);
-  const { isBranchManager } = useRole();
+  const { isCreditOfficer } = useRole();
 
   const status: string = data.grtApprovalStatus || "Pending";
 
@@ -54,8 +54,8 @@ const GRTApproval: React.FC<Props> = ({
         <Ionicons name={statusIcon} size={20} color={statusColor} />
         <Text style={[styles.statusBannerText, { color: statusColor }]}>
           {status === "Pending"
-            ? "Awaiting Branch Manager approval"
-            : `GRT ${status.toLowerCase()} by Branch Manager`}
+            ? "Awaiting Credit Officer approval"
+            : `GRT ${status.toLowerCase()} by Credit Officer`}
         </Text>
       </View>
 
@@ -95,7 +95,7 @@ const GRTApproval: React.FC<Props> = ({
         </View>
       </View>
 
-      {isBranchManager ? (
+      {isCreditOfficer ? (
         <View style={styles.actionRow}>
           <AppButton
             title="Approve GRT"
@@ -112,7 +112,7 @@ const GRTApproval: React.FC<Props> = ({
         </View>
       ) : (
         <Text style={styles.roleNote}>
-          Only a Branch Manager can approve or reject this GRT. You can continue
+          Only a Credit Officer can approve or reject this GRT. You can continue
           — this will be reviewed separately.
         </Text>
       )}

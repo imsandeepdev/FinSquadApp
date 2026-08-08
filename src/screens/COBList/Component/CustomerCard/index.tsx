@@ -3,6 +3,8 @@ import {
   View,
   Text,
   TouchableOpacity,
+  StyleProp,
+  ViewStyle,
 } from "react-native";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -17,12 +19,14 @@ interface Props {
   item: Customer;
   onPress?: () => void;
   onMenuPress?: () => void;
+  style?: StyleProp<ViewStyle>;
 }
 
 const CustomerCard = ({
   item,
   onPress,
   onMenuPress,
+  style,
 }: Props) => {
   const { theme: { themeColor } } = useTheme();
   const styles = getStyles(themeColor);
@@ -31,7 +35,7 @@ const CustomerCard = ({
     <TouchableOpacity
       activeOpacity={0.85}
       onPress={onPress}
-      style={styles.card}>
+      style={[styles.card, style]}>
       {/* Left Avatar */}
 
       <Avatar name={item.name} />

@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, ScrollView, Image, Pressable, Alert } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { AppButton, StoryScreen } from "../../components";
+import { AppButton, AppHeader, StoryScreen } from "../../components";
 import { useTheme } from "../../utils/provider/themeProvider";
 import { useRole, ROLE_LABELS } from "../../utils/provider/roleProvider";
+import { useLanguage } from "../../utils/provider/languageProvider";
+import { AVAILABLE_LANGUAGES } from "../../utils/i18n";
 import { reset } from "../../appNavigator/navigationService";
 import { NAVIGATE_NAME } from "../../utils/const";
 import { getStyles } from "./styles";
@@ -15,27 +17,36 @@ import {
   MENU_SECTIONS,
   ProfileMenuItem,
 } from "./const";
+import LanguageSelectModal from "./LanguageSelectModal";
 
 const ProfileScreen = () => {
   const { theme: { themeColor } } = useTheme();
   const styles = getStyles(themeColor);
   const { role } = useRole();
+  const { language, t } = useLanguage();
+
+  const [languageModalVisible, setLanguageModalVisible] = useState(false);
 
   const roleLabel = role ? ROLE_LABELS[role] : AGENT_PROFILE.role;
   const gradientColors = [themeColor.appColor, themeColor.appColor, themeColor.secAppColor];
+  const currentLanguageLabel = AVAILABLE_LANGUAGES.find(l => l.code === language)?.nativeLabel;
 
   const onMenuPress = (item: ProfileMenuItem) => {
-    Alert.alert(item.label, "This will be available soon.");
+    if (item.id === "language") {
+      setLanguageModalVisible(true);
+      return;
+    }
+    Alert.alert(t(item.labelKey), t("common.comingSoon"));
   };
 
   const onLogout = () => {
     Alert.alert(
-      "Log out?",
-      "You will need to sign in again to access your account.",
+      t("profile.logoutConfirmTitle"),
+      t("profile.logoutConfirmMessage"),
       [
-        { text: "Cancel", style: "cancel" },
+        { text: t("common.cancel"), style: "cancel" },
         {
-          text: "Log out",
+          text: t("profile.logoutConfirm"),
           style: "destructive",
           onPress: () => reset(NAVIGATE_NAME.LOGIN),
         },
@@ -45,6 +56,11 @@ const ProfileScreen = () => {
 
   return (
     <StoryScreen>
+      <AppHeader
+        title={t("profile.header")}
+        leftIcon={null}
+      />
+
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
@@ -129,7 +145,7 @@ const ProfileScreen = () => {
               </Text>
 
               <Text style={styles.statLabel}>
-                {stat.label}
+                {t(stat.labelKey)}
               </Text>
             </View>
           ))}
@@ -137,21 +153,21 @@ const ProfileScreen = () => {
 
         <View style={styles.card}>
           <Text style={styles.cardTitle}>
-            Contact & Work Info
+            {t("profile.contactWork")}
           </Text>
 
           {WORK_INFO.map((item) => (
-            <View style={styles.row} key={item.label}>
-              <Text style={styles.rowLabel}>{item.label}</Text>
+            <View style={styles.row} key={item.labelKey}>
+              <Text style={styles.rowLabel}>{t(item.labelKey)}</Text>
               <Text style={styles.rowValue}>{item.value}</Text>
             </View>
           ))}
         </View>
 
         {MENU_SECTIONS.map((section) => (
-          <View key={section.title}>
+          <View key={section.titleKey}>
             <Text style={styles.menuSectionTitle}>
-              {section.title}
+              {t(section.titleKey)}
             </Text>
 
             <View style={styles.card}>
@@ -166,8 +182,12 @@ const ProfileScreen = () => {
                     </View>
 
                     <Text style={styles.menuLabel}>
-                      {item.label}
+                      {t(item.labelKey)}
                     </Text>
+
+                    {item.id === "language" && !!currentLanguageLabel && (
+                      <Text style={styles.menuValueText}>{currentLanguageLabel}</Text>
+                    )}
 
                     <Ionicons name="chevron-forward" size={16} color={themeColor.placeHolder} />
                   </Pressable>
@@ -180,7 +200,7 @@ const ProfileScreen = () => {
         ))}
 
         <AppButton
-          title="Log Out"
+          title={t("profile.logout")}
           onPress={onLogout}
           containerStyle={styles.logoutButton}
           titleTextStyle={styles.logoutButtonText}
@@ -191,6 +211,11 @@ const ProfileScreen = () => {
         </Text>
 
       </ScrollView>
+
+      <LanguageSelectModal
+        visible={languageModalVisible}
+        onClose={() => setLanguageModalVisible(false)}
+      />
     </StoryScreen>
   );
 };

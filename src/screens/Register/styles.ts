@@ -23,6 +23,62 @@ export const getStyles = (AppColor: ThemeColorType) =>
     rememberMeText: {
         color: AppColor.primaryText,
     },
+
+    roleLabel: {
+        fontSize: responsiveSize(13),
+        fontWeight: "600",
+        color: AppColor.primaryText,
+        marginBottom: responsiveSize(8),
+        marginTop: responsiveSize(16),
+    },
+
+    roleRow: {
+        flexDirection: "row",
+        marginBottom: responsiveSize(4),
+    },
+
+    roleCard: {
+        flex: 1,
+        alignItems: "center",
+        paddingVertical: responsiveSize(10),
+        paddingHorizontal: responsiveSize(4),
+        borderRadius: responsiveSize(12),
+        borderWidth: 1.5,
+        borderColor: AppColor.borderColor,
+        backgroundColor: AppColor.cardColor,
+        marginRight: responsiveSize(8),
+    },
+
+    roleCardLast: {
+        marginRight: responsiveSize(0),
+    },
+
+    roleCardActive: {
+        borderColor: AppColor.appColor,
+        backgroundColor: AppColor.secLightAppColor,
+    },
+
+    roleCardIconWrap: {
+        width: responsiveSize(30),
+        height: responsiveSize(30),
+        borderRadius: responsiveSize(15),
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: AppColor.appLightColor,
+        marginBottom: responsiveSize(6),
+    },
+
+    roleCardText: {
+        fontSize: responsiveSize(11.5),
+        fontWeight: "700",
+        color: AppColor.primaryText,
+        textAlign: "center",
+    },
+
+    roleCardTextActive: {
+        color: AppColor.appColor,
+    },
+
     loginButtonContainer: {
         marginTop: responsiveSize(20),
     },

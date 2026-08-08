@@ -25,6 +25,16 @@ StyleSheet.create({
     borderColor: AppColor.secLightAppColor,
   },
 
+  rightButton: {
+    height: responsiveSize(36),
+    width: responsiveSize(36),
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: responsiveSize(10),
+    borderWidth:1,
+    borderColor: AppColor.secLightAppColor,
+  },
+
   leftIcon: {
     height: responsiveSize(20),
     width: responsiveSize(20),

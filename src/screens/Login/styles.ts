@@ -15,28 +15,44 @@ export const getStyles = (AppColor: ThemeColorType) =>
         flex: 1,
         marginTop: responsiveSize(20),
     },
+
+    brandBadge: {
+        width: responsiveSize(56),
+        height: responsiveSize(56),
+        borderRadius: responsiveSize(28),
+        backgroundColor: AppColor.appColor,
+        alignItems: "center",
+        justifyContent: "center",
+        marginBottom: responsiveSize(10),
+    },
+
     roleLabel: {
         fontSize: responsiveSize(13),
         fontWeight: "600",
         color: AppColor.primaryText,
         marginBottom: responsiveSize(8),
-        marginTop: responsiveSize(4),
+        marginTop: responsiveSize(16),
     },
 
     roleRow: {
         flexDirection: "row",
-        marginBottom: responsiveSize(16),
+        marginBottom: responsiveSize(4),
     },
 
     roleCard: {
         flex: 1,
         alignItems: "center",
-        paddingVertical: responsiveSize(12),
+        paddingVertical: responsiveSize(10),
+        paddingHorizontal: responsiveSize(4),
         borderRadius: responsiveSize(12),
         borderWidth: 1.5,
         borderColor: AppColor.borderColor,
         backgroundColor: AppColor.cardColor,
-        marginRight: responsiveSize(10),
+        marginRight: responsiveSize(8),
+    },
+
+    roleCardLast: {
+        marginRight: responsiveSize(0),
     },
 
     roleCardActive: {
@@ -45,9 +61,9 @@ export const getStyles = (AppColor: ThemeColorType) =>
     },
 
     roleCardIconWrap: {
-        width: responsiveSize(34),
-        height: responsiveSize(34),
-        borderRadius: responsiveSize(17),
+        width: responsiveSize(30),
+        height: responsiveSize(30),
+        borderRadius: responsiveSize(15),
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: AppColor.appLightColor,
@@ -55,9 +71,10 @@ export const getStyles = (AppColor: ThemeColorType) =>
     },
 
     roleCardText: {
-        fontSize: responsiveSize(13),
+        fontSize: responsiveSize(11.5),
         fontWeight: "700",
         color: AppColor.primaryText,
+        textAlign: "center",
     },
 
     roleCardTextActive: {
@@ -67,10 +84,35 @@ export const getStyles = (AppColor: ThemeColorType) =>
     rememberMeRow: {
         flexDirection: "row",
         justifyContent: "space-between",
-        marginTop: responsiveSize(10),
+        alignItems: "center",
+        marginTop: responsiveSize(14),
+    },
+    rememberMePressable: {
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    checkbox: {
+        width: responsiveSize(18),
+        height: responsiveSize(18),
+        borderRadius: responsiveSize(4),
+        borderWidth: 1.5,
+        borderColor: AppColor.borderColor,
+        alignItems: "center",
+        justifyContent: "center",
+        marginRight: responsiveSize(8),
+    },
+    checkboxChecked: {
+        backgroundColor: AppColor.appColor,
+        borderColor: AppColor.appColor,
     },
     rememberMeText: {
+        fontSize: responsiveSize(13),
         color: AppColor.primaryText,
+    },
+    forgotPasswordText: {
+        fontSize: responsiveSize(13),
+        fontWeight: "600",
+        color: AppColor.appColor,
     },
     loginButtonContainer: {
         marginTop: responsiveSize(20),
@@ -79,10 +121,15 @@ export const getStyles = (AppColor: ThemeColorType) =>
         marginHorizontal: responsiveSize(0),
     },
     title: {
-        fontSize: responsiveSize(18), 
-        fontWeight: "600", 
-        marginBottom: responsiveSize(8), 
+        fontSize: responsiveSize(18),
+        fontWeight: "600",
+        marginBottom: responsiveSize(4),
         color: AppColor.primaryText
+    },
+    subtitle: {
+        fontSize: responsiveSize(13),
+        color: AppColor.secondaryLightText,
+        marginBottom: responsiveSize(16),
     },
 
     topLightCardView: {

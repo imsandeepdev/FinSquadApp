@@ -124,13 +124,40 @@ export const getStyles = (themeColor: ThemeColorType) =>
 
     cardTitleSub: {
       fontSize: responsiveSize(11),
-      color: themeColor.successColor,
+      color: themeColor.placeHolder,
+      marginTop: responsiveSize(2),
+    },
+
+    trendBadge: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: responsiveSize(8),
+      paddingVertical: responsiveSize(4),
+      borderRadius: responsiveSize(20),
+    },
+
+    trendBadgeText: {
+      fontSize: responsiveSize(11),
       fontWeight: "700",
+      marginLeft: responsiveSize(3),
     },
 
     chartWrap: {
       alignItems: "flex-start",
-      overflow: "hidden",
+      paddingTop: responsiveSize(18),
+    },
+
+    chartTopLabel: {
+      fontSize: responsiveSize(9.5),
+      fontWeight: "700",
+      color: themeColor.placeHolder,
+      marginBottom: responsiveSize(4),
+    },
+
+    chartAxisLabel: {
+      fontSize: responsiveSize(10.5),
+      color: themeColor.placeHolder,
+      marginTop: responsiveSize(4),
     },
 
     categoryRow: {

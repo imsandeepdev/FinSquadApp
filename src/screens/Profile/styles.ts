@@ -263,6 +263,13 @@ export const getStyles = (themeColor: ThemeColorType) =>
       color: themeColor.appTextColor,
     },
 
+    menuValueText: {
+      fontSize: responsiveSize(12),
+      fontWeight: "600",
+      color: themeColor.placeHolder,
+      marginRight: responsiveSize(6),
+    },
+
     logoutButton: {
       backgroundColor: themeColor.cardColor,
       borderWidth: 1,

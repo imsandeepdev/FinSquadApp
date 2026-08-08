@@ -56,12 +56,30 @@ export const getStyles = (themeColor: ThemeColorType) =>
       color: themeColor.white,
     },
 
-    fetchStatusText: {
-      fontSize: responsiveSize(12),
-      color: themeColor.secondaryLightText,
-      marginTop: responsiveSize(-6),
+    verifyLinkRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingVertical: responsiveSize(10),
+      paddingHorizontal: responsiveSize(12),
+      borderRadius: responsiveSize(10),
+      borderWidth: 1,
+      borderColor: themeColor.borderColor,
+      backgroundColor: themeColor.background,
       marginBottom: responsiveSize(8),
-      marginLeft: responsiveSize(4),
+    },
+
+    verifyLinkText: {
+      flex: 1,
+      marginLeft: responsiveSize(8),
+      fontSize: responsiveSize(13),
+      fontWeight: "600",
+      color: themeColor.appColor,
+    },
+
+    reVerifyText: {
+      fontSize: responsiveSize(12),
+      fontWeight: "700",
+      color: themeColor.secondaryLightText,
     },
 
     fetchSuccessRow: {

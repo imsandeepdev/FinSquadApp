@@ -1,3 +1,5 @@
+import { TranslationKey } from "../../utils/i18n";
+
 export const AGENT_PROFILE = {
   name: "Riya Nandi",
   role: "Senior Relationship Manager",
@@ -15,59 +17,59 @@ export const AGENT_PROFILE = {
 };
 
 export const PROFILE_STATS = [
-  { id: "clients", icon: "people-outline", label: "Total Clients", value: "20" },
-  { id: "portfolio", icon: "wallet-outline", label: "Portfolio Managed", value: "₹12.45 Cr" },
-  { id: "collection", icon: "trending-up-outline", label: "Collection Efficiency", value: "96.4%" },
+  { id: "clients", icon: "people-outline", labelKey: "profile.stats.totalClients" as TranslationKey, value: "20" },
+  { id: "portfolio", icon: "wallet-outline", labelKey: "profile.stats.portfolioManaged" as TranslationKey, value: "₹12.45 Cr" },
+  { id: "collection", icon: "trending-up-outline", labelKey: "profile.stats.collectionEfficiency" as TranslationKey, value: "96.4%" },
 ];
 
 export const WORK_INFO = [
-  { label: "Mobile Number", value: AGENT_PROFILE.mobile },
-  { label: "Email Address", value: AGENT_PROFILE.email },
-  { label: "Branch", value: AGENT_PROFILE.branch },
-  { label: "Region", value: AGENT_PROFILE.region },
-  { label: "Employee ID", value: AGENT_PROFILE.employeeId },
-  { label: "Date of Joining", value: AGENT_PROFILE.joinDate },
+  { labelKey: "profile.workInfo.mobile" as TranslationKey, value: AGENT_PROFILE.mobile },
+  { labelKey: "profile.workInfo.email" as TranslationKey, value: AGENT_PROFILE.email },
+  { labelKey: "profile.workInfo.branch" as TranslationKey, value: AGENT_PROFILE.branch },
+  { labelKey: "profile.workInfo.region" as TranslationKey, value: AGENT_PROFILE.region },
+  { labelKey: "profile.workInfo.employeeId" as TranslationKey, value: AGENT_PROFILE.employeeId },
+  { labelKey: "profile.workInfo.joinDate" as TranslationKey, value: AGENT_PROFILE.joinDate },
 ];
 
 export interface ProfileMenuItem {
   id: string;
   icon: string;
-  label: string;
+  labelKey: TranslationKey;
 }
 
 export interface ProfileMenuSection {
-  title: string;
+  titleKey: TranslationKey;
   items: ProfileMenuItem[];
 }
 
 export const MENU_SECTIONS: ProfileMenuSection[] = [
   {
-    title: "Account",
+    titleKey: "profile.menu.sectionAccount",
     items: [
-      { id: "edit-profile", icon: "person-outline", label: "Edit Profile" },
-      { id: "documents-kyc", icon: "document-text-outline", label: "Documents & KYC" },
-      { id: "change-password", icon: "lock-closed-outline", label: "Change Password" },
+      { id: "edit-profile", icon: "person-outline", labelKey: "profile.menu.editProfile" },
+      { id: "documents-kyc", icon: "document-text-outline", labelKey: "profile.menu.documentsKyc" },
+      { id: "change-password", icon: "lock-closed-outline", labelKey: "profile.menu.changePassword" },
     ],
   },
   {
-    title: "Work",
+    titleKey: "profile.menu.sectionWork",
     items: [
-      { id: "my-performance", icon: "stats-chart-outline", label: "My Performance" },
-      { id: "my-centres", icon: "business-outline", label: "My Centres" },
+      { id: "my-performance", icon: "stats-chart-outline", labelKey: "profile.menu.myPerformance" },
+      { id: "my-centres", icon: "business-outline", labelKey: "profile.menu.myCentres" },
     ],
   },
   {
-    title: "Preferences",
+    titleKey: "profile.menu.sectionPreferences",
     items: [
-      { id: "notifications", icon: "notifications-outline", label: "Notifications" },
-      { id: "language", icon: "language-outline", label: "Language" },
+      { id: "notifications", icon: "notifications-outline", labelKey: "profile.menu.notifications" },
+      { id: "language", icon: "language-outline", labelKey: "profile.menu.language" },
     ],
   },
   {
-    title: "Support",
+    titleKey: "profile.menu.sectionSupport",
     items: [
-      { id: "help-support", icon: "help-circle-outline", label: "Help & Support" },
-      { id: "terms-privacy", icon: "shield-checkmark-outline", label: "Terms & Privacy" },
+      { id: "help-support", icon: "help-circle-outline", labelKey: "profile.menu.helpSupport" },
+      { id: "terms-privacy", icon: "shield-checkmark-outline", labelKey: "profile.menu.termsPrivacy" },
     ],
   },
 ];

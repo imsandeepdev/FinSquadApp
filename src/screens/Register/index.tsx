@@ -9,19 +9,30 @@ import {
   TextInput,
 } from "react-native";
 
+import Ionicons from "react-native-vector-icons/Ionicons";
 import { AppButton, AppTextInput, ResetPasswordFooter, StoryScreen } from "../../components";
 import { getStyles } from './styles';
 import { useTheme } from "../../utils/provider/themeProvider";
+import { useRole, UserRole } from "../../utils/provider/roleProvider";
 import {useNavigation} from '@react-navigation/native';
+
+const ROLE_OPTIONS: { id: UserRole; label: string; icon: string }[] = [
+  { id: "FIELD_OFFICER", label: "Field Officer", icon: "walk-outline" },
+  { id: "CREDIT_OFFICER", label: "Credit Officer", icon: "shield-checkmark-outline" },
+  { id: "BRANCH_MANAGER", label: "Branch Manager", icon: "business-outline" },
+];
 
 const Register = () => {
   const navigation = useNavigation<any>();
   const { theme: { themeColor } } = useTheme();
   const styles = getStyles(themeColor);
+  const { setRole } = useRole();
   const usernameRef = useRef<TextInput | null>(null);
   const passwordRef = useRef<TextInput | null>(null);
   const mobileRef = useRef<TextInput | null>(null);
   const emailRef = useRef<TextInput | null>(null);
+
+  const [selectedRole, setSelectedRole] = useState<UserRole>("FIELD_OFFICER");
 
 
   // FORM STATE
@@ -102,11 +113,11 @@ const Register = () => {
       setTimeout(() => {
         setLoading(false);
         console.log("Login Success");
-         navigation.replace('AIWealthCoachScreen');
+        setRole(selectedRole);
+        navigation.replace('MainApp');
 
         // TODO:
         // store token
-        // navigate to dashboard
       }, 1500);
 
     } catch (error) {
@@ -219,6 +230,45 @@ const Register = () => {
                       : "☐ Accept Terms & Conditions"}
                   </Text>
                 </Pressable>
+              </View>
+
+              {/* ROLE SELECTION */}
+              <Text style={styles.roleLabel}>
+                Register as
+              </Text>
+
+              <View style={styles.roleRow}>
+                {ROLE_OPTIONS.map((option, index) => {
+                  const active = option.id === selectedRole;
+                  const isLast = index === ROLE_OPTIONS.length - 1;
+                  return (
+                    <Pressable
+                      key={option.id}
+                      style={[
+                        styles.roleCard,
+                        active && styles.roleCardActive,
+                        isLast && styles.roleCardLast,
+                      ]}
+                      onPress={() => setSelectedRole(option.id)}
+                    >
+                      <View style={styles.roleCardIconWrap}>
+                        <Ionicons
+                          name={option.icon}
+                          size={16}
+                          color={active ? themeColor.appColor : themeColor.placeHolder}
+                        />
+                      </View>
+
+                      <Text
+                        style={[styles.roleCardText, active && styles.roleCardTextActive]}
+                        numberOfLines={1}
+                        adjustsFontSizeToFit
+                      >
+                        {option.label}
+                      </Text>
+                    </Pressable>
+                  );
+                })}
               </View>
 
               {/* LOGIN BUTTON */}

@@ -12,7 +12,7 @@ import { getStyles } from "./styles";
 import { NAVIGATE_NAME } from "../../../utils/const";
 import { responsiveSize } from "../../../res";
 
-const BOTH_ROLES: UserRole[] = ["FIELD_OFFICER", "BRANCH_MANAGER"];
+const ALL_ROLES: UserRole[] = ["FIELD_OFFICER", "CREDIT_OFFICER", "BRANCH_MANAGER"];
 
 const actions = [
   {
@@ -28,7 +28,7 @@ const actions = [
     title: "Loan Proposal",
     subtitle: "Create New Proposal",
     color: "#16A34A",
-    navigate: NAVIGATE_NAME.COB_LIST_SCREEN,
+    navigate: NAVIGATE_NAME.LOAN_ORIGINATION_SCREEN,
     roles: ["FIELD_OFFICER"] as UserRole[],
   },
   {
@@ -36,7 +36,7 @@ const actions = [
     title: "Express Loan",
     subtitle: "Quick Loan Disbursement",
     color: "#7C3AED",
-    navigate: NAVIGATE_NAME.COB_LIST_SCREEN,
+    navigate: NAVIGATE_NAME.LOAN_TYPE_SELECTION_SCREEN,
     roles: ["FIELD_OFFICER"] as UserRole[],
   },
   {
@@ -44,15 +44,17 @@ const actions = [
     title: "Meetings",
     subtitle: "Schedule and Manage Meetings",
     color: "#F59E0B",
-    navigate: NAVIGATE_NAME.COB_LIST_SCREEN,
-    roles: BOTH_ROLES,
+    // No dedicated Meetings screen yet — Dashboard shows a "coming soon"
+    // notice for tiles without a navigate target instead of guessing one.
+    navigate: undefined,
+    roles: ALL_ROLES,
   },
   {
     icon: "cash", // Collections & Payments
     title: "Collection",
     subtitle: "Manage Collections and Payments",
     color: "#EC4899",
-    navigate: NAVIGATE_NAME.COB_LIST_SCREEN,
+    navigate: NAVIGATE_NAME.REPAYMENT_SCREEN,
     roles: ["FIELD_OFFICER"] as UserRole[],
   },
   {
@@ -60,8 +62,18 @@ const actions = [
     title: "Reports",
     subtitle: "View Reports and Analytics",
     color: "#0EA5E9",
-    navigate: NAVIGATE_NAME.COB_LIST_SCREEN,
-    roles: BOTH_ROLES,
+    // "Report" is a bottom-tab route (not a root-stack screen) — Dashboard
+    // lives inside the same tab navigator, so this switches tabs.
+    navigate: "Report",
+    roles: ALL_ROLES,
+  },
+  {
+    icon: "shield-checkmark", // GRT / FI approval queue
+    title: "Approval Queue",
+    subtitle: "Review Pending GRT & FI Cases",
+    color: "#0D9488",
+    navigate: NAVIGATE_NAME.APPROVAL_QUEUE_SCREEN,
+    roles: ["CREDIT_OFFICER"] as UserRole[],
   },
   {
     icon: "checkmark-done", // Loan approval / sanction

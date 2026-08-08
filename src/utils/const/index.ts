@@ -8,4 +8,6 @@ export const NAVIGATE_NAME = {
     LOAN_APPROVAL_SCREEN: 'LoanApprovalScreen',
     PRE_DISBURSEMENT_SCREEN: 'PreDisbursementScreen',
     REPAYMENT_SCREEN: 'RepaymentScreen',
+    LOAN_ORIGINATION_SCREEN: 'LoanOriginationScreen',
+    APPROVAL_QUEUE_SCREEN: 'ApprovalQueueScreen',
 }

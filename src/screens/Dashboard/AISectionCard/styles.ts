@@ -1,129 +1,108 @@
-import {StyleSheet} from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { ThemeColorType } from "../../../res/colors/theme.types";
 import { responsiveSize } from "../../../res";
 
 export const getStyles = (AppColor: ThemeColorType) =>
 StyleSheet.create({
         viewContainer: {
-        borderWidth:1,
-        borderRadius:responsiveSize(15),
-        overflow:"hidden"
-
+        borderRadius: responsiveSize(16),
+        overflow: "hidden",
+        shadowColor: AppColor.shadow,
+        shadowOffset: { width: 0, height: responsiveSize(4) },
+        shadowOpacity: 0.18,
+        shadowRadius: responsiveSize(8),
+        ...Platform.select({ android: { elevation: 4 } }),
         },
 
-        contentPad:{
-        paddingHorizontal:responsiveSize(10),
-        paddingVertical:responsiveSize(6),
+        gradientFill: {
+        borderRadius: responsiveSize(16),
         },
 
-        container:
-        {
-            marginHorizontal:responsiveSize(0),
+        contentPad: {
+        paddingHorizontal: responsiveSize(14),
+        paddingVertical: responsiveSize(12),
         },
 
-        header:
-        {
-        flexDirection:"row",
-        justifyContent:"space-between",
-        alignItems:"center",
+        header: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
         },
 
-        leftHeader:{
-        flexDirection:"row",
-        alignItems:"center",
+        leftHeader: {
+        flexDirection: "row",
+        alignItems: "center",
         },
 
-        heading:{
-        marginLeft:responsiveSize(8),
-        fontSize:responsiveSize(12),
-        fontWeight:"700",
-        color:AppColor.white,
+        iconBadge: {
+        width: responsiveSize(22),
+        height: responsiveSize(22),
+        borderRadius: responsiveSize(11),
+        backgroundColor: "rgba(255,255,255,0.2)",
+        justifyContent: "center",
+        alignItems: "center",
         },
 
-        button:{
-        paddingHorizontal:responsiveSize(6),
-        paddingVertical:responsiveSize(4),
-        borderRadius:responsiveSize(20),
-        backgroundColor:"rgba(255,255,255,.08)",
-        flexDirection:"row",
-        alignItems:"center",
-        borderWidth: 0.5
+        heading: {
+        marginLeft: responsiveSize(8),
+        fontSize: responsiveSize(11.5),
+        fontWeight: "800",
+        letterSpacing: 0.5,
+        color: AppColor.white,
         },
 
-        buttonText:{
-        color:AppColor.primaryText,
-        fontSize:responsiveSize(12),
-        fontWeight:'500'
+        button: {
+        paddingHorizontal: responsiveSize(10),
+        paddingVertical: responsiveSize(5),
+        borderRadius: responsiveSize(20),
+        backgroundColor: "rgba(255,255,255,0.16)",
+        flexDirection: "row",
+        alignItems: "center",
         },
 
-        content:{
-        marginVertical:responsiveSize(6),
-        flexDirection:"row",
+        buttonText: {
+        color: AppColor.white,
+        fontSize: responsiveSize(11.5),
+        fontWeight: "700",
+        marginRight: responsiveSize(2),
         },
 
-        aiCircle:{
-        width:responsiveSize(40),
-        height:responsiveSize(40),
-        borderRadius:responsiveSize(20),
-        backgroundColor:AppColor.secAppColor,
-        justifyContent:"center",
-        alignItems:"center",
+        content: {
+        marginTop: responsiveSize(14),
+        flexDirection: "row",
+        alignItems: "center",
         },
 
-        aiText:{
-        fontSize:responsiveSize(16),
-        fontWeight:"700",
-        color:AppColor.appLightColor,
+        aiCircle: {
+        width: responsiveSize(42),
+        height: responsiveSize(42),
+        borderRadius: responsiveSize(21),
+        backgroundColor: AppColor.white,
+        justifyContent: "center",
+        alignItems: "center",
         },
 
-        textContainer:{
-        flex:1,
-        marginLeft:responsiveSize(10),
+        textContainer: {
+        flex: 1,
+        marginLeft: responsiveSize(12),
         },
 
-        title:{
-        fontSize:responsiveSize(14),
-        fontWeight:"700",
-        color:AppColor.appLightColor,
+        title: {
+        fontSize: responsiveSize(14),
+        fontWeight: "700",
+        color: AppColor.white,
         },
 
-        subtitle:{
-        marginTop:responsiveSize(4),
-        fontSize:responsiveSize(12),
-        color:AppColor.lightWhite,
+        subtitle: {
+        marginTop: responsiveSize(4),
+        fontSize: responsiveSize(12),
+        lineHeight: responsiveSize(17),
+        color: "rgba(255,255,255,0.85)",
         },
 
-        green:{
-        color:AppColor.successColor,
-        fontWeight:"700",
-        fontSize:responsiveSize(12),
+        highlight: {
+        color: "#FDE68A",
+        fontWeight: "800",
+        fontSize: responsiveSize(12),
         },
-
-        arrowRow:{
-        marginTop:responsiveSize(10),
-        flexDirection:"row",
-        justifyContent:"space-between",
-        alignItems:"center",
-        },
-
-        arrow:{
-        fontSize:responsiveSize(14),
-        color:"#64748B",
-        },
-
-        team:{
-        flexDirection:"row",
-        },
-
-        avatar:{
-        width:responsiveSize(40),
-        height:responsiveSize(40),
-        borderRadius:responsiveSize(20),
-        marginLeft:responsiveSize(-8),
-        borderWidth:1,
-        borderColor:"#071A70",
-
-        },
-
-
 });

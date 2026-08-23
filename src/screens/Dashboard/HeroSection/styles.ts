@@ -41,7 +41,7 @@ color:AppColor.white,
 name:{
 fontSize:responsiveSize(18),
 fontWeight:"700",
-color:"#999",
+color:AppColor.white,
 marginTop:responsiveSize(10),
 },
 

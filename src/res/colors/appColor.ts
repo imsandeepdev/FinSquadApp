@@ -29,7 +29,7 @@ export const AppColor = {
 
   // TEXT COLORS (FIXED HIERARCHY)
   primaryText: "#1F2937",
-  primaryLightText: " #4B5563",
+  primaryLightText: "#4B5563",
   secondaryText: "#F3F4F6",
   secondaryLightText: "#D1D5DB",
 

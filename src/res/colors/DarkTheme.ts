@@ -41,7 +41,11 @@ export const DarkTheme = {
     errorText: "#FF453A",
     infoText: "#60A5FA",
 
-    appTextColor: "#40E0D0",
+    // Neutral, not the brand teal — same rationale as LightTheme:
+    // this token is the app's general text color, used everywhere
+    // (titles, labels, values). A saturated accent color there made
+    // every heading/label look like a link in dark mode too.
+    appTextColor: "#F3F4F6",
     appLightTextColor: "#1A7F8E",
 
     secAppText: "#E5E7EB",

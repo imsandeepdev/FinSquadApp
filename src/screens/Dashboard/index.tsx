@@ -22,32 +22,32 @@ const Dashboard = () => {
 
   return (
     <StoryScreen>
-    <ScrollView 
-    contentContainerStyle={styles.container}
-    showsVerticalScrollIndicator={false}>
+
       <HeaderSection/>
+      
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.container}
+        showsVerticalScrollIndicator={false}
+      >
+        <StatsSection/>
+        <View style={styles.aiSectionWrapper}>
+          <AISectionCard/>
+        </View>
+        <View style={styles.quickActionsWrapper}>
+          <QuickActions
+            onPress={(item:any)=>{
+              if (!item?.navigate) {
+                Alert.alert(item?.title || "Coming soon", "This feature will be available soon.");
+                return;
+              }
+              navigation.navigate(item.navigate);
+            }}
+          />
+        </View>
+        {/* <SmartTaskCard/> */}
 
-      <StatsSection/>
-
-      <View style={styles.aiSectionWrapper}>
-        <AISectionCard/>
-      </View>
-
-      <View style={styles.quickActionsWrapper}>
-
-      <QuickActions
-      onPress={(item:any)=>{
-        if (!item?.navigate) {
-          Alert.alert(item?.title || "Coming soon", "This feature will be available soon.");
-          return;
-        }
-        navigation.navigate(item.navigate);
-      }}
-      />
-      </View>
-      <SmartTaskCard/>
-
-    </ScrollView>
+      </ScrollView>
     </StoryScreen>
 
   );

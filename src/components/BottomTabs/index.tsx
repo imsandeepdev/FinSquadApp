@@ -11,6 +11,7 @@ import {
 import { ParamListBase } from '@react-navigation/native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Dashboard from '../../screens/Dashboard';
 import AIInsightsScreen from '../../screens/AIInsights';
 import ClientsScreen from '../../screens/Clients';
@@ -75,51 +76,83 @@ const BottomTabs: React.FC = () => {
         tabBarShowLabel: false,
         tabBarStyle: styles.tabBar,
 
-        tabBarIcon: ({focused, color, size}: {focused: boolean; color: string; size: number}) => {
-          let iconName: string;
+        tabBarIcon: ({focused}: {focused: boolean; color: string; size: number}) => {
+          // Active tabs render in the brand color, inactive ones in the
+          // theme's muted/placeholder tint — same pair used everywhere
+          // else in the app for "selected vs. not" icon states.
+          const tintColor = focused ? themeColor.appColor : themeColor.placeHolder;
 
           switch (route.name) {
             case 'Dashboard':
-              iconName = focused
-                ? 'grid'
-                : 'grid-outline';
-              break;
+              // The asymmetric 4-tile "dashboard" glyph, not Ionicons'
+              // plain uniform grid — matches the requested icon.
+              return (
+                <MaterialCommunityIcons
+                  name={focused ? 'view-dashboard' : 'view-dashboard-outline'}
+                  size={responsiveSize(24)}
+                  color={tintColor}
+                />
+              );
 
             case 'Clients':
-              iconName = focused
-                ? 'people'
-                : 'people-outline';
-              break;
+              // Requested icon is a single person inside a scan/viewfinder
+              // frame (not the two-people "people" glyph) — matches
+              // MaterialCommunityIcons' "face-recognition" exactly. It
+              // only ships one weight, so focus is shown by color alone.
+              return (
+                <MaterialCommunityIcons
+                  name="face-recognition"
+                  size={responsiveSize(24)}
+                  color={tintColor}
+                />
+              );
 
             case 'AI':
-              iconName = focused
-                ? 'sparkles'
-                : 'sparkles-outline';
-              break;
+              // Requested icon is a hexagon outline with a sparkle inside
+              // — MaterialCommunityIcons' "creation" glyph. Single weight,
+              // so focus is shown by color alone.
+              return (
+                <MaterialCommunityIcons
+                  name="creation"
+                  size={responsiveSize(24)}
+                  color={tintColor}
+                />
+              );
 
             case 'Report':
-              iconName = focused
-                ? 'bar-chart'
-                : 'bar-chart-outline';
-              break;
+              // Ionicons' "bar-chart" has no outer frame — the requested
+              // icon is a boxed bar-chart (rounded square border baked
+              // into the glyph itself), which is MaterialCommunityIcons'
+              // "chart-box".
+              return (
+                <MaterialCommunityIcons
+                  name={focused ? 'chart-box' : 'chart-box-outline'}
+                  size={responsiveSize(24)}
+                  color={tintColor}
+                />
+              );
 
             case 'Account':
-              iconName = focused
-                ? 'person-circle'
-                : 'person-circle-outline';
-              break;
+              // MaterialCommunityIcons' "account-circle" matches the
+              // requested profile glyph (circle + head + shoulder arc),
+              // consistent with the other MDI icons used in this bar.
+              return (
+                <MaterialCommunityIcons
+                  name={focused ? 'account-circle' : 'account-circle-outline'}
+                  size={responsiveSize(24)}
+                  color={tintColor}
+                />
+              );
 
             default:
-              iconName = 'ellipse';
+              return (
+                <Ionicons
+                  name="ellipse"
+                  size={responsiveSize(24)}
+                  color={tintColor}
+                />
+              );
           }
-
-          return (
-            <Ionicons
-              name={iconName}
-              size={responsiveSize(24)}
-              color={focused ? themeColor.appColor : themeColor.lightBlack}
-            />
-          );
         },
       })}>
       {/* <Tab.Screen

@@ -44,9 +44,7 @@ const actions = [
     title: "Meetings",
     subtitle: "Schedule and Manage Meetings",
     color: "#F59E0B",
-    // No dedicated Meetings screen yet — Dashboard shows a "coming soon"
-    // notice for tiles without a navigate target instead of guessing one.
-    navigate: undefined,
+    navigate: NAVIGATE_NAME.MEETING_SCREEN,
     roles: ALL_ROLES,
   },
   {
@@ -90,14 +88,6 @@ const actions = [
     color: "#7C3AED",
     navigate: NAVIGATE_NAME.PRE_DISBURSEMENT_SCREEN,
     roles: ["BRANCH_MANAGER"] as UserRole[],
-  },
-  {
-    icon: "sync", // Repayment / EMI
-    title: "Repayment",
-    subtitle: "Track & Pay EMI Installments",
-    color: "#EA580C",
-    navigate: NAVIGATE_NAME.REPAYMENT_SCREEN,
-    roles: ["FIELD_OFFICER"] as UserRole[],
   },
 ];
 

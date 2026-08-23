@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, ScrollView, Image, Pressable, Alert } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { useNavigation } from "@react-navigation/native";
 import { AppButton, AppHeader, StoryScreen } from "../../components";
 import { useTheme } from "../../utils/provider/themeProvider";
 import { useRole, ROLE_LABELS } from "../../utils/provider/roleProvider";
@@ -20,6 +21,7 @@ import {
 import LanguageSelectModal from "./LanguageSelectModal";
 
 const ProfileScreen = () => {
+  const navigation = useNavigation<any>();
   const { theme: { themeColor } } = useTheme();
   const styles = getStyles(themeColor);
   const { role } = useRole();
@@ -36,6 +38,32 @@ const ProfileScreen = () => {
       setLanguageModalVisible(true);
       return;
     }
+
+    if (item.id === "edit-profile") {
+      navigation.navigate(NAVIGATE_NAME.EDIT_PROFILE_SCREEN);
+      return;
+    }
+
+    if (item.id === "documents-kyc") {
+      navigation.navigate(NAVIGATE_NAME.DOCUMENTS_KYC_SCREEN);
+      return;
+    }
+
+    if (item.id === "change-password") {
+      navigation.navigate(NAVIGATE_NAME.CHANGE_PASSWORD_SCREEN);
+      return;
+    }
+
+    if (item.id === "my-performance") {
+      navigation.navigate(NAVIGATE_NAME.MY_PERFORMANCE_SCREEN);
+      return;
+    }
+
+    if (item.id === "my-centres") {
+      navigation.navigate(NAVIGATE_NAME.MY_CENTRES_SCREEN);
+      return;
+    }
+
     Alert.alert(t(item.labelKey), t("common.comingSoon"));
   };
 

@@ -24,16 +24,14 @@ export const LightTheme = {
     successColor: "#16A34A",
     infoColor: "#3B82F6",
 
-    // // app theme
-    // appLightColor: "#40E0D0",
-    // appColor: "#1A7F8E",
-
-    // secAppColor: "#E6F7F6",
-    // secLightAppColor: "#D1F0ED",
-
      // app theme
-    appLightColor: "#EEF2FF",     // Soft, premium light indigo tint
-    appColor: "#6366F1",          // Your original Indigo
+    // appLightColor: "#EEF2FF",     // Soft, premium light indigo tint
+    // appColor: "#6366F1",          // Your original Indigo
+// appLightColor: "#FFEDD5", // Soft light orange
+// appColor: "#EA580C",      // Deep premium orange
+
+appLightColor: "#FFF7ED", // Soft, premium light orange tint
+appColor: "#F97316",      // Primary orange
 
     secAppColor: "#A855F7",       // Your original Purple
     secLightAppColor: "#F3E8FF",  // Soft, clean light purple tint
@@ -47,13 +45,21 @@ export const LightTheme = {
     errorText: "#DC2626",
     infoText: "#2563EB",
 
-    appTextColor: "#6366F1",
+    // Kept neutral (not the brand indigo) — this token is used as the
+    // app's general-purpose text color across ~75 screens/components
+    // (titles, labels, values, inputs). Using the accent hue here made
+    // every heading/label read like a link. Brand emphasis should come
+    // from `appColor` / `secAppColor` directly, not from this token.
+    appTextColor: "#1F2937",
     appLightTextColor: "#EEF2FF",
 
     secAppText: "#A855F7",
     secLightAppText: "#F3E8FF",
 
-    placeHolder: "#9CA3AF",
+    // #9CA3AF (Tailwind gray-400) was ~2.4:1 contrast on white/light
+    // backgrounds — fails WCAG AA and reads as "invisible" text.
+    // gray-500 clears 4.5:1 while staying visually secondary.
+    placeHolder: "#6B7280",
 
     // borders
     borderColor: "#E5E7EB",

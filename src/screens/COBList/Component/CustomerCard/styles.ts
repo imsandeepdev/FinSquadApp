@@ -8,20 +8,20 @@ export const getStyles = (themeColor: ThemeColorType) =>
       backgroundColor: themeColor.cardColor,
       marginHorizontal: responsiveSize(16),
       marginVertical: responsiveSize(6),
-      borderRadius: responsiveSize(15),
-      padding: responsiveSize(12),
+      borderRadius: responsiveSize(16),
+      padding: responsiveSize(14),
       flexDirection: "row",
       alignItems: "center",
-      elevation: 2,
+      // Proper floating card — shadow does the definition, so we drop
+      // the hairline border that was fighting it for the card's edge.
+      elevation: 4,
       shadowColor: themeColor.black,
-      shadowOpacity: 0.08,
-      shadowRadius: 5,
+      shadowOpacity: 0.1,
+      shadowRadius: responsiveSize(10),
       shadowOffset: {
         width: responsiveSize(0),
-        height: responsiveSize(2),
+        height: responsiveSize(4),
       },
-      borderWidth: 0.3,
-      borderColor: themeColor.borderColor,
     },
 
     infoContainer: {

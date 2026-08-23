@@ -62,6 +62,18 @@ const CalendarModal: React.FC<CalendarModalProps> = ({
 
   const isDisabled = (d: Date) => d > effectiveMax || d < effectiveMin;
 
+  // Whether stepping a month back/forward would land on a month that
+  // still has at least one selectable day — if not, hide that direction
+  // entirely instead of letting the user browse into a fully-disabled
+  // past (or beyond-max future) month just to find every day grayed out.
+  const canGoPrevMonth =
+    viewYear > effectiveMin.getFullYear() ||
+    (viewYear === effectiveMin.getFullYear() && viewMonth > effectiveMin.getMonth());
+
+  const canGoNextMonth =
+    viewYear < effectiveMax.getFullYear() ||
+    (viewYear === effectiveMax.getFullYear() && viewMonth < effectiveMax.getMonth());
+
   const daysGrid = useMemo(() => {
     const firstOfMonth = new Date(viewYear, viewMonth, 1);
     const startWeekday = firstOfMonth.getDay();
@@ -125,8 +137,17 @@ const CalendarModal: React.FC<CalendarModalProps> = ({
         {mode === "day" && (
           <>
             <View style={styles.header}>
-              <Pressable onPress={goPrevMonth} style={styles.navBtn} hitSlop={10}>
-                <Ionicons name="chevron-back" size={20} color={themeColor.appColor} />
+              <Pressable
+                onPress={goPrevMonth}
+                disabled={!canGoPrevMonth}
+                style={[styles.navBtn, !canGoPrevMonth && styles.navBtnDisabled]}
+                hitSlop={10}
+              >
+                <Ionicons
+                  name="chevron-back"
+                  size={20}
+                  color={canGoPrevMonth ? themeColor.appColor : themeColor.placeHolder}
+                />
               </Pressable>
 
               <View style={styles.headerCenter}>
@@ -138,8 +159,17 @@ const CalendarModal: React.FC<CalendarModalProps> = ({
                 </Pressable>
               </View>
 
-              <Pressable onPress={goNextMonth} style={styles.navBtn} hitSlop={10}>
-                <Ionicons name="chevron-forward" size={20} color={themeColor.appColor} />
+              <Pressable
+                onPress={goNextMonth}
+                disabled={!canGoNextMonth}
+                style={[styles.navBtn, !canGoNextMonth && styles.navBtnDisabled]}
+                hitSlop={10}
+              >
+                <Ionicons
+                  name="chevron-forward"
+                  size={20}
+                  color={canGoNextMonth ? themeColor.appColor : themeColor.placeHolder}
+                />
               </Pressable>
             </View>
 
@@ -192,7 +222,9 @@ const CalendarModal: React.FC<CalendarModalProps> = ({
             <Text style={styles.pickerTitle}>Select Month</Text>
             <View style={styles.monthGrid}>
               {MONTHS.map((m, idx) => {
-                const disabled = viewYear === effectiveMax.getFullYear() && idx > effectiveMax.getMonth();
+                const disabled =
+                  (viewYear === effectiveMax.getFullYear() && idx > effectiveMax.getMonth()) ||
+                  (viewYear === effectiveMin.getFullYear() && idx < effectiveMin.getMonth());
                 const active = viewMonth === idx;
                 return (
                   <Pressable

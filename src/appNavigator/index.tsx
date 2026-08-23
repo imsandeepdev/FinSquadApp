@@ -15,6 +15,12 @@ import PreDisbursementScreen from '../screens/PreDisbursement';
 import RepaymentScreen from '../screens/Repayment';
 import LoanOriginationScreen from '../screens/LoanOrigination';
 import ApprovalQueueScreen from '../screens/ApprovalQueue';
+import EditProfileScreen from '../screens/Profile/EditProfile';
+import DocumentsKYCScreen from '../screens/Profile/DocumentsKYC';
+import ChangePasswordScreen from '../screens/Profile/ChangePassword';
+import MyPerformanceScreen from '../screens/Profile/MyPerformance';
+import MyCentresScreen from '../screens/Profile/MyCentres';
+import MeetingScreen from '../screens/Meeting';
 import { NAVIGATE_NAME } from '../utils/const';
 
 
@@ -87,6 +93,36 @@ const AppNavigator = () => {
         <Stack.Screen
           name={NAVIGATE_NAME.APPROVAL_QUEUE_SCREEN}
           component={ApprovalQueueScreen}
+        />
+
+        <Stack.Screen
+          name={NAVIGATE_NAME.EDIT_PROFILE_SCREEN}
+          component={EditProfileScreen}
+        />
+
+        <Stack.Screen
+          name={NAVIGATE_NAME.DOCUMENTS_KYC_SCREEN}
+          component={DocumentsKYCScreen}
+        />
+
+        <Stack.Screen
+          name={NAVIGATE_NAME.CHANGE_PASSWORD_SCREEN}
+          component={ChangePasswordScreen}
+        />
+
+        <Stack.Screen
+          name={NAVIGATE_NAME.MY_PERFORMANCE_SCREEN}
+          component={MyPerformanceScreen}
+        />
+
+        <Stack.Screen
+          name={NAVIGATE_NAME.MY_CENTRES_SCREEN}
+          component={MyCentresScreen}
+        />
+
+        <Stack.Screen
+          name={NAVIGATE_NAME.MEETING_SCREEN}
+          component={MeetingScreen}
         />
 
       </Stack.Navigator>

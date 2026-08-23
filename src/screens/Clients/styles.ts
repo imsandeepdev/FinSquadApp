@@ -10,7 +10,12 @@ export const getStyles = (themeColor: ThemeColorType) =>
 
     scrollContent: {
       paddingHorizontal: responsiveSize(15),
+      paddingTop: responsiveSize(4),
       paddingBottom: responsiveSize(40),
+    },
+
+    searchWrap: {
+      marginBottom: responsiveSize(4),
     },
 
     headerRow: {
@@ -29,37 +34,27 @@ export const getStyles = (themeColor: ThemeColorType) =>
       marginTop: responsiveSize(3),
     },
 
-    summaryRow: {
-      flexDirection: "row",
-      marginBottom: responsiveSize(14),
-    },
-
-    summaryCard: {
-      flex: 1,
-      backgroundColor: themeColor.cardColor,
-      borderRadius: responsiveSize(12),
-      borderWidth: 1,
-      borderColor: themeColor.borderColor,
-      paddingVertical: responsiveSize(10),
+    // Floating circular button, bottom-right, above the bottom tab bar —
+    // opens the summary stats (Total Clients / Active / Centres) as a
+    // bottom sheet instead of showing them inline at the top.
+    summaryFab: {
+      position: "absolute",
+      right: responsiveSize(18),
+      bottom: responsiveSize(95),
+      width: responsiveSize(52),
+      height: responsiveSize(52),
+      borderRadius: responsiveSize(26),
+      backgroundColor: themeColor.appColor,
       alignItems: "center",
-      marginRight: responsiveSize(8),
-    },
-
-    summaryCardLast: {
-      marginRight: 0,
-    },
-
-    summaryValue: {
-      fontSize: appSize.font_Medium,
-      fontWeight: "800",
-      color: themeColor.appTextColor,
-    },
-
-    summaryLabel: {
-      fontSize: responsiveSize(10.5),
-      color: themeColor.placeHolder,
-      marginTop: responsiveSize(2),
-      textAlign: "center",
+      justifyContent: "center",
+      elevation: 8,
+      shadowColor: themeColor.black,
+      shadowOpacity: 0.25,
+      shadowRadius: responsiveSize(10),
+      shadowOffset: {
+        width: responsiveSize(0),
+        height: responsiveSize(4),
+      },
     },
 
     viewToggleRow: {
@@ -72,7 +67,7 @@ export const getStyles = (themeColor: ThemeColorType) =>
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
-      paddingVertical: responsiveSize(9),
+      paddingVertical: responsiveSize(10),
       borderRadius: responsiveSize(10),
       borderWidth: 1.5,
       borderColor: themeColor.borderColor,
@@ -122,11 +117,18 @@ export const getStyles = (themeColor: ThemeColorType) =>
     // ---- Centre card ----
     centreCard: {
       backgroundColor: themeColor.cardColor,
-      borderRadius: responsiveSize(14),
-      borderWidth: 1,
-      borderColor: themeColor.borderColor,
-      padding: responsiveSize(14),
-      marginBottom: responsiveSize(12),
+      borderRadius: responsiveSize(16),
+      padding: responsiveSize(16),
+      marginBottom: responsiveSize(14),
+      // Proper elevated card — shadow instead of a flat border.
+      elevation: 4,
+      shadowColor: themeColor.black,
+      shadowOpacity: 0.1,
+      shadowRadius: responsiveSize(10),
+      shadowOffset: {
+        width: responsiveSize(0),
+        height: responsiveSize(4),
+      },
     },
 
     centreHeaderRow: {
@@ -208,7 +210,9 @@ export const getStyles = (themeColor: ThemeColorType) =>
     centreMeetingText: {
       marginLeft: responsiveSize(6),
       fontSize: responsiveSize(11.5),
-      color: themeColor.secondaryLightText,
+      // Was secondaryLightText — near-invisible (~1.4:1 contrast) on a
+      // light card background.
+      color: themeColor.placeHolder,
     },
   });
 

@@ -49,6 +49,10 @@ export const getStyles = (themeColor: ThemeColorType) =>
       alignItems: "center",
     },
 
+    navBtnDisabled: {
+      backgroundColor: themeColor.surface,
+    },
+
     headerCenter: {
       flexDirection: "row",
     },

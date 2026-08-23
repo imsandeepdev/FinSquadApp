@@ -11,7 +11,8 @@ StyleSheet.create({
   },
 
   header: {
-    padding: responsiveSize(10),
+    paddingHorizontal: responsiveSize(14),
+    paddingVertical: responsiveSize(8),
     backgroundColor: AppColor.background,
   },
 
@@ -24,29 +25,29 @@ StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     backgroundColor: AppColor.secLightAppColor,
-    paddingHorizontal: responsiveSize(12),
-    paddingVertical: responsiveSize(5),
+    paddingHorizontal: responsiveSize(10),
+    paddingVertical: responsiveSize(3),
     borderRadius: responsiveSize(20),
-    marginTop: responsiveSize(6),
+    marginTop: responsiveSize(4),
   },
 
   loanTypeChipText: {
     color: AppColor.successColor,
     fontWeight: "600",
-    fontSize: appSize.font_Small,
-    marginLeft: responsiveSize(5),
+    fontSize: appSize.font_extraSmall,
+    marginLeft: responsiveSize(4),
   },
 
   stepText: {
     color: AppColor.primaryText,
     fontWeight: "700",
-    fontSize: appSize.font_Small,
+    fontSize: appSize.font_extraSmall,
   },
 
   title: {
     textAlign: "center",
-    marginTop: responsiveSize(4),
-    fontSize: appSize.font_Regular,
+    marginTop: responsiveSize(2),
+    fontSize: appSize.font_Medium,
     fontWeight: "700",
     color: AppColor.appTextColor,
   },

@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
 import { ThemeColorType } from "../../res/colors/theme.types";
-import { appSize, responsiveSize } from "../../res";
+import { responsiveSize } from "../../res";
 
-export const getStyles = (AppColor: ThemeColorType) =>
+export const getStyles = (_themeColor: ThemeColorType) =>
 
 StyleSheet.create({
   container: {
-    marginTop: appSize.res_Margin15,
+    marginTop: responsiveSize(8),
     flexDirection: "row",
   },
 

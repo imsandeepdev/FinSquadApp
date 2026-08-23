@@ -11,6 +11,7 @@ import { centres } from "../CentreManagement/const";
 import { Centre } from "../CentreManagement/types";
 import CustomerCard from "../COBList/Component/CustomerCard";
 import CustomerDetailModal from "./CustomerDetailModal";
+import SummarySheet from "./SummarySheet";
 
 type ViewMode = "customers" | "centres";
 
@@ -23,6 +24,7 @@ const ClientsScreen = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [centreFilter, setCentreFilter] = useState<string | null>(null);
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
+  const [summarySheetVisible, setSummarySheetVisible] = useState(false);
 
   const summary = useMemo(
     () => ({
@@ -95,38 +97,22 @@ const ClientsScreen = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
-         {searchOpen && (
-          <AppTextInput
-            
-            placeholder={viewMode === "customers" ? "Search by name, code or mobile" : "Search centres by name or village"}
-            value={search}
-            onChangeText={setSearch}
-            leftIcon="search-outline"
-            restInputTextProps={{ autoFocus: true }}
-          />
+        {searchOpen && (
+          <View style={styles.searchWrap}>
+            <AppTextInput
+              placeholder={viewMode === "customers" ? "Search by name, code or mobile" : "Search centres by name or village"}
+              value={search}
+              onChangeText={setSearch}
+              leftIcon="search-outline"
+              restInputTextProps={{ autoFocus: true }}
+            />
+          </View>
         )}
 
         <View style={styles.headerRow}>
           <Text style={styles.screenSubtitle}>
             Your onboarded customers & centres
           </Text>
-        </View>
-
-       
-
-        <View style={styles.summaryRow}>
-          <View style={styles.summaryCard}>
-            <Text style={styles.summaryValue}>{summary.totalCustomers}</Text>
-            <Text style={styles.summaryLabel}>Total Clients</Text>
-          </View>
-          <View style={styles.summaryCard}>
-            <Text style={styles.summaryValue}>{summary.activeCustomers}</Text>
-            <Text style={styles.summaryLabel}>Active</Text>
-          </View>
-          <View style={[styles.summaryCard, styles.summaryCardLast]}>
-            <Text style={styles.summaryValue}>{summary.totalCentres}</Text>
-            <Text style={styles.summaryLabel}>Centres</Text>
-          </View>
         </View>
 
         <View style={styles.viewToggleRow}>
@@ -247,7 +233,7 @@ const ClientsScreen = () => {
                 </View>
 
                 <View style={styles.centreMeetingRow}>
-                  <Ionicons name="calendar-outline" size={13} color={themeColor.secondaryLightText} />
+                  <Ionicons name="calendar-outline" size={13} color={themeColor.placeHolder} />
                   <Text style={styles.centreMeetingText}>
                     Meets every {centre.meetingDay} · Health {centre.repaymentHealthScore}/100
                   </Text>
@@ -265,11 +251,26 @@ const ClientsScreen = () => {
 
       </ScrollView>
 
+      <Pressable
+        style={styles.summaryFab}
+        onPress={() => setSummarySheetVisible(true)}
+      >
+        <Ionicons name="stats-chart" size={20} color={themeColor.white} />
+      </Pressable>
+
       <CustomerDetailModal
         visible={!!selectedCustomer}
         onClose={() => setSelectedCustomer(null)}
         customer={selectedCustomer}
         centre={selectedCustomer ? centreForCustomer(selectedCustomer) : undefined}
+      />
+
+      <SummarySheet
+        visible={summarySheetVisible}
+        onClose={() => setSummarySheetVisible(false)}
+        totalCustomers={summary.totalCustomers}
+        activeCustomers={summary.activeCustomers}
+        totalCentres={summary.totalCentres}
       />
     </StoryScreen>
   );

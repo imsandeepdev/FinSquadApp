@@ -17,21 +17,72 @@ export interface ReportKpi {
   color: string;
 }
 
-export const REPORT_KPIS: ReportKpi[] = [
-  { id: "disbursed", icon: "arrow-up-circle-outline", label: "Total Disbursed", value: "₹18.6L", color: "#2563EB" },
-  { id: "collected", icon: "arrow-down-circle-outline", label: "Total Collected", value: "₹14.2L", color: "#16A34A" },
-  { id: "overdue", icon: "alert-circle-outline", label: "Overdue Amount", value: "₹62,400", color: "#DC2626" },
-  { id: "active", icon: "people-outline", label: "Active Loans", value: "96", color: "#7C3AED" },
-];
+export interface CollectionTrendPoint {
+  label: string;
+  value: number;
+  overdue: number;
+}
 
-export const COLLECTION_TREND = [
-  { label: "Mar", value: 120 },
-  { label: "Apr", value: 145 },
-  { label: "May", value: 132 },
-  { label: "Jun", value: 158 },
-  { label: "Jul", value: 170 },
-  { label: "Aug", value: 142 },
-];
+export interface ReportPeriodData {
+  subtitle: string;
+  kpis: ReportKpi[];
+  collectionTrend: CollectionTrendPoint[];
+}
+
+export const REPORT_DATA_BY_PERIOD: Record<string, ReportPeriodData> = {
+  week: {
+    subtitle: "₹ in Lakhs · Last 7 days",
+    kpis: [
+      { id: "disbursed", icon: "arrow-up-circle-outline", label: "Total Disbursed", value: "₹4.2L", color: "#2563EB" },
+      { id: "collected", icon: "arrow-down-circle-outline", label: "Total Collected", value: "₹3.4L", color: "#16A34A" },
+      { id: "overdue", icon: "alert-circle-outline", label: "Overdue Amount", value: "₹8,200", color: "#DC2626" },
+      { id: "active", icon: "people-outline", label: "Active Loans", value: "96", color: "#7C3AED" },
+    ],
+    collectionTrend: [
+      { label: "Mon", value: 18, overdue: 2.5 },
+      { label: "Tue", value: 22, overdue: 1.8 },
+      { label: "Wed", value: 19, overdue: 3.1 },
+      { label: "Thu", value: 26, overdue: 1.4 },
+      { label: "Fri", value: 31, overdue: 1.1 },
+      { label: "Sat", value: 24, overdue: 2.0 },
+      { label: "Sun", value: 14, overdue: 2.6 },
+    ],
+  },
+
+  month: {
+    subtitle: "₹ in Lakhs · Last 4 weeks",
+    kpis: [
+      { id: "disbursed", icon: "arrow-up-circle-outline", label: "Total Disbursed", value: "₹9.4L", color: "#2563EB" },
+      { id: "collected", icon: "arrow-down-circle-outline", label: "Total Collected", value: "₹7.6L", color: "#16A34A" },
+      { id: "overdue", icon: "alert-circle-outline", label: "Overdue Amount", value: "₹28,500", color: "#DC2626" },
+      { id: "active", icon: "people-outline", label: "Active Loans", value: "96", color: "#7C3AED" },
+    ],
+    collectionTrend: [
+      { label: "Week 1", value: 72, overdue: 9 },
+      { label: "Week 2", value: 84, overdue: 6 },
+      { label: "Week 3", value: 65, overdue: 11 },
+      { label: "Week 4", value: 91, overdue: 5 },
+    ],
+  },
+
+  quarter: {
+    subtitle: "₹ in Lakhs · Last 6 months",
+    kpis: [
+      { id: "disbursed", icon: "arrow-up-circle-outline", label: "Total Disbursed", value: "₹18.6L", color: "#2563EB" },
+      { id: "collected", icon: "arrow-down-circle-outline", label: "Total Collected", value: "₹14.2L", color: "#16A34A" },
+      { id: "overdue", icon: "alert-circle-outline", label: "Overdue Amount", value: "₹62,400", color: "#DC2626" },
+      { id: "active", icon: "people-outline", label: "Active Loans", value: "96", color: "#7C3AED" },
+    ],
+    collectionTrend: [
+      { label: "Mar", value: 120, overdue: 14 },
+      { label: "Apr", value: 145, overdue: 11 },
+      { label: "May", value: 132, overdue: 16 },
+      { label: "Jun", value: 158, overdue: 9 },
+      { label: "Jul", value: 170, overdue: 7 },
+      { label: "Aug", value: 142, overdue: 12 },
+    ],
+  },
+};
 
 export interface ReportCategory {
   id: string;

@@ -77,7 +77,10 @@ export const getStyles = (themeColor: ThemeColorType) =>
       backgroundColor: themeColor.appLightColor,
 
       borderWidth: 1,
-      borderColor: themeColor.appTextColor,
+      // Brand accent (not the neutral appTextColor) — this is a CTA
+      // button and should stay visually branded/dashed, unlike plain
+      // labels elsewhere.
+      borderColor: themeColor.appColor,
       borderStyle: "dashed",
 
       justifyContent: "center",
@@ -87,7 +90,7 @@ export const getStyles = (themeColor: ThemeColorType) =>
     },
 
     addText: {
-      color: themeColor.appTextColor,
+      color: themeColor.appColor,
       fontWeight: "700",
       fontSize: responsiveSize(16),
     },

@@ -10,10 +10,10 @@ export const getStyles = (themeColor: ThemeColorType) =>
     },
 
     sectionTitle: {
-      fontSize: appSize.font_Large,
+      fontSize: appSize.font_Medium,
       fontWeight: "700",
       color: themeColor.appTextColor,
-      marginBottom: responsiveSize(10),
+      marginBottom: responsiveSize(8),
     },
 
     fieldLabel: {

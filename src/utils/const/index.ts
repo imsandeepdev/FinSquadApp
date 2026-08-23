@@ -10,4 +10,10 @@ export const NAVIGATE_NAME = {
     REPAYMENT_SCREEN: 'RepaymentScreen',
     LOAN_ORIGINATION_SCREEN: 'LoanOriginationScreen',
     APPROVAL_QUEUE_SCREEN: 'ApprovalQueueScreen',
+    EDIT_PROFILE_SCREEN: 'EditProfileScreen',
+    DOCUMENTS_KYC_SCREEN: 'DocumentsKYCScreen',
+    CHANGE_PASSWORD_SCREEN: 'ChangePasswordScreen',
+    MY_PERFORMANCE_SCREEN: 'MyPerformanceScreen',
+    MY_CENTRES_SCREEN: 'MyCentresScreen',
+    MEETING_SCREEN: 'MeetingScreen',
 }

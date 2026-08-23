@@ -21,6 +21,14 @@ export const getStyles = (themeColor: ThemeColorType) =>
       paddingTop: responsiveSize(10),
       paddingBottom: responsiveSize(28),
       maxHeight: "85%",
+      elevation: 16,
+      shadowColor: themeColor.black,
+      shadowOpacity: 0.15,
+      shadowRadius: responsiveSize(16),
+      shadowOffset: {
+        width: responsiveSize(0),
+        height: responsiveSize(-4),
+      },
     },
 
     grabber: {
@@ -69,10 +77,8 @@ export const getStyles = (themeColor: ThemeColorType) =>
     },
 
     infoCard: {
-      backgroundColor: themeColor.background,
+      backgroundColor: themeColor.surface,
       borderRadius: responsiveSize(12),
-      borderWidth: 1,
-      borderColor: themeColor.borderColor,
       padding: responsiveSize(12),
       marginBottom: responsiveSize(14),
     },
@@ -85,7 +91,8 @@ export const getStyles = (themeColor: ThemeColorType) =>
 
     infoLabel: {
       fontSize: responsiveSize(12.5),
-      color: themeColor.secondaryLightText,
+      // Was secondaryLightText — near-invisible on a light background.
+      color: themeColor.placeHolder,
     },
 
     infoValue: {

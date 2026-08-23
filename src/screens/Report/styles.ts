@@ -143,7 +143,7 @@ export const getStyles = (themeColor: ThemeColorType) =>
     },
 
     chartWrap: {
-      alignItems: "flex-start",
+      width: "100%",
       paddingTop: responsiveSize(18),
     },
 
@@ -158,6 +158,74 @@ export const getStyles = (themeColor: ThemeColorType) =>
       fontSize: responsiveSize(10.5),
       color: themeColor.placeHolder,
       marginTop: responsiveSize(4),
+    },
+
+    legendRow: {
+      flexDirection: "row",
+      marginTop: responsiveSize(2),
+      marginBottom: responsiveSize(4),
+    },
+
+    legendItem: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginRight: responsiveSize(16),
+    },
+
+    legendDot: {
+      width: responsiveSize(7),
+      height: responsiveSize(7),
+      borderRadius: responsiveSize(4),
+      marginRight: responsiveSize(6),
+    },
+
+    legendLabel: {
+      fontSize: responsiveSize(11),
+      fontWeight: "600",
+      color: themeColor.placeHolder,
+    },
+
+    tooltip: {
+      // Deliberately theme-color-black (not appTextColor, which is now
+      // a neutral ink token) — this is a fixed dark tooltip chip with
+      // white text, same look in light and dark mode.
+      backgroundColor: themeColor.black,
+      borderRadius: responsiveSize(10),
+      paddingHorizontal: responsiveSize(10),
+      paddingVertical: responsiveSize(8),
+    },
+
+    tooltipMonth: {
+      fontSize: responsiveSize(11),
+      fontWeight: "700",
+      color: themeColor.white,
+      marginBottom: responsiveSize(4),
+    },
+
+    tooltipRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginTop: responsiveSize(2),
+    },
+
+    tooltipDot: {
+      width: responsiveSize(6),
+      height: responsiveSize(6),
+      borderRadius: responsiveSize(3),
+      marginRight: responsiveSize(6),
+    },
+
+    tooltipLabel: {
+      flex: 1,
+      fontSize: responsiveSize(10.5),
+      color: themeColor.white,
+      opacity: 0.85,
+    },
+
+    tooltipValue: {
+      fontSize: responsiveSize(10.5),
+      fontWeight: "700",
+      color: themeColor.white,
     },
 
     categoryRow: {
